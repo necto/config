@@ -60,15 +60,17 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
 ;; Autocompletion
-(add-to-list 'load-path "~/.emacs.d/auto-complete/")
-(when (< 21 emacs-major-version)
-  (require 'auto-complete-config)
-  (add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
-  (ac-config-default)
-  ;; Not autocomplete comments
-  (add-to-list 'ac-ignores "//")
-  ;; Suggest autocompletion after 4 characters typed
-  (setq ac-auto-start 4))
+;; wget http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2
+(when (file-exists-p "~/.emacs.d/auto-complete")
+  (add-to-list 'load-path "~/.emacs.d/auto-complete/")
+  (when (< 21 emacs-major-version)
+    (require 'auto-complete-config)
+    (add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+    (ac-config-default)
+    ;; Not autocomplete comments
+    (add-to-list 'ac-ignores "//")
+    ;; Suggest autocompletion after 4 characters typed
+    (setq ac-auto-start 4)))
 
 ;; indentation: '{' without indentation
 (c-set-offset 'substatement-open 0)
@@ -190,7 +192,8 @@
    '(stripes-face ((t (:background "gray95"))))))
 
 ;; Stripes mode - like the one in tables
-(require 'stripes)
+;; wget http://www.emacswiki.org/emacs/download/stripes.el
+(require 'stripes nil 'noerror)
 
 ;; Ido mode: Interactively DO : autocomipletion file and 
 ;; buffer names by matching in any part, not only beginning
@@ -225,34 +228,36 @@
 
 
 ;; Rectangular selection
-(require 'rect-mark) ; rebinding of C-SPC doesn't work, don't know why.
-(global-set-key (kbd "C-x r SPC") 'rm-set-mark)
-;; More general key bindings, taking into account a
-;; rectangular selection
-(global-set-key (kbd "C-w")  
-  '(lambda(b e) (interactive "r") 
-     (if rm-mark-active 
-       (rm-kill-region b e) (kill-region b e))))
-(global-set-key (kbd "M-w")  
-  '(lambda(b e) (interactive "r") 
-     (if rm-mark-active 
-       (rm-kill-ring-save b e) (kill-ring-save b e))))
-(global-set-key (kbd "C-x C-x")  
-  '(lambda(&optional p) (interactive "p") 
-     (if rm-mark-active 
-       (rm-exchange-point-and-mark p) (exchange-point-and-mark p))))
-
-(autoload 'rm-set-mark "rect-mark"
-  "Set mark for rectangle." t)
-(autoload 'rm-exchange-point-and-mark "rect-mark"
-  "Exchange point and mark for rectangle." t)
-(autoload 'rm-kill-region "rect-mark"
-  "Kill a rectangular region and save it in the kill ring." t)
-(autoload 'rm-kill-ring-save "rect-mark"
-  "Copy a rectangular region to the kill ring." t)
-
-;; More convinient terminal emulator then the "term
-(when (require 'multi-term nil t)
+;; wget http://emacswiki.org/emacs/download/rect-mark.el
+(when (require 'rect-mark nil 'noerror) ; rebinding of C-SPC doesn't work, don't know why.
+  (global-set-key (kbd "C-x r SPC") 'rm-set-mark)
+  ;; More general key bindings, taking into account a
+  ;; rectangular selection
+  (global-set-key (kbd "C-w")  
+                  '(lambda(b e) (interactive "r") 
+                     (if rm-mark-active 
+                         (rm-kill-region b e) (kill-region b e))))
+  (global-set-key (kbd "M-w")  
+                  '(lambda(b e) (interactive "r") 
+                     (if rm-mark-active 
+                         (rm-kill-ring-save b e) (kill-ring-save b e))))
+  (global-set-key (kbd "C-x C-x")  
+                  '(lambda(&optional p) (interactive "p") 
+                     (if rm-mark-active 
+                         (rm-exchange-point-and-mark p) (exchange-point-and-mark p))))
+  
+  (autoload 'rm-set-mark "rect-mark"
+    "Set mark for rectangle." t)
+  (autoload 'rm-exchange-point-and-mark "rect-mark"
+    "Exchange point and mark for rectangle." t)
+  (autoload 'rm-kill-region "rect-mark"
+    "Kill a rectangular region and save it in the kill ring." t)
+  (autoload 'rm-kill-ring-save "rect-mark"
+    "Copy a rectangular region to the kill ring." t))
+  
+;; More convinient terminal emulator then the "term"
+;; wget http://www.emacswiki.org/emacs/download/multi-term.el
+(when (require 'multi-term nil 'noerror)
   (global-set-key (kbd "<f5>") 'multi-term)
   (global-set-key (kbd "<C-next>") 'multi-term-next)
   (global-set-key (kbd "<C-prior>") 'multi-term-prev)
@@ -280,7 +285,7 @@
   (term-char-mode))
 
 ;; some more key bindings
-(when (require 'term nil t) ; only if term can be loaded..
+(when (require 'term nil 'noerror) ; only if term can be loaded..
   (setq term-bind-key-alist
         (list (cons "C-c C-c" 'term-interrupt-subjob)
               (cons "C-p" 'previous-line)
@@ -300,16 +305,17 @@
 
 
 ;; brief Dired mode.
-(require 'dired-details)
-(dired-details-install)
+;; wget http://www.emacswiki.org/emacs/download/dired-details.el
+(when (require 'dired-details nil 'noerror)
+  (dired-details-install))
 
 ;; Use directory name instead of a number in buffer with
 ;; the same named files :instead of Makefile Makefile<2>
 ;; it will become Makefile:sbo Makefile:rto
-(require 'uniquify) 
+(require 'uniquify)
 (setq 
-  uniquify-buffer-name-style 'post-forward
-  uniquify-separator ":")
+ uniquify-buffer-name-style 'post-forward
+ uniquify-separator ":")
 
 ;; Time in status bar
 (setq display-time-day-and-date t
