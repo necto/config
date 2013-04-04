@@ -86,6 +86,8 @@
 
 ;; indentation: '{' without indentation
 (c-set-offset 'substatement-open 0)
+;; disable indentation for namespaces
+(c-set-offset 'innamespace '-)
 ;; next statement - 4 spaces further
 (setq c-basic-offset 4)
 
