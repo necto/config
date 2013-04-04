@@ -16,6 +16,18 @@
 (show-paren-mode t)
 (setq show-paren-delay 0)
 
+;; If the point at a parenthesis, move the point to the matching parenthesis
+;; otherwise, just insert %
+(defun match-paren (arg)
+      "Go to the matching paren if on a paren; otherwise insert %."
+      (interactive "p")
+      (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+            ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+            (t (self-insert-command (or arg 1)))))
+
+;; Jump to the matching parenthesis just by pressing % on a parenthesis
+(global-set-key "%" 'match-paren)
+
 ;; Highlight text selection
 (transient-mark-mode 1)
 ;(require 'highlight-current-line)
@@ -359,3 +371,10 @@
  '(font-lock-keyword-face ((((class color) (min-colors 8)) (:foreground "blue" :weight thin))))
  '(highlight ((((class color) (min-colors 8)) (:background "gray"))))
  '(stripes-face ((t (:background "gray95")))))
+
+;(setq inferior-lisp-program "/usr/bin/sbcl") ; your Lisp system
+(setq slime-net-coding-system 'utf-8-unix) ; nessesary for russian characters
+(when (file-exists-p "/usr/share/common-lisp/source/slime")  ; your SLIME directory
+  (add-to-list 'load-path "/usr/share/common-lisp/source/slime/"))
+(when (require 'slime nil 'noerror)
+  (slime-setup))
