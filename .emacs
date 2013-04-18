@@ -101,27 +101,29 @@
 ;; enable column numbers at the status-bar
 (column-number-mode 1)
 
-;; Delete all trailing spaces after the point. Neccesary for kill-line advice.
-(defun delete-horizontal-space-after ()
+;; Delete all trailing spaces after the point to the end of the line.
+;; Neccesary for kill-line advice.
+(defun delete-trailing-horizontal-space-after ()
   "Delete all spaces and tabs after point."
-  (let ((orig-pos (point)))
-    (delete-region
-     (progn
-       (skip-chars-forward " \t")
-       (constrain-to-field nil orig-pos t))
-     orig-pos)))
+  (let* ((orig-pos (point))
+         (end-pos (progn
+                    (skip-chars-forward " \t")
+                    (constrain-to-field nil orig-pos t))))
+    (if (eolp)
+        (delete-region orig-pos end-pos)
+      (goto-char orig-pos))))
 
 ;; kill all excess spaces at the next line while joining them
-(defadvice kill-line (before check-position activate)   
+(defadvice kill-line (before check-position activate)
   (when (member major-mode
                 '(emacs-lisp-mode scheme-mode lisp-mode
                                   c-mode c++-mode objc-mode
                                   latex-mode plain-tex-mode))
-    (delete-horizontal-space-after)
-    (if (and (eolp) (not (bolp)))
-        (progn (forward-char 1)
-               (delete-horizontal-space)
-               (backward-char 1)))))
+    (delete-trailing-horizontal-space-after)
+    (when (and (eolp) (not (bolp)))
+      (forward-char 1)
+      (delete-horizontal-space)
+      (backward-char 1))))
 
 ;; Find a file in a dir or it's ancestors
 (defun find-file-upwards (file-to-find)
