@@ -382,3 +382,5 @@
   (add-to-list 'load-path "/usr/share/common-lisp/source/slime/"))
 (when (require 'slime nil 'noerror)
   (slime-setup))
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
