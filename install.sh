@@ -5,6 +5,7 @@ echo "Configuration files are in $cfgdir"
 pushd ~
 ln -s ${cfgdir}/.emacs .emacs
 ln -s ${cfgdir}/.vimrc .vimrc
+ln -s ${cfgdir}/.bashrc .bashrc
 echo "Downloading Emacs plugins"
 if [ ! -d ".emacs.d" ]; then
     mkdir .emacs.d
