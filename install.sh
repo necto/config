@@ -3,9 +3,11 @@
 cfgdir=$(pwd)
 echo "Configuration files are in $cfgdir"
 pushd ~
+echo "Making symlinks to all dotfiles"
 ln -s ${cfgdir}/.emacs .emacs
 ln -s ${cfgdir}/.vimrc .vimrc
 ln -s ${cfgdir}/.bashrc .bashrc
+ln -s ${cfgdir}/.gitcofig .gitconfig
 echo "Downloading Emacs plugins"
 if [ ! -d ".emacs.d" ]; then
     mkdir .emacs.d
