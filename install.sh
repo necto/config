@@ -7,7 +7,7 @@ echo "Making symlinks to all dotfiles"
 ln -s ${cfgdir}/.emacs .emacs
 ln -s ${cfgdir}/.vimrc .vimrc
 ln -s ${cfgdir}/.bashrc .bashrc
-ln -s ${cfgdir}/.gitcofig .gitconfig
+ln -s ${cfgdir}/.gitconfig .gitconfig
 echo "Downloading Emacs plugins"
 if [ ! -d ".emacs.d" ]; then
     mkdir .emacs.d
