@@ -1,5 +1,5 @@
 set tags=./tags,./TAGS,tags,../tags,../../tags,~/nf/ecl/tags
-source ~/.vim/plugins/cscope_maps.vim
+"source ~/.vim/plugins/cscope_maps.vim
 " source ~/.vim/plugins/RainbowParenthsis.vim
 
 set ttymouse=xterm2

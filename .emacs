@@ -130,7 +130,7 @@
   "Recursively searches each parent directory starting from the default-directory.
    looking for a file with name file-to-find.  Returns the path to it
    or nil if not found."
-  (labels ((find-file-r (path)
+  (cl-labels ((find-file-r (path)
                     (let* ((parent (file-name-directory path))
                            (possible-file (concat parent file-to-find)))
                       (cond
@@ -384,3 +384,8 @@
   (slime-setup))
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+(when (> emacs-major-version 23)
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                           ("marmalade" . "http://marmalade-repo.org/packages/")
+                           ("melpa" . "http://melpa.milkbox.net/packages/"))))
