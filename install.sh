@@ -3,27 +3,17 @@
 cfgdir=$(pwd)
 echo "Configuration files are in $cfgdir"
 pushd ~
+echo "Deleting .emacs to replace it with .spacemacs"
+rm .emacs
 echo "Making symlinks to all dotfiles"
-ln -s ${cfgdir}/.emacs .emacs
+ln -s ${cfgdir}/.spaceemacs .spaceemacs
 ln -s ${cfgdir}/.vimrc .vimrc
 ln -s ${cfgdir}/.bashrc .bashrc
 ln -s ${cfgdir}/.gitconfig .gitconfig
-echo "Downloading Emacs plugins"
-if [ ! -d ".emacs.d" ]; then
-    mkdir .emacs.d
+echo "Deleting the emacs plugins directory .emacs.d"
+if [ -d ".emacs.d" ]; then
+   rm -rf .emacs.d
 fi
-pushd .emacs.d
-echo "Autocompletion"
-wget http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2
-tar -xjf auto-complete-1.3.1.tar.bz2
-mv auto-complete-1.3.1 auto-complete
-echo "Stripes"
-wget http://www.emacswiki.org/emacs/download/stripes.el
-echo "Rectangular selection"
-wget http://emacswiki.org/emacs/download/rect-mark.el
-echo "Multiterm"
-wget http://www.emacswiki.org/emacs/download/multi-term.el
-echo "Brief dired mode"
-wget http://www.emacswiki.org/emacs/download/dired-details.el
-popd
+echo "Downloading Spacemacs"
+git clone https://github.com/syl20bnr/spacemacs .emacs.d
 popd

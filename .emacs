@@ -194,7 +194,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(compilation-scroll-output (quote first-error))
+ '(coq-prog-args (quote ("-I" "/home/necto/proj/cpdt/src")))
+ '(ede-project-directories (quote ("/home/necto/proj/klee/klee" "/home/necto/proj/click")))
  '(multi-term-scroll-show-maximum-output t)
+ '(safe-local-variable-values (quote ((related-file-name . "../include/click/hashallocator.hh") (related-file-name . "../include/click/string.hh") (related-file-name . "../../lib/straccum.cc") (related-file-name . "../include/click/router.hh") (related-file-name . "../../lib/args.cc") (related-file-name . "../include/click/handlercall.hh") (related-file-name . "../../lib/element.cc") (related-file-name . "../../lib/hashallocator.cc") (related-file-name . "../../lib/glue.cc") (related-file-name . "../../lib/etheraddress.cc") (related-file-name . "../../lib/bighashmap_arena.cc") (related-file-name . "../include/click/confparse.hh") (related-file-name . "../../lib/integers.cc") (related-file-name . "../../lib/router.cc") (related-file-name . "../../lib/handlercall.cc") (related-file-name . "../../lib/string.cc") (related-file-name . "../include/click/packet.hh") (related-file-name . "../../lib/packet.cc") (related-file-name . "../../lib/task.cc") (related-file-name . "../../lib/notifier.cc") (related-file-name . "../include/click/element.hh") (related-file-name . "../include/click/ipflowid.hh") (related-file-name . "../../lib/ipaddress.cc") (related-file-name . "../../lib/ipflowid.cc"))))
  '(term-scroll-show-maximum-output nil))
 
 (when (< 21 emacs-major-version)
@@ -389,3 +392,19 @@
   (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                            ("marmalade" . "http://marmalade-repo.org/packages/")
                            ("melpa" . "http://melpa.milkbox.net/packages/"))))
+
+(when (file-exists-p "/usr/share/emacs/24.3/lisp/cedet/semantic")
+  (add-to-list 'load-path "/usr/share/emacs/24.3/lisp/cedet/semantic"))
+
+
+;; proofgeneral CoQ mode:
+(setq vst-base-path (expand-file-name "~/proj/vst"))
+(setq compcert-install-path (expand-file-name "~/proj/compcert-2.4"))
+(setq coq-compile-before-require 1)
+
+(setq coq-load-path `((,(concat vst-base-path "/msl") "msl")
+                      (,(concat vst-base-path "/sepcomp") "sepcomp")
+                      (,(concat vst-base-path "/veric") "veric")
+                      (,(concat vst-base-path "/floyd") "floyd")
+                      (,(concat vst-base-path "/progs") "progs")
+                      (,compcert-install-path "compcert")))
