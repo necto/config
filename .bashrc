@@ -6,7 +6,10 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[0;06m\]'
 
-export PATH=/opt/mpich2/bin:$PATH
+#export PATH=/opt/mpich2/bin:$PATH
+export LANGUAGE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 
 if [ "$TERM" = "linux" ]; then
@@ -27,4 +30,10 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]P7ffffff" #lightgrey
     echo -en "\e]PFdedede" #white
     clear
+else
+    export TERM=xterm-256color
 fi
+
+export ALTERNATE_EDITOR="vi"
+export EDITOR="emacsclient -t"
+export VISUAL="emacsclient -c -a emacs"

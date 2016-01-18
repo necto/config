@@ -6,7 +6,7 @@ pushd ~
 echo "Deleting .emacs to replace it with .spacemacs"
 rm .emacs
 echo "Making symlinks to all dotfiles"
-ln -s ${cfgdir}/.spaceemacs .spaceemacs
+ln -s ${cfgdir}/.spacemacs .spacemacs
 ln -s ${cfgdir}/.vimrc .vimrc
 ln -s ${cfgdir}/.bashrc .bashrc
 ln -s ${cfgdir}/.gitconfig .gitconfig
