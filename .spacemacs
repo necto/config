@@ -261,6 +261,7 @@ layers configuration. You are free to put any user code."
                                                           (cyrillic-jis-russian . ("ru"))))
   (setq google-translate-input-method-auto-toggling t)
   (spacemacs/set-leader-keys "[" 'google-translate-smooth-translate)
+  (setq-default spacemacs//show-trailing-whitespace nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
