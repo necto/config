@@ -5,13 +5,11 @@
 - clean: ['~']
 
 - link:
-  ~/.dotfiles ''
-  ~/.spacemacs .spacemacs
-  ~/.vimrc .vimrc
-  ~/.bashrc .bashrc
-  ~/.gitconfig .gitconfig
+    ~/.dotfiles: ''
+    ~/.spacemacs: .spacemacs
+    ~/.vimrc: .vimrc
+    ~/.bashrc: .bashrc
+    ~/.gitconfig: .gitconfig
 
 - shell:
-  - [rm -rf ~/.emacs.d, Removing the old emacs plugins directory .emacs.d]
-  - [git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d,
-     Downloading Spacemacs]
+  - [sh emerge-spacemacs.sh, Downloading Spacemacs]
