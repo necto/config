@@ -37,3 +37,8 @@ fi
 export ALTERNATE_EDITOR="vi"
 export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -c -a emacs"
+
+SHELL="bash"
+eval `opam config env`
+export PATH=/home/necto/proj/verifast/bin:/home/necto/proj/llvm-3.4.2/Release+Asserts/bin:/home/necto/proj/klee/Release+Asserts/bin:$PATH
+

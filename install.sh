@@ -18,6 +18,15 @@ do
     shift
 done
 
+echo "Haskell mode dependencies"
+sudo apt install cabal-install
+cabal update
+cabal install stylish-haskell
+cabal install hlint
+cabal install hasktags
+cabal install ghc-mod
+
+
 echo "Configuration files are in $cfgdir"
 pushd ~
 echo "Deleting .emacs to replace it with .spacemacs"
@@ -34,7 +43,7 @@ fi
 echo "Downloading Spacemacs"
 git clone https://github.com/syl20bnr/spacemacs .emacs.d
 popd
-if [ Emerge_emacs -eq true]
+if [ Emerge_emacs -eq true ]
 then
     so ./emerge-emacs-snapshot-ubuntu.sh $Y_opt
 fi

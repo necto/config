@@ -28,6 +28,8 @@ values."
      emacs-lisp
      git
      markdown
+     ocaml
+     haskell
      ;; org
       (shell :variables
              shell-default-height 30
@@ -109,11 +111,11 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
-                               :weight normal
-                               :width normal
-                               :powerline-scale 1.1)
+   ;dotspacemacs-default-font '("Source Code Pro"
+   ;                            :size 14
+   ;                            :weight normal
+   ;                            :width normal
+   ;                            :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -241,7 +243,7 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
-  (setq-default with-editor-emacsclient-executable "emacsclient-snapshot")
+  (setq-default with-editor-emacsclient-executable "emacsclient")
   )
 
 (defun dotspacemacs/user-config ()
