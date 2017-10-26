@@ -2,7 +2,7 @@ Config { font = "xft:Ubuntu-10"
        , additionalFonts = ["xft:Ubuntu Mono-11"]
        , bgColor = "black"
        , fgColor = "grey"
-       , position = TopW L 93
+       , position = BottomW R 93
        , commands = [ Run MultiCpu [ "--template" , "<total0>|<total1>|<total2>|<total3>%"
                                    , "--Low"      , "50"         -- units: %
                                    , "--High"     , "85"         -- units: %

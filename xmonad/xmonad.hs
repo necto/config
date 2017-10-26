@@ -22,10 +22,10 @@ import qualified XMonad.Layout.IndependentScreens as LIS
 togglevga = do
   screencount <- LIS.countScreens
   if screencount > 1
-    then spawn "xrandr --output HDMI2 --off"
-    else spawn "xrandr --output HDMI2 --auto --right-of eDP1"
--- then spawn "xrandr --output HDMI2 --off --output DP1 --off"
--- else spawn "xrandr --output HDMI2 --auto --right-of eDP1 --output DP1 --off"
+    then spawn "xrandr --output HDMI2 --off --output DP1 --off"
+    else spawn "xrandr --output HDMI2 --auto --right-of eDP1 --output DP1 --auto --left-of eDP1"
+    -- then spawn "xrandr --output HDMI2 --off"
+    -- else spawn "xrandr --output HDMI2 --auto --right-of eDP1"
 
 -- Does not quite work for now: when called
 -- many times in a row, places all the windows in to the
