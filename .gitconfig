@@ -1,8 +1,8 @@
 [user]
-	email = necto.ne@gmail.com
-	name = Necto
+       email = necto.ne@gmail.com
+       name = Arseniy Zaostrovnykh
 [color]
-        ui = true
+       ui = true
 [github]
 	user = Necto
 	token = e90733a9093647e79d32adfb5bccfc86
@@ -10,3 +10,5 @@
      insteadOf = gh:
 [push]
 	default = matching
+[alias]
+	lol = log --graph --oneline --decorate

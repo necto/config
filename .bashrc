@@ -38,7 +38,13 @@ export ALTERNATE_EDITOR="vi"
 export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -c -a emacs"
 
-SHELL="bash"
+# necessary for android studio (AVD manager) corectly detecting my 64bit linux
+SHELL="/bin/bash"
+export SHELL="/bin/bash"
 eval `opam config env`
 export PATH=/home/necto/proj/verifast/bin:/home/necto/proj/llvm-3.4.2/Release+Asserts/bin:/home/necto/proj/klee/Release+Asserts/bin:$PATH
 
+export LD_LIBRARY_PATH=~/proj/z3/build/:$LD_LIBRARY_PATH
+
+# Force java gui to work with Xmonad
+export _JAVA_AWT_WM_NONREPARENTING=1 
