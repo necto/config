@@ -42,9 +42,22 @@ export VISUAL="emacsclient -c -a emacs"
 SHELL="/bin/bash"
 export SHELL="/bin/bash"
 eval `opam config env`
-export PATH=/home/necto/proj/verifast/bin:/home/necto/proj/llvm-3.4.2/Release+Asserts/bin:/home/necto/proj/klee/Release+Asserts/bin:$PATH
+export PATH=/home/necto/proj/verifast/bin:/home/necto/proj/llvm-3.4.2/Release+Asserts/bin:/home/necto/proj/klee/build/bin:$PATH
 
 export LD_LIBRARY_PATH=~/proj/z3/build/:$LD_LIBRARY_PATH
 
 # Force java gui to work with Xmonad
 export _JAVA_AWT_WM_NONREPARENTING=1 
+
+function set_terminal_windowname() {
+    echo -ne "\033]2;$(pwd); $(history 1 | sed "s/^[ ]*[0-9]*[ ]*//g")\007"
+}
+
+# Automatically measure and display execution time for each command issued
+source ~/config/bash-command-timer.sh
+
+function before_every_command() {
+    set_terminal_windowname
+    BCTPreCommand
+}
+trap 'before_every_command' DEBUG
