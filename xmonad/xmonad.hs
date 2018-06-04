@@ -3,9 +3,11 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.SpawnOnce
 import Graphics.X11.ExtraTypes.XF86
 import Graphics.X11.Types
 import XMonad.Actions.CycleWS
@@ -18,14 +20,11 @@ import qualified XMonad.Layout.IndependentScreens as LIS
 -- assumed to be in my $PATH, in order to control the backlight brightness.
 -- (as xbacklight suddenly stopped working for some reason)
 
--- TODO: detect the real output for the connected monitor.
 togglevga = do
   screencount <- LIS.countScreens
   if screencount > 1
-    then spawn "xrandr --output HDMI2 --off --output DP1 --off"
-    else spawn "xrandr --output HDMI2 --auto --right-of eDP1 --output DP1 --auto --left-of eDP1"
-    -- then spawn "xrandr --output HDMI2 --off"
-    -- else spawn "xrandr --output HDMI2 --auto --right-of eDP1"
+    then spawn "bash ~/.xmonad/other-screen-off.sh"
+    else spawn "bash ~/.xmonad/other-screen-on.sh"
 
 -- Does not quite work for now: when called
 -- many times in a row, places all the windows in to the
@@ -35,9 +34,14 @@ spawnToWorkspace program workspace = do
   spawn program
   windows $ W.greedyView workspace
 
+-- | Startup applications
+startupHook' :: X()
+startupHook' = do
+  spawnOnce "try arbtt-capture -r 30"
+
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
-  xmonad $ defaultConfig
+  xmonad $ ewmh $ defaultConfig
     { manageHook = manageDocks <+> manageHook defaultConfig
     , layoutHook = smartBorders . avoidStruts $ layoutHook defaultConfig
     , logHook = dynamicLogWithPP xmobarPP
@@ -46,6 +50,8 @@ main = do
                 , ppUrgent = xmobarColor "yellow" "red" . xmobarStrip}
     , modMask = mod4Mask
     , borderWidth = 2
+    , handleEventHook = handleEventHook def <+> fullscreenEventHook
+    , startupHook = startupHook'
     } `additionalKeys`
     [ ((mod4Mask .|. shiftMask, xK_z ), spawn "xscreensaver-command -lock")
     , ((0, xK_Print           ), spawn "~/.xmonad/switch_keyboard_layout.sh")
