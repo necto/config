@@ -61,3 +61,11 @@ function before_every_command() {
     BCTPreCommand
 }
 trap 'before_every_command' DEBUG
+
+# Use the latest version of GHC and cabal by default
+export PATH=/opt/ghc/bin:$PATH
+export PATH=/opt/cabal/bin:$PATH
+
+# Use cabal-installed binaries (mostly pandoc and pandoc-crossref)
+
+export PATH=~/.local/bin:$PATH
