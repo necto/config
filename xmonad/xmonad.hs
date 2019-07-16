@@ -44,10 +44,18 @@ main = do
   xmonad $ ewmh $ docks defaultConfig
     { manageHook = manageDocks <+> manageHook defaultConfig
     , layoutHook = smartBorders . avoidStruts $ layoutHook defaultConfig
-    , logHook = dynamicLogWithPP xmobarPP
-                { ppOutput = hPutStrLn xmproc
-                , ppTitle = xmobarColor "green" "" . shorten 100
-                , ppUrgent = xmobarColor "yellow" "red" . xmobarStrip}
+    , logHook =
+        dynamicLogWithPP xmobarPP
+        { ppOutput = hPutStrLn xmproc
+        , ppTitle = xmobarColor "green" "" . shorten 120
+        , ppVisible = xmobarColor "darkorange" "" . wrap "(" ")"
+        , ppUrgent = xmobarColor "yellow" "red" . xmobarStrip
+        , ppLayout = (\x -> case x of
+                         "Tall" -> "T"
+                         "Mirror Tall" -> "MT"
+                         "Full" -> "F"
+                         _ -> x)
+        , ppSep = " : "}
     , modMask = mod4Mask
     , borderWidth = 2
     , handleEventHook = handleEventHook def <+> fullscreenEventHook

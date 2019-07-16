@@ -30,9 +30,17 @@ Config { font = "xft:Ubuntu-19"
                                          -- charged status
                                          , "-i"	, "<fc=#006000>Charged</fc>"
                                          ] 120
+                    , Run DynNetwork     [ "--template" , "<tx>kB/s <rx>kB/s"
+                                         , "--Low"      , "1000"          -- units: B/s
+                                         , "--High"     , "1000000"       -- units: B/s
+                                         , "--low"      , "darkgreen"
+                                         , "--normal"   , "darkorange"
+                                         , "--high"     , "darkred"
+                                         ] 10
                     , Run StdinReader
+                    , Run Date "<fc=darkorange>%a %b %_d</fc> <fc=green>%H:%M</fc>" "date" 10
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ [%mylayout%] <fn=1><%multicpu% : %memory%> </fn> | Vol: %myvolume% | %battery%  <fc=#ee9a00>%date%</fc>"
+       , template = "%StdinReader% }{ %dynnetwork% | <fc=green>[%mylayout%]</fc><fn=1><%multicpu% : %memory%></fn>| <icon=/home/necto/.xmonad/icons/volume.xbm/> %myvolume% | %battery%  %date%"
        }

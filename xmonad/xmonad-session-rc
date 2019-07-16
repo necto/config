@@ -1,8 +1,9 @@
 #!/bin/bash
 
 trayer --edge bottom --align left --SetDockType true --SetPartialStrut true \
-       --expand true --widthtype percent --width 7 --transparent true \
-       --tint 0x191970 --heighttype pixel --height 33 &
+       --expand true --widthtype pixel --width 180 --transparent true \
+       --tint 0x191970 --heighttype pixel --height 33 --monitor primary \
+       --distance 0 --distancefrom bottom &
 
 xsetroot -solid midnightblue
 xsetroot -cursor_name left_ptr
