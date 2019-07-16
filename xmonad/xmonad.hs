@@ -41,7 +41,7 @@ startupHook' = do
 
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
-  xmonad $ ewmh $ defaultConfig
+  xmonad $ ewmh $ docks defaultConfig
     { manageHook = manageDocks <+> manageHook defaultConfig
     , layoutHook = smartBorders . avoidStruts $ layoutHook defaultConfig
     , logHook = dynamicLogWithPP xmobarPP
@@ -69,10 +69,11 @@ main = do
     , ((mod4Mask, xK_s               ), do
           spawnToWorkspace "thunderbird" "5"
           spawnToWorkspace "firefox" "2"
-          spawnToWorkspace "skype" "6"
+          spawnToWorkspace "skypeforlinux" "6"
           spawnToWorkspace "telegram" "6"
           spawnToWorkspace "slack" "6")
     , ((0, xF86XK_Display            ), togglevga)
+    , ((mod4Mask, xK_p               ), spawn "dmenu_run -fn 'Ubuntu Mono-30'")
 
     , ((mod4Mask, xK_Down            ), nextScreen)
     , ((mod4Mask .|. shiftMask, xK_Down), shiftNextScreen)

@@ -1,5 +1,5 @@
-Config { font = "xft:Ubuntu-10"
-       , additionalFonts = ["xft:Ubuntu Mono-11"]
+Config { font = "xft:Ubuntu-19"
+       , additionalFonts = ["xft:Ubuntu Mono-15"]
        , bgColor = "black"
        , fgColor = "grey"
        , position = BottomW R 93
@@ -15,7 +15,7 @@ Config { font = "xft:Ubuntu-10"
                     , Run Date "%a %b %_d %H:%M" "date" 10
                     , Run Com "/bin/bash" ["-c", "~/.xmonad/get-volume"] "myvolume" 10
                     , Run Com "/bin/bash" ["-c", "~/.xmonad/query-keyboard-layout.sh"] "mylayout" 10
-                    , Run Battery        [ "--template" , "Batt: <acstatus>"
+                    , Run Battery        [ "--template" , "<acstatus>"
                                          , "--Low"      , "10"        -- units: %
                                          , "--High"     , "80"        -- units: %
                                          , "--low"      , "darkred"
