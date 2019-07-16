@@ -26,7 +26,7 @@ str1=$str2
 str2=${str1#${str1:0:1}*[}
 ir=`expr index "$str2" [`
 muter=''
-if [ ${str2:0:3} = $o ]; then muter='<fc=#e12901>[M]</fc>'; fi
+if [ ${str2:0:3} = $o ]; then muter='<fc=darkred>[M]</fc>'; fi
 v2=${str2%\]}
 v=${v1}\ $muter
 echo $v
