@@ -1,8 +1,8 @@
-
+SELECTED_RES_RX="[0-9]\+x[0-9]\+.*[0-9.]\+[ *]+"
 PRIMARY_SCREEN=$(xrandr | grep primary | awk '{print $1}')
 OTHER_SCREEN=$(xrandr | grep connected | grep -v disconnected | grep -v $PRIMARY_SCREEN | awk '{print $1}')
-PRIMARY_SCREEN_RES=$(xrandr | sed -n "/primary/,/connected/p" | grep '+$' | awk '{print $1}')
-OTHER_SCREEN_RES=$(xrandr | sed -n "/^$OTHER_SCREEN/,/primary/p"  | grep '+$' | awk '{print $1}')
+PRIMARY_SCREEN_RES=$(xrandr | sed -n "/primary/,/connected/p" | grep "$SELECTED_RES_RX" | awk '{print $1}')
+OTHER_SCREEN_RES=$(xrandr | sed -n "/^$OTHER_SCREEN/,/primary/p"  | grep "$SELECTED_RES_RX" | awk '{print $1}')
 PRIMARY_SCREEN_RESX=$(echo $PRIMARY_SCREEN_RES | awk -Fx '{print $1}')
 PRIMARY_SCREEN_RESY=$(echo $PRIMARY_SCREEN_RES | awk -Fx '{print $2}')
 OTHER_SCREEN_RESX=$(echo $OTHER_SCREEN_RES | awk -Fx '{print $1}')
@@ -24,7 +24,7 @@ else
     OTHER_SCREEN_POSX=$PRIMARY_SCREEN_RESX
     OTHER_SCREEN_POSY=$(($PRIMARY_SCREEN_RESY-$OTHER_SCREEN_RESY))
 
-    # Order is important!
+    
     xrandr --output $OTHER_SCREEN --auto --pos ${OTHER_SCREEN_POSX}x${OTHER_SCREEN_POSY}
 fi
 
