@@ -12,3 +12,6 @@
 	default = matching
 [alias]
 	lol = log --graph --oneline --decorate
+	pandiff = difftool -t pandiff
+[difftool "pandiff"]
+	cmd = pandiff \"$LOCAL\" \"$REMOTE\"
