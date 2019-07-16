@@ -7,20 +7,23 @@ trayer --edge bottom --align left --SetDockType true --SetPartialStrut true \
 
 xsetroot -solid midnightblue
 xsetroot -cursor_name left_ptr
-/usr/lib/gnome-settings-daemon/gsd-xsettings &
-
-#eval $(gnome-settings-daemon)
-#eval $(gnome-keyring-daemon --start)
-#export GNOME_KEYRING_SOCKET
-#export GNOME_KEYRING_PID
+if [ -x /usr/lib/gnome-settings-daemon/gsd-xsettings ]; then
+    # make sure the interface fonts and magnification factors are applied
+    /usr/lib/gnome-settings-daemon/gsd-xsettings &
+fi
 
 # Set background image with feh
 feh --bg-scale /usr/share/backgrounds/singularity.jpg &
 
-#dropbox start &
-
 if [ -x /usr/bin/nm-applet ] ; then
+    # network manager applet into the systray
     nm-applet --sm-disable &
+fi
+
+if [ -x /usr/bin/gnome-keyring-daemon ]; then
+    # This combines ssh-agent and gpg-agent for key management.
+    # $(...) sources the command output to set variables.
+    export $(gnome-keyring-daemon --start --daemonize)
 fi
 
 export PATH=$PATH:/opt/cisco/anyconnect/bin

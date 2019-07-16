@@ -38,6 +38,7 @@ spawnToWorkspace program workspace = do
 startupHook' :: X()
 startupHook' = do
   spawnOnce "try arbtt-capture -r 30"
+  spawnOnce "dropbox start"
 
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
@@ -75,6 +76,7 @@ main = do
     , ((0, xF86XK_MonBrightnessDown  ), spawn "light -U 5")
     , ((mod4Mask, xK_b               ), sendMessage ToggleStruts)
     , ((mod4Mask, xK_s               ), do
+          spawn "dropbox start"
           spawnToWorkspace "thunderbird" "5"
           spawnToWorkspace "firefox" "2"
           spawnToWorkspace "skypeforlinux" "6"
