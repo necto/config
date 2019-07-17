@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Run the second screen in extended mode, instead of the default mirror
+. ~/.xmonad/other-screen-on.sh
+
 trayer --edge bottom --align left --SetDockType true --SetPartialStrut true \
        --expand true --widthtype pixel --width 180 --transparent true \
        --tint 0x191970 --heighttype pixel --height 33 --monitor primary \

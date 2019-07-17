@@ -1,3 +1,21 @@
+# Turn on the second screen connected, and position it to the right of
+# the primary screen, aligned by the bottom edge.
+
+# If there is no second screen, exit silently
+
+SCREENS_CONNECTED=$(xrandr | grep ' connected' | wc -l)
+if [ $SCREENS_CONNECTED \> 2 ];
+then
+    echo This script does not support more than 2 screens.
+    exit 1
+fi
+
+if [ 2 \> $SCREENS_CONNECTED ];
+then
+    # Only one screen is connected, nothing to do here
+    exit 0
+fi
+
 SELECTED_RES_RX="[0-9]\+x[0-9]\+.*[0-9.]\+[ *]+"
 PRIMARY_SCREEN=$(xrandr | grep primary | awk '{print $1}')
 OTHER_SCREEN=$(xrandr | grep connected | grep -v disconnected | grep -v $PRIMARY_SCREEN | awk '{print $1}')
