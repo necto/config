@@ -4,16 +4,28 @@
 # If there is no second screen, exit silently
 
 SCREENS_CONNECTED=$(xrandr | grep ' connected' | wc -l)
+
+# find out how the script was invoked
+# we don't want to end the user's terminal session!
+if [[ "$0" != "$BASH_SOURCE" ]] ; then
+  # this script is executed via `source`!
+  # An `exit` will close the user's console!
+  EXIT=return
+else
+  # this script is not `source`-d, it's safe to exit via `exit`
+  EXIT=exit
+fi
+
 if [ $SCREENS_CONNECTED \> 2 ];
 then
     echo This script does not support more than 2 screens.
-    exit 1
+    $EXIT 1
 fi
 
 if [ 2 \> $SCREENS_CONNECTED ];
 then
     # Only one screen is connected, nothing to do here
-    exit 0
+    $EXIT 0
 fi
 
 SELECTED_RES_RX="[0-9]\+x[0-9]\+.*[0-9.]\+[ *]+"
