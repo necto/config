@@ -62,7 +62,7 @@ main = do
     , handleEventHook = handleEventHook def <+> fullscreenEventHook
     , startupHook = startupHook'
     } `additionalKeys`
-    [ ((mod4Mask .|. shiftMask, xK_z ), spawn "xscreensaver-command -lock")
+    [ ((mod4Mask .|. shiftMask, xK_z ), spawn "setxkbmap us && xscreensaver-command -lock")
     , ((0, xK_Print           ), spawn "~/.xmonad/switch_keyboard_layout.sh")
     , ((0, xK_Menu           ), spawn "~/.xmonad/switch_keyboard_layout.sh")
     , ((0, xF86XK_AudioLowerVolume   ), spawn "amixer set Master 2-")
