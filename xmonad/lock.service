@@ -6,14 +6,15 @@
 # to enable entering the user password.
 [Unit]
 Description=Lock the screen on resume from suspend
-After=sleep.target
+Before=sleep.target
 
 [Service]
 Type=oneshot
 User=necto
 Environment=DISPLAY=:0
 ExecStartPre=-/usr/bin/setxkbmap us
-ExecStart=/usr/bin/slock
+ExecStart=/usr/bin/xscreensaver-command -lock
+ExecStartPost=-/bin/sleep 1
 
 [Install]
 WantedBy=sleep.target
