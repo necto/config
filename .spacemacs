@@ -18,6 +18,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     rust
      csv
      python
      javascript
@@ -39,6 +40,7 @@ values."
      org
      ;; collaborative editing: floobits
      latex
+     scala
       (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
@@ -53,7 +55,7 @@ values."
    ;; polymode: Enables interleaved major modes
    dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(racer)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)

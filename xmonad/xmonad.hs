@@ -39,6 +39,7 @@ startupHook' :: X()
 startupHook' = do
   spawnOnce "try arbtt-capture -r 30"
   spawnOnce "dropbox start"
+  spawnOnce "duplicati"
 
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
@@ -62,7 +63,7 @@ main = do
     , handleEventHook = handleEventHook def <+> fullscreenEventHook
     , startupHook = startupHook'
     } `additionalKeys`
-    [ ((mod4Mask .|. shiftMask, xK_z ), spawn "setxkbmap us && xscreensaver-command -lock")
+    [ ((mod4Mask .|. shiftMask, xK_z ), spawn "~/.xmonad/lock_screen.sh")
     , ((0, xK_Print           ), spawn "~/.xmonad/switch_keyboard_layout.sh")
     , ((0, xK_Menu           ), spawn "~/.xmonad/switch_keyboard_layout.sh")
     , ((0, xF86XK_AudioLowerVolume   ), spawn "amixer set Master 2-")
@@ -80,7 +81,7 @@ main = do
           spawnToWorkspace "thunderbird" "5"
           spawnToWorkspace "firefox" "2"
           spawnToWorkspace "skypeforlinux" "6"
-          spawnToWorkspace "telegram" "6"
+          spawnToWorkspace "~/.TelegramDesktop/Telegram" "6"
           spawnToWorkspace "slack" "6")
     , ((0, xF86XK_Display            ), togglevga)
     , ((mod4Mask, xK_p               ), spawn "dmenu_run -fn 'Ubuntu Mono-30'")
