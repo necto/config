@@ -1,7 +1,7 @@
 
-ln -fs /usr/share/zoneinfo/Europe/Zurich /etc/localtime
-DEBIAN_FRONTEND=noninteractive apt update && apt install -y git python emacs
-dpkg-reconfigure --frontend noninteractive tzdata
+sudo ln -fs /usr/share/zoneinfo/Europe/Zurich /etc/localtime
+DEBIAN_FRONTEND=noninteractive sudo apt update && sudo apt install -y git python emacs
+sudo dpkg-reconfigure --frontend noninteractive tzdata
 cd ~
 mv .bashrc .bashrc.bkp
 git clone https://github.com/necto/config
@@ -9,7 +9,7 @@ cd config
 ./install
 
 # More useful packages
-apt install vim xmonad wget unzip
+sudo apt install -y vim wget unzip net-tools iputils-ping xmonad xmobar trayer feh suckless-tools x11-xserver-utils alsa-utils
 
 ssh-keygen
 echo "Add this key to your github.com account: https://github.com/settings/keys"
@@ -18,7 +18,7 @@ cat ~/.ssh/id_rsa.pub
 echo "X------------------------X"
 
 # Dev packages
-apt install -y cmake ninja-build clang-10 ccache gcc lld clangd
+sudo apt install -y cmake ninja-build clang-10 ccache gcc lld clangd
 
 # TODO: configure firefox, gtk (font size, etc), xmonad-as-the-default, docker
 
