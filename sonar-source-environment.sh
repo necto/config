@@ -19,3 +19,6 @@ mkdir -p exe/reproducer
 ln -s cmake/reproducer exe/reproducer/reproducer
 mkdir -p exe/subprocess
 ln -s cmake/subprocess exe/subprocess/subprocess
+cd ..
+ln -s build/cmake/compile_commands.json ./
+ln -s ~/config/.clang-format ./
