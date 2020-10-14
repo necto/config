@@ -7,6 +7,7 @@ mv .bashrc .bashrc.bkp
 git clone https://github.com/necto/config
 cd config
 ./install
+git remote set-url origin gh:necto/config
 
 # More useful packages
 sudo apt install -y vim wget unzip net-tools iputils-ping xmonad xmobar trayer feh suckless-tools x11-xserver-utils alsa-utils
