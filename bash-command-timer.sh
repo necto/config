@@ -1,6 +1,6 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
-#    Copyright (C) 2014 Chuan Ji <ji@chu4n.com>                               #
+#    Copyright (C) 2014-2020 Chuan Ji <chuan@jichu4n.com>                     #
 #                                                                             #
 #    Licensed under the Apache License, Version 2.0 (the "License");          #
 #    you may not use this file except in compliance with the License.         #
@@ -16,12 +16,16 @@
 #                                                                             #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+
+
 # A simple Bash script for printing timing information for each command line
 # executed.
 #
 # For the most up-to-date version, as well as further information and
 # installation instructions, please visit the GitHub project page at
-#     https://github.com/jichuan89/bash-command-timer
+#     https://github.com/jichu4n/bash-command-timer
+
+
 
 # SETTINGS
 # ========
@@ -35,15 +39,18 @@
 #     BCT_ENABLE=1
 BCT_ENABLE=1
 
-# The color of the output.
+# The color of the output for successful and failed commands respectively.
 #
-# This should be a color string  usable in a VT100 escape sequence (see
+# They should be a color string usable in a VT100 escape sequence (see
 # http://en.wikipedia.org/wiki/ANSI_escape_code#Colors), without the
 # escape sequence prefix and suffix. For example, bold red would be '1;31'.
 #
-# If empty, disable colored output. Set it to empty if your terminal does not
+# The color of the output is set in the function BCTPreCommand
+#
+# If empty, disable colored output. Set them to empty if your terminal does not
 # support VT100 escape sequences.
-BCT_COLOR='34'
+BCT_SUCCESS_COLOR='32'
+BCT_ERROR_COLOR='91'
 
 # The display format of the current time.
 #
@@ -62,6 +69,7 @@ BCT_MILLIS=1
 # Wheter to wrap to the next line if the output string would overlap with
 # characters of last command's output
 BCT_WRAP=0
+
 
 
 # IMPLEMENTATION
@@ -97,6 +105,8 @@ else
   exit 1
 fi
 
+
+# BCTPreCommand is trapped to the DEBUG trap, directly or through bash-preexec.
 # The debug trap is invoked before the execution of each command typed by the
 # user (once for every command in a composite command) and again before the
 # execution of PROMPT_COMMAND after the user's command finishes. Thus, to be
@@ -105,6 +115,15 @@ fi
 # flag is set and clear it after the first execution.
 BCT_AT_PROMPT=1
 function BCTPreCommand() {
+  local EXIT="$?"
+  if [ $EXIT == 0 ]
+  then
+    # colour for exit without error
+    BCT_COLOR=$BCT_SUCCESS_COLOR
+  else
+    # colour for exit with error
+    BCT_COLOR=$BCT_ERROR_COLOR
+  fi
   if [ -z "$BCT_AT_PROMPT" ]; then
     return
   fi
@@ -112,8 +131,10 @@ function BCTPreCommand() {
   BCT_COMMAND_START_TIME=$(eval $BCTTime)
 }
 
+
 # Bash will automatically set COLUMNS to the current terminal width.
 export COLUMNS
+
 
 # Flag to prevent printing out the time upon first login.
 BCT_FIRST_PROMPT=1
@@ -188,4 +209,4 @@ function BCTPostCommand() {
   # Finally, print output.
   echo -e "${output_str_colored}"
 }
-PROMPT_COMMAND='BCTPostCommand'
+

@@ -5,7 +5,7 @@
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias rehash='hash -r'
-PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[0;06m\]'
+PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] '
 
 #export PATH=/opt/mpich2/bin:$PATH
 export LANGUAGE=en_US.UTF-8
@@ -42,13 +42,13 @@ export VISUAL="emacsclient -c -a emacs"
 # necessary for android studio (AVD manager) corectly detecting my 64bit linux
 SHELL="/bin/bash"
 export SHELL="/bin/bash"
-eval `opam config env`
-export PATH=/home/necto/proj/verifast/bin:/home/necto/proj/llvm-3.4.2/Release+Asserts/bin:/home/necto/proj/klee/build/bin:$PATH
-
-export LD_LIBRARY_PATH=~/proj/z3/build/:$LD_LIBRARY_PATH
+if command -v opam &> /dev/null
+then
+    eval `opam config env`
+fi
 
 # Force java gui to work with Xmonad
-export _JAVA_AWT_WM_NONREPARENTING=1 
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 function set_terminal_windowname() {
     echo -ne "\033]2;$(pwd); $(history 1 | sed "s/^[ ]*[0-9]*[ ]*//g")\007"
@@ -61,6 +61,7 @@ function before_every_command() {
     set_terminal_windowname
     BCTPreCommand
 }
+PROMPT_COMMAND='BCTPostCommand'
 trap 'before_every_command' DEBUG
 
 # Use the latest version of GHC and cabal by default
