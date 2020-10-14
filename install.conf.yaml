@@ -12,4 +12,9 @@
     ~/.gitconfig: .gitconfig
 
 - shell:
-  - [sh emerge-spacemacs.sh, Downloading Spacemacs]
+  -
+    command: sh emerge-spacemacs.sh
+    description: Downloading Spacemacs
+    stdout: true
+    stderr: true
+    stdin: true
