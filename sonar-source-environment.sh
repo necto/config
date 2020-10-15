@@ -1,5 +1,5 @@
 # SonarSource cpecific:
-apt install -y zlib1g-dev python3-pip
+sudo apt install -y zlib1g-dev python3-pip
 pip3 install lit
 
 # download llvm fork from https://github.com/SonarSource/llvm-project/releases put it into ~/proj/sonarsource-clang*
@@ -28,5 +28,5 @@ ln -s build/cmake/compile_commands.json ./
 ln -s ~/config/.clang-format ./
 
 # Gradle stuff
-apt install -y default-jdk
+# sudo apt install -y default-jdk
 # to be continued...
