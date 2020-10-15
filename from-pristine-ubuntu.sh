@@ -10,7 +10,7 @@ cd config
 git remote set-url origin gh:necto/config
 
 # More useful packages
-sudo apt install -y vim wget unzip net-tools iputils-ping xmonad xmobar trayer feh suckless-tools x11-xserver-utils alsa-utils
+sudo apt install -y vim wget unzip net-tools iputils-ping xmonad xmobar trayer feh suckless-tools x11-xserver-utils arandr alsa-utils
 
 ssh-keygen
 echo "Add this key to your github.com account: https://github.com/settings/keys"

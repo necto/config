@@ -29,7 +29,6 @@ if [ -x /usr/bin/gnome-keyring-daemon ]; then
     export $(gnome-keyring-daemon --start --daemonize)
 fi
 
-export PATH=$PATH:/opt/cisco/anyconnect/bin
 export SHELL=bash
 
 exec xmonad

@@ -38,7 +38,7 @@ spawnToWorkspace program workspace = do
 startupHook' :: X()
 startupHook' = do
   spawnOnce "try arbtt-capture -r 30"
-  spawnOnce "dropbox start"
+  spawnOnce ".dropbox-dist/dropboxd"
   spawnOnce "duplicati"
 
 main = do
