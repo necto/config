@@ -4,9 +4,12 @@ pip3 install lit
 
 # download llvm fork from https://github.com/SonarSource/llvm-project/releases put it into ~/proj/sonarsource-clang*
 
-tar -xvf sonarsource-clang*
+mkdir -p ~/proj
 
 cd ~/proj
+
+tar -xvf sonarsource-clang*
+
 git clone gh:SonarSource/sonar-cpp
 cd sonar-cpp
 mkdir -p build/cmake
