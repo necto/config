@@ -73,8 +73,8 @@ main = do
     , ((0, xK_KP_Right                  ), spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")
     , ((0, xK_KP_Left                   ), spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")
     , ((0, xK_KP_Begin                  ), spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")
-    , ((0, xF86XK_MonBrightnessUp    ), spawn "light -A 7")
-    , ((0, xF86XK_MonBrightnessDown  ), spawn "light -U 5")
+    , ((0, xF86XK_MonBrightnessUp    ), spawn "~/.xmonad/light/light -A 7")
+    , ((0, xF86XK_MonBrightnessDown  ), spawn "~/.xmonad/light/light -U 5")
     , ((mod4Mask, xK_b               ), sendMessage ToggleStruts)
     , ((mod4Mask, xK_s               ), do
           spawn "dropbox start"

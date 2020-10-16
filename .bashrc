@@ -71,3 +71,4 @@ export PATH=/opt/cabal/bin:$PATH
 # Use cabal-installed binaries (mostly pandoc and pandoc-crossref)
 
 export PATH=~/.local/bin:$PATH
+export PATH=~/config/xmonad/light:$PATH
