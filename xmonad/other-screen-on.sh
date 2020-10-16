@@ -47,7 +47,7 @@ then
     OTHER_SCREEN_POSY=0
 
     # Order is important!
-    xrandr --output $OTHER_SCREEN --auto --pos ${OTHER_SCREEN_POSX}x${OTHER_SCREEN_POSY}
+    xrandr --output $OTHER_SCREEN --mode ${OTHER_SCREEN_RESX}x${OTHER_SCREEN_RESY} --pos ${OTHER_SCREEN_POSX}x${OTHER_SCREEN_POSY}
     xrandr --output $PRIMARY_SCREEN --pos ${PRIMARY_POSX}x${PRIMARY_POSY}
 else
     PRIMARY_POSX=0
@@ -56,7 +56,7 @@ else
     OTHER_SCREEN_POSY=$(($PRIMARY_SCREEN_RESY-$OTHER_SCREEN_RESY))
 
     
-    xrandr --output $OTHER_SCREEN --auto --pos ${OTHER_SCREEN_POSX}x${OTHER_SCREEN_POSY}
+    xrandr --output $OTHER_SCREEN --mode ${OTHER_SCREEN_RESX}x${OTHER_SCREEN_RESY} --pos ${OTHER_SCREEN_POSX}x${OTHER_SCREEN_POSY}
 fi
 
 
