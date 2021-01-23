@@ -28,3 +28,7 @@ sudo apt install -y cmake ninja-build clang-10 ccache gcc lld clangd
 
 # ln -s ~/.xmonad/bin/xsession ~/.xsession
 # Logout, login from slim/lightdm/xdm/kdm/gdm
+
+# remove the terminal title-bar (gnome-terminal-server window decoration):
+# Open dconf-editor, navigate to /org/gnome/terminal/legacy/headerbar and change it to False
+# from https://askubuntu.com/questions/1138272/removing-window-decorations-of-gnome-terminal-in-ubuntu-19-04
