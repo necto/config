@@ -1,11 +1,8 @@
 [user]
-       email = necto.ne@gmail.com
+       email = arseniy.zaostrovnykh@sonarsource.com
        name = Arseniy Zaostrovnykh
 [color]
        ui = true
-[github]
-	user = Necto
-	token = e90733a9093647e79d32adfb5bccfc86
 [url "git@github.com:"]
      insteadOf = gh:
 [push]
