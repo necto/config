@@ -31,4 +31,7 @@ fi
 
 export SHELL=bash
 
+# Compose diacritics with the right Alt (Meta) key
+xmodmap -e "keycode 108 = Multi_key"
+
 exec xmonad
