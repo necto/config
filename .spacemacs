@@ -427,13 +427,22 @@ This function is called at the very end of Spacemacs initialization."
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
- '(org-agenda-files (quote ("~/Dropbox/notes/general.org")))
+ '(org-agenda-files (quote ("~/Dropbox/notes/gtd/general.org"
+                            "~/Dropbox/notes/gtd/inbox.org"
+                            "~/Dropbox/notes/gtd/projects.org"
+                            "~/Dropbox/notes/gtd/tickler.org")))
  '(org-capture-templates
    (quote
     (("t" "Add a todo item" entry
-      (file "~/Dropbox/notes/general.org")
-      "* TODO [#B] %?
-  OPEN: %t" :jump-to-captured t :empty-lines 1))))
+      (file+headline "~/Dropbox/notes/gtd/inbox.org" "Todos")
+      "** TODO [#B] %?
+  OPEN: %U" :jump-to-captured t :empty-lines 1))))
+ '(org-refile-targets '(("~/Dropbox/notes/gtd/projects.org" :maxlevel . 2)
+                        ("~/Dropbox/notes/gtd/someday.org" :level . 1)
+                        ("~/Dropbox/notes/gtd/tickler.org" :maxlevel . 2)))
+ '(org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+
+
  '(org-clock-display-default-range (quote untilnow))
  '(package-selected-packages
    (quote
