@@ -24,6 +24,9 @@ echo "X------------------------X"
 # Dev packages
 sudo apt install -y cmake ninja-build clang-10 ccache gcc lld clangd
 
+# Notifications from the terminal:
+sudo apt install -y libnotify-bin notify-osd
+
 # TODO: configure firefox, gtk (font size, etc), xmonad-as-the-default, docker
 
 # ln -s ~/.xmonad/bin/xsession ~/.xsession

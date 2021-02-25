@@ -17,6 +17,8 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
+# Added a GUI notification for long commands taken from:
+# https://gitlab.com/victor-engmark/tilde/-/commit/1fc8b9f6ab0586499c7921b1452c43c394cd1e39
 
 # A simple Bash script for printing timing information for each command line
 # executed.
@@ -129,6 +131,7 @@ function BCTPreCommand() {
   fi
   unset BCT_AT_PROMPT
   BCT_COMMAND_START_TIME=$(eval $BCTTime)
+  BCT_COMMAND_LINE=$(history 1 | sed "s/^[ ]*[0-9]*[ ]*//g")
 }
 
 
@@ -208,5 +211,12 @@ function BCTPostCommand() {
   echo -ne "\033[${#output_str}D"
   # Finally, print output.
   echo -e "${output_str_colored}"
+
+  # Send a notification if the command took long time (> 10 minutes)
+  local tot_secs=$(($command_time / $SEC))
+  local notify_path=$(which notify-send)
+  if [ $tot_secs -gt 600 ] && [ -x "$notify_path" ]; then
+      notify-send "Finished in: $time_str" "$BCT_COMMAND_LINE"
+  fi
 }
 
