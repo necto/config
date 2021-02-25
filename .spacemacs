@@ -385,7 +385,7 @@ This function is called at the very end of Spacemacs initialization."
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#272822" "#F92672" "#A6E22E" "#E6DB74" "#66D9EF" "#FD5FF0" "#A1EFE4" "#F8F8F2"])
- `(c-basic-offset 2)
+ '(c-basic-offset 2)
  '(c-offsets-alist
    (quote
     ((arglist-intro . +)
