@@ -31,6 +31,8 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]P7ffffff" #lightgrey
     echo -en "\e]PFdedede" #white
     clear
+elif [ "$TERM" = "dumb" ]; then
+    echo 'Keep the "dumb" term from the tramp mode'
 else
     export TERM=xterm-256color
 fi
@@ -61,8 +63,15 @@ function before_every_command() {
     set_terminal_windowname
     BCTPreCommand
 }
-PROMPT_COMMAND='BCTPostCommand'
-trap 'before_every_command' DEBUG
+if [ $TERM = "dumb" ]
+then
+    # Fix for TRAMP (Emacs remote connection)
+    unset opt zle
+    PS1='$ '
+else
+    PROMPT_COMMAND='BCTPostCommand'
+    trap 'before_every_command' DEBUG
+fi
 
 # Use the latest version of GHC and cabal by default
 export PATH=/opt/ghc/bin:$PATH
