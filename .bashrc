@@ -81,3 +81,8 @@ export PATH=/opt/cabal/bin:$PATH
 
 export PATH=~/.local/bin:$PATH
 export PATH=~/config/xmonad/light:$PATH
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+alias suspend="systemctl -i suspend"
+
