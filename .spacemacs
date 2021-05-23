@@ -369,6 +369,12 @@ layers configuration. You are free to put any user code."
       (setenv "PATH" path-from-shell)
       (setq exec-path (split-string path-from-shell path-separator))))
   (when window-system (set-exec-path-from-shell-PATH))
+  (require 'lsp-mode)
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-tramp-connection "clangd-12")
+                    :major-modes '(c++-mode)
+                    :remote? t
+                    :server-id 'clangd-remote))
   )
 
 (defun dotspacemacs/emacs-custom-settings ()
