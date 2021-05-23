@@ -55,6 +55,7 @@ values."
             c-c++-backend 'lsp-clangd
             c-c++-default-mode-for-headers 'c++-mode)
      (lsp :variables
+          lsp-ui-doc-enable nil
           lsp-rust-server 'rust-analyzer) ;; <- Language server protocol
      ;; collaborative editing: floobits
      latex
