@@ -330,6 +330,7 @@ values."
    ;; (default "%I@%S")
    ;; see https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org#frame-title
    dotspacemacs-frame-title-format "%a :%m"
+   default-input-method "russian-computer"
    ))
 
 (defun dotspacemacs/user-init ()
