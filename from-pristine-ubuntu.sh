@@ -22,7 +22,7 @@ cat ~/.ssh/id_rsa.pub
 echo "X------------------------X"
 
 # Dev packages
-sudo apt install -y cmake ninja-build clang-10 ccache gcc lld clangd
+sudo apt install -y cmake ninja-build clang-12 ccache gcc lld clangd-12
 
 # Notifications from the terminal:
 sudo apt install -y libnotify-bin notify-osd

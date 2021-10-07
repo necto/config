@@ -1,30 +1,25 @@
 # SonarSource cpecific:
-sudo apt install -y zlib1g-dev python3-pip
-pip3 install lit
+# this list partially replicates "from-pristine-ubuntu.sh", for the self-sufficiency
+sudo apt install -y zlib1g-dev python3-pip ninja-build clangd-12 clang-12 cmake ccache gcc lld
+pip3 install lit==12.0.1
 
-# download llvm fork from https://github.com/SonarSource/llvm-project/releases put it into ~/proj/sonarsource-clang*
+# download llvm fork from https://github.com/SonarSource/llvm-project/releases put it into ~/sonarsource-clang*
 
 mkdir -p ~/proj
-
 cd ~/proj
+mv ~/sonarsource-clang* ./
 
 tar -xvf sonarsource-clang*
 
 git clone gh:SonarSource/sonar-cpp
 cd sonar-cpp
-mkdir -p build/cmake
-cd build/cmake
-CC=clang-10 CXX=clang++-10 cmake -DUSE_CCACHE=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DUSE_PCH=OFF -DBUILD_SHARED_LIBS=ON -DUSE_LINKER=lld -GNinja ../..
+mkdir -p build/asserts
+echo 'CC=clang-12 CXX=clang++-12 cmake -DUSE_CCACHE=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DUSE_ASSERTIONS=ON -DUSE_PCH=OFF -DBUILD_SHARED_LIBS=ON -DUSE_LINKER=lld -GNinja ../..' > build/build-asserts.sh
+cd build/asserts
+bash ../build-asserts.sh
 ninja
-cd ..
-mkdir -p exe/tester
-ln -s ../../cmake/tester exe/tester/tester
-mkdir -p exe/reproducer
-ln -s ../../cmake/reproducer exe/reproducer/reproducer
-mkdir -p exe/subprocess
-ln -s ../../cmake/subprocess exe/subprocess/subprocess
-cd ..
-ln -s build/cmake/compile_commands.json ./
+cd ../..
+ln -s build/asserts/compile_commands.json ./
 ln -s ~/config/.clang-format ./
 
 # Gradle stuff
