@@ -14,7 +14,7 @@ git clone gh:SonarSource/sonar-cpp
 cd sonar-cpp
 mkdir -p build/cmake
 cd build/cmake
-CC=clang-10 CXX=clang++-10 cmake -DUSE_CCACHE=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DUSE_PCH=OFF -DBUILD_SHARED_LIBS=ON -DUSE_LINKER=lld -GNinja ../..
+CC=clang-13 CXX=clang++-13 cmake -DUSE_CCACHE=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DUSE_PCH=OFF -DBUILD_SHARED_LIBS=ON -DUSE_LINKER=lld -GNinja ../..
 ninja
 cd ..
 mkdir -p exe/tester
