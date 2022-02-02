@@ -1,9 +1,8 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.DynamicProperty
 import XMonad.Layout.NoBorders
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
@@ -41,10 +40,27 @@ startupHook' = do
   spawnOnce ".dropbox-dist/dropboxd"
   spawnOnce "duplicati"
 
+manageZoomHook =
+  composeAll $
+    [ (className =? zoomClassName) <&&> shouldFloat <$> title --> doFloat,
+      (className =? zoomClassName) <&&> shouldSink <$> title --> doSink
+    ]
+  where
+    zoomClassName = "zoom"
+    tileTitles =
+      [ "Zoom - Free Account", -- main window
+        "Zoom - Licensed Account", -- main window
+        "Zoom", -- meeting window on creation
+        "Zoom Meeting" -- meeting window shortly after creation
+      ]
+    shouldFloat windowTitle = windowTitle `notElem` tileTitles
+    shouldSink windowTitle = windowTitle `elem` tileTitles
+    doSink = (ask >>= doF . W.sink) <+> doF W.swapDown
+
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
   xmonad $ ewmh $ docks defaultConfig
-    { manageHook = manageDocks <+> manageHook defaultConfig
+    { manageHook = manageZoomHook <+> manageDocks <+> manageHook defaultConfig
     , layoutHook = smartBorders . avoidStruts $ layoutHook defaultConfig
     , logHook =
         dynamicLogWithPP xmobarPP
@@ -60,7 +76,7 @@ main = do
         , ppSep = " : "}
     , modMask = mod4Mask
     , borderWidth = 2
-    , handleEventHook = handleEventHook def <+> fullscreenEventHook
+    , handleEventHook = mconcat [dynamicTitle manageZoomHook, fullscreenEventHook, handleEventHook def] -- handleEventHook def <+> fullscreenEventHook
     , startupHook = startupHook'
     } `additionalKeys`
     [ ((mod4Mask .|. shiftMask, xK_z ), spawn "~/.xmonad/lock_screen.sh")
