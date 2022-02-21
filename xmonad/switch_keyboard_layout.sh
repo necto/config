@@ -7,4 +7,5 @@ if [ "$CURRENT_LANG" = $LANG1 ]; then
     setxkbmap -layout $LANG2,$LANG1
 else
     setxkbmap $LANG1
+    setxkbmap -option compose:ralt
 fi
