@@ -1,6 +1,6 @@
 # SonarSource cpecific:
 # this list partially replicates "from-pristine-ubuntu.sh", for the self-sufficiency
-sudo apt install -y zlib1g-dev python3-pip ninja-build clangd-12 clang-12 cmake ccache gcc lld
+sudo apt install -y zlib1g-dev python3-pip ninja-build clangd-13 clang-13 cmake ccache gcc lld
 pip3 install lit==12.0.1
 
 # download llvm fork from https://github.com/SonarSource/llvm-project/releases put it into ~/sonarsource-clang*
