@@ -10,7 +10,7 @@ cd config
 git remote set-url origin gh:necto/config
 
 # More useful packages
-sudo apt install -y vim wget unzip net-tools iputils-ping xmonad xmobar trayer feh suckless-tools x11-xserver-utils arandr help2man alsa-utils
+sudo apt install -y vim wget unzip net-tools iputils-ping xmonad xmobar trayer feh suckless-tools x11-xserver-utils arandr help2man alsa-utils curl
 
 # Build the tool used to control the backlight brightness
 cd ~/config/xmonad/light && make && sudo ./makeexec.sh
@@ -22,6 +22,7 @@ cat ~/.ssh/id_rsa.pub
 echo "X------------------------X"
 
 ## !! Untested!! add llvm-13 / clang-13 packages source:
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
 echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main' | sudo tee -a /etc/apt/sources.list
 echo 'deb-src http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main' | sudo tee -a /etc/apt/sources.list
 
