@@ -22,8 +22,8 @@ cat ~/.ssh/id_rsa.pub
 echo "X------------------------X"
 
 ## !! Untested!! add llvm-13 / clang-13 packages source:
-sudo echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main' >> /etc/apt/sources.list
-sudo echo 'deb-src http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main' >> /etc/apt/sources.list
+echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main' | sudo tee -a /etc/apt/sources.list
+echo 'deb-src http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main' | sudo tee -a /etc/apt/sources.list
 
 # Dev packages
 sudo apt install -y cmake ninja-build clang-13 ccache gcc lld clangd-13
