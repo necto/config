@@ -12,3 +12,8 @@
 	pandiff = difftool -t pandiff
 [difftool "pandiff"]
 	cmd = pandiff \"$LOCAL\" \"$REMOTE\"
+[merge]
+	tool = ec-merge
+[mergetool "ec-merge"]
+	cmd = ~/config/ec-merge.sh $LOCAL $REMOTE $MERGED $BASE
+	trustExitCode = true
