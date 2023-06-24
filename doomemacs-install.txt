@@ -1,0 +1,16 @@
+sudo apt install ripgrep fd-find
+ln -s $(which fdfind) ~/.local/bin/fd
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+~/.emacs.d/bin/doom install
+# (no to regenerating envvar, because spacemacs launched from pmenu launcher seemed to be doing fine)
+# (yes to installing all-the-icon's fonts)
+~/.config/emacs/bin/doom doctor
+# - no "--with-native-compilation" option in my default emacs
+#      gave up on installing emacs28-nativecomp because it requires to modern gcc deps,
+#      which are not easily available on ubuntu 22
+# - no PCRE support in my version of ripgrep
+# - no markdown compiler (fine, no need)
+# - no shellcheck (for shell linting)
+sudo apt install shellcheck
+
+echo 'export PATH="$HOME/.config/emacs/bin/:$PATH"' >> ~/.bashrc

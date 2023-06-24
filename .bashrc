@@ -87,3 +87,4 @@ export PATH=~/config/xmonad/light:$PATH
 
 alias suspend="systemctl -i suspend"
 
+export PATH="$HOME/.config/emacs/bin:$PATH"
