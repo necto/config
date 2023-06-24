@@ -3,6 +3,12 @@
 # Run the second screen in extended mode, instead of the default mirror
 . ~/.xmonad/other-screen-on.sh
 
+xscreensaver -nosplash &
+
+if [ -x /usr/bin/redshift ]; then
+    /usr/bin/redshift &
+fi
+
 trayer --edge bottom --align left --SetDockType true --SetPartialStrut true \
        --expand true --widthtype pixel --width 180 --transparent true \
        --tint 0x191970 --heighttype pixel --height 33 --monitor primary \
@@ -33,5 +39,8 @@ export SHELL=bash
 
 # Compose diacritics with the right Alt (Meta) key
 xmodmap -e "keycode 108 = Multi_key"
+
+# # Launch ZScaler tunneling to the company intranet
+# /opt/zscaler/bin/ZSTray
 
 exec xmonad
