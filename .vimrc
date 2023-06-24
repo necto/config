@@ -126,13 +126,13 @@ set shellcmdflag=-ic
 
 " Favorite Color Scheme
 if has("gui_running")
-   colorscheme delek
+   colorscheme desert
    " Remove Toolbar
    set guioptions-=T
    "Terminus is AWESOME
    set guifont=Terminus\ 9
 else
-   colorscheme delek
+   colorscheme desert
 endif
 
 "Status line gnarliness
