@@ -42,7 +42,7 @@
 ;(setq doom-theme 'tsdh-light)
 ;(setq doom-theme 'doom-solarized-light)
 
-(setq doom-font (font-spec :size 25))
+(setq doom-font (font-spec :size 30 :family "Ubuntu Mono"))
 
 (setq doom-theme 'spacemacs-light)
 
