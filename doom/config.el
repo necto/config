@@ -116,12 +116,6 @@
 (map! :leader :desc "Switch to the previously shown buffer" "TAB" #'mode-line-other-buffer)
 (map! :leader :desc "Switch to the previously shown buffer" "<tab>" #'mode-line-other-buffer)
 
-;; TODO: make a package and load it properly (don't forget about no-compile)
-(require 'lit-insert)
-
-(map! :leader :desc "Delete lit-tester spec comment" :mode lit-highlight-mode "d l" #'li-delete-spec)
-(map! :leader :desc "Insert issue spec comments" :mode lit-highlight-mode "i l" #'li-insert-issues)
-
 (after! org
   (setq org-agenda-files '("~/notes/gtd/general.org"
                            "~/notes/gtd/inbox.org"
@@ -145,6 +139,11 @@
 
 (setq auto-save-default t
       make-backup-files t)
+
+(after! lit
+  (map! :leader :desc "Delete lit-tester spec comment" :mode lit-mode "d l" #'lit-delete-spec)
+  (map! :leader :desc "Insert issue spec comments" :mode lit-mode "i l" #'lit-insert-issues))
+
 
 ;; To display line numbers on the side:
 ;; M-x linum-mode

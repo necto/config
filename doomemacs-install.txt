@@ -14,3 +14,15 @@ git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
 sudo apt install shellcheck
 
 echo 'export PATH="$HOME/.config/emacs/bin/:$PATH"' >> ~/.bashrc
+
+# dscoveries:
+# SPC SPC - regex-search all path in the project
+# in all search buffers, separate terms by space, each ntnerm must match a substring in any pos
+# sXX - "snipe" - move cursor to the first occurence of characters XX in the string.
+#                ";" - next match, on any subsequent line within the screen, "," - previous one
+# SXX - "snipe" backwards
+# v i - evil "expand" for smart object selecting
+# v ... o - swap cursor between ends of a region (point <-> mark)
+# doom starts emacs server automatically. So if my emacs is running,
+# I can open `emacsclient -c <file>` instead of lunching a second emacs
+# g s s - avy-goto-char - press chars and jump directly

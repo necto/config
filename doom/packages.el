@@ -49,3 +49,7 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! spacemacs-theme)
+
+(package! lit
+  :recipe (:host github :repo "necto/lit.el" :local-repo "~/proj/lit.el"
+                 :build (:not compile native-compile)))
