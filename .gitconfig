@@ -17,3 +17,8 @@
 [mergetool "ec-merge"]
 	cmd = ~/config/ec-merge.sh $LOCAL $REMOTE $MERGED $BASE
 	trustExitCode = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
