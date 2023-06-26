@@ -29,6 +29,11 @@ if [ -x /usr/bin/nm-applet ] ; then
     nm-applet --sm-disable &
 fi
 
+if [ -x /usr/bin/xscreensaver ] ; then
+    # xscreensaver can lock the screen
+    /usr/bin/xscreensaver &
+fi
+
 if [ -x /usr/bin/gnome-keyring-daemon ]; then
     # This combines ssh-agent and gpg-agent for key management.
     # $(...) sources the command output to set variables.
