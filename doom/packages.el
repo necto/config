@@ -50,6 +50,8 @@
 ;(unpin! t)
 (package! spacemacs-theme)
 
+(package! adoc-mode)
+
 (package! lit
   :recipe (:host github :repo "necto/lit.el" :local-repo "~/proj/lit.el"
                  :build (:not compile native-compile)))
