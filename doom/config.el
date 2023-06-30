@@ -137,6 +137,8 @@
   )
 
 
+(setq c-basic-offset 2)
+
 (setq auto-save-default t
       make-backup-files t)
 
@@ -145,6 +147,8 @@
   (map! :leader :desc "Insert issue spec comments" :mode lit-mode "l i" #'lit-insert-issues)
   (map! :leader :desc "Run current lit test" :mode lit-mode "l r" #'lit-run-tester)
   (map! :leader :desc "Insert issues from last run" :mode lit-mode "l e" #'lit-insert-issues-from-run))
+
+(map! :mode (cpp-mode c-mode c++-mode) "C-l" #'recenter-top-bottom)
 
 
 ;; To display line numbers on the side:
