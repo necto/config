@@ -141,8 +141,10 @@
       make-backup-files t)
 
 (after! lit
-  (map! :leader :desc "Delete lit-tester spec comment" :mode lit-mode "d l" #'lit-delete-spec)
-  (map! :leader :desc "Insert issue spec comments" :mode lit-mode "i l" #'lit-insert-issues))
+  (map! :leader :desc "Delete lit-tester spec comment" :mode lit-mode "l d" #'lit-delete-spec)
+  (map! :leader :desc "Insert issue spec comments" :mode lit-mode "l i" #'lit-insert-issues)
+  (map! :leader :desc "Run current lit test" :mode lit-mode "l r" #'lit-run-tester)
+  (map! :leader :desc "Insert issues from last run" :mode lit-mode "l e" #'lit-insert-issues-from-run))
 
 
 ;; To display line numbers on the side:
