@@ -1,8 +1,12 @@
 
 sudo ln -fs /usr/share/zoneinfo/Europe/Zurich /etc/localtime
-DEBIAN_FRONTEND=noninteractive sudo apt update && sudo apt install -y git python emacs
+DEBIAN_FRONTEND=noninteractive sudo apt update && sudo apt install -y git emacs
 sudo dpkg-reconfigure --frontend noninteractive tzdata
 cd ~
+
+# Make python3.10 the default python
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.10 10
+
 mv .bashrc .bashrc.bkp
 git clone https://github.com/necto/config
 cd config
@@ -21,13 +25,14 @@ echo "X------------------------X"
 cat ~/.ssh/id_rsa.pub
 echo "X------------------------X"
 
-## !! Untested!! add llvm-13 / clang-13 packages source:
-wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
-echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main' | sudo tee -a /etc/apt/sources.list
-echo 'deb-src http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main' | sudo tee -a /etc/apt/sources.list
+## add llvm-17 / clang-17 packages source:
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+echo 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main' | sudo tee -a /etc/apt/sources.list
+echo 'deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main' | sudo tee -a /etc/apt/sources.list
+sudo apt update
 
 # Dev packages
-sudo apt install -y cmake ninja-build clang-13 ccache gcc lld clangd-13
+sudo apt install -y cmake ninja-build clang-17 ccache gcc lld clangd-17
 
 # Notifications from the terminal:
 sudo apt install -y libnotify-bin notify-osd
