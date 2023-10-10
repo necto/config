@@ -15,6 +15,10 @@ sudo apt install shellcheck
 
 echo 'export PATH="$HOME/.config/emacs/bin/:$PATH"' >> ~/.bashrc
 
+# To fix the broken icons,
+# run nerd-icons-install-fonts
+# (don't get fooled by lots of sources advising to all-the-icons-install-fonts, that is outdated)
+
 # dscoveries:
 # SPC SPC - regex-search all path in the project
 # in all search buffers, separate terms by space, each ntnerm must match a substring in any pos
