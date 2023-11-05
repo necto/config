@@ -107,7 +107,7 @@
                                 "--background-index"
                                 "--clang-tidy"
                                 "--completion-style=detailed")
-      lsp-clangd-binary-path "~/proj/llvm-project/build/bin/clangd")
+      lsp-clangd-binary-path "/usr/bin/clangd-17")
 
 (after! lsp-clangd (set-lsp-priority! 'clangd 2))
 
