@@ -103,7 +103,7 @@
 (setq-default typescript-indent-level 2)
 (add-load-path! "~/proj/languages-experimental-tooling/personal/arseniy-zaostrovnykh/elisp/")
 
-(setq lsp-clients-clangd-args '("-j=3"
+(setq lsp-clients-clangd-args '("-j=8"
                                 "--background-index"
                                 "--clang-tidy"
                                 "--completion-style=detailed")
