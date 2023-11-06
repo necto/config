@@ -59,3 +59,10 @@
 (package! copilot
   :recipe (:host github :repo "zerolfx/copilot.el"
                  :files ("*.el" "dist")))
+
+(package! lsp-sonarlint
+  :recipe (:host github :repo "necto/lsp-sonarlint" :local-repo "~/proj/lsp-sonarlint"
+           :build (:not compile native-compile)
+           :files ("lsp-sonarlint.el"
+                   ("languages" "languages/*/*.el" "languages/*/*.jar")
+                   ("server" "server/*"))))
