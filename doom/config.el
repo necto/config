@@ -137,7 +137,8 @@
   )
 
 
-(setq c-basic-offset 2)
+(setq c-basic-offset 2
+      js-indent-level 2)
 
 (setq auto-save-default t
       make-backup-files t)
