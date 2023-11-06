@@ -106,7 +106,7 @@
        ;;data              ; config/data formats
        emacs-lisp        ; drown in parentheses
        ;;json              ; At least it ain't XML
-       ;;(java +lsp)       ; the poster child for carpal tunnel syndrome
+       (java +lsp +tree-sitter)       ; the poster child for carpal tunnel syndrome
        ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
        markdown          ; writing docs for people to ignore
        ;;ocaml             ; an objective camel
