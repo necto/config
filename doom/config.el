@@ -151,6 +151,8 @@
 
 (map! :mode (cpp-mode c-mode c++-mode) "C-l" #'recenter-top-bottom)
 
+(after! magit
+  (setq git-commit-summary-max-length 72))
 
 ;; To display line numbers on the side:
 ;; M-x linum-mode
