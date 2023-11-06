@@ -55,3 +55,7 @@
 (package! lit
   :recipe (:host github :repo "necto/lit.el" :local-repo "~/proj/lit.el"
                  :build (:not compile native-compile)))
+
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el"
+                 :files ("*.el" "dist")))
