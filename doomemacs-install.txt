@@ -1,7 +1,7 @@
 sudo apt install ripgrep fd-find
 ln -s $(which fdfind) ~/.local/bin/fd
 git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
-~/.emacs.d/bin/doom install
+~/.config/emacs/bin/doom install
 # (no to regenerating envvar, because spacemacs launched from pmenu launcher seemed to be doing fine)
 # (yes to installing all-the-icon's fonts)
 ~/.config/emacs/bin/doom doctor
