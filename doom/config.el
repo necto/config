@@ -109,7 +109,8 @@
                                 "--completion-style=detailed")
       lsp-clangd-binary-path "/usr/bin/clangd-17")
 
-(after! lsp-clangd (set-lsp-priority! 'clangd 2))
+(after! lsp-clangd (set-lsp-priority! 'clangd 2)
+  (setq lsp-headerline-breadcrumb-enable t))
 
 (map! :leader :desc "Lisp eval any expression" ":" #'pp-eval-expression)
 (map! :leader :desc "Choose an interactive command" ";" #'execute-extended-command)
