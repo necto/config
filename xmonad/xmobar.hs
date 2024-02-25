@@ -1,4 +1,4 @@
-Config { font = "xft:Ubuntu-19"
+Config { font = "xft:Ubuntu-12"
        , additionalFonts = ["xft:Ubuntu Mono-15"]
        , bgColor = "black"
        , fgColor = "grey"
