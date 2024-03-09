@@ -15,10 +15,10 @@
              (gnu packages emacs)
              (gnu packages vim)
              (gnu packages certs)
-
-             ;; experimenting for doom emacs
              (gnu packages base)
              (gnu packages version-control)
+             (gnu packages rust-apps) ; For ripgrep
+             (gnu packages fontutils) ; For fontconfig
              )
 
 (define %home
@@ -28,16 +28,6 @@
 
 (define %emacs-config
   (string-append %home "/.config/emacs"))
-
-;; (define %doom-emacs
-;;   (git-checkout
-;;    (url "https://github.com/doomemacs/doomemacs ~/.config/emacs")
-;;    (commit "98d753e1036f76551ccaa61f5c810782cda3b48a")))
-
-;; (define %doom-bin
-;;   (file-append %doom-emacs "/bin/doom"))
-;;
-;; maybe home-activation-service-type can run the checkout and install
 
 (home-environment
   ;; Below is the list of packages that will show up in your
@@ -49,14 +39,14 @@
                           binutils ;; used by `doom install`
                           sed
                           grep
+                          ripgrep ;; used by doom emacs
+                          fd ;; used by doom emacs
+                          which
+                          fontconfig ;; used by doom doctor
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
                     ))
-
-  ;; Then do:
-  ;; git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
-  ;; bash ~/.config/emacs/bin/doom install
 
   ;; Below is the list of Home services.  To search for available
   ;; services, run 'guix home search KEYWORD' in a terminal.
@@ -83,19 +73,13 @@
                          (with-imported-modules '((guix build utils))
                            #~(begin
                                (use-modules (guix build utils))
-                               ; This one works:
-                               ;; (system (string-append
-                               ;;          "GIT_SSL_CAINFO=$HOME/.guix-home/profile/etc/ssl/certs/ca-certificates.crt "
-                               ;;          #$(file-append git "/bin/git")
-                               ;;          " clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs"))
-
-                               ; This one works too
-                               ;; (system* "cp" "-r" #$(git-checkout (url "https://github.com/doomemacs/doomemacs"))
-                               ;;          #$(string-append %home "/.config/emacs"))
-
                                (mkdir-p #$%emacs-config)
                                (copy-recursively #$(git-checkout (url "https://github.com/doomemacs/doomemacs"))
                                                  #$%emacs-config
                                                  #:log #f)
-                               (system (string-append "echo $'\\n\\n' Don\\'t forget to run bash "
+                               (substitute* (string-append #$%emacs-config "/bin/doom")
+                                 (("/usr/bin/env sh")
+                                  #$(string-append %home "/.guix-home/profile/bin/bash")))
+                               (system (string-append "echo $'\\n\\n'Don\\'t forget to run:$'\\n'"
+                                                      #$%emacs-config "/bin/doom env $'\\n'"
                                                       #$%emacs-config "/bin/doom install $'\\n\\n'"))))))))
