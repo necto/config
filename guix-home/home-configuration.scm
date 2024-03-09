@@ -12,6 +12,10 @@
              (gnu home services shells)
              (gnu home services)
 
+             (gnu packages emacs)
+             (gnu packages vim)
+             (gnu packages certs)
+
              ;; experimenting for doom emacs
              (gnu packages base)
              (gnu packages version-control)
@@ -38,12 +42,17 @@
 (home-environment
   ;; Below is the list of packages that will show up in your
   ;; Home profile, under ~/.guix-home/profile.
-  (packages (specifications->packages (list "virt-manager" "virt-viewer" "sed" "grep" "which" "vim"
-                                            ;; trying to install dependencies of doom emacs
-                                            "emacs" "git"
-                                            "nss-certs" ;; HTTPS sertificates for git and other CLI tools
-                                            "binutils" ;; used by `doom install`
-                                            )))
+  (packages (append (list emacs
+                          vim
+                          nss-certs ;; HTTPS sertificates for git and other CLI tools
+                          git
+                          binutils ;; used by `doom install`
+                          sed
+                          grep
+                          )
+                    (specifications->packages (list)) ; in case I don't know which package to import,
+                                                      ; use a string here e.g. "emacs"
+                    ))
 
   ;; Then do:
   ;; git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
