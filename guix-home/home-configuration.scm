@@ -15,10 +15,14 @@
              (gnu packages emacs)
              (gnu packages vim)
              (gnu packages certs)
+             (gnu packages version-control)
+             (gnu packages base)
 
              ;; experimenting for doom emacs
-             (gnu packages base)
-             (gnu packages version-control)
+             (guix packages)
+             (guix git-download) ; for git-fetch method
+             (guix build-system trivial) ; for trivial-build-system
+             ((guix licenses) #:prefix license:)
              )
 
 (define %home
@@ -28,6 +32,45 @@
 
 (define %emacs-config
   (string-append %home "/.config/emacs"))
+
+;; (define doom-emacs
+;;   (package
+;;     (name "doom-emacs")
+;;     (version "d657be1744a1481dc4646d0b62d5ee1d3e75d1d8")
+;;     (source
+;;      (origin
+;;        (method git-fetch)
+;;        (uri (git-reference
+;;              (url "https://github.com/doomemacs/doomemacs")
+;;              (commit version)))
+;;        (sha256
+;;         (base32
+;;          "0clnfr5l386bn1mdli0nj8w2fjsgvzs49nw0ishpljm3jgznsvyw"))))
+;;     (build-system trivial-build-system)
+;;     (inputs (list emacs))
+;;     (description "Prebuilt .config/emacs directory for doom emacs.
+;;                   Requires copying to ~/.config/emacs to be used")
+;;     (synopsis "Doom Emacs")
+;;     (license license:gpl3+) ;; TODO make more permissive
+;;     (home-page "localhost")
+;;     (arguments
+;;      (list
+;;       #:modules `((guix build utils))
+;;       #:builder
+;;       #~(begin
+;;           (use-modules (guix build utils))
+;;           (format #t "=-=-=-=-=- =-=-=-=-=-=- -==-=-=- =-=-=-=-=- Hello!\n")
+;;           (format #t "reflection: ~a\n" (module-uses (current-module)))
+;;           (format #t "reflection: my sdir is ~a\n" (getcwd))
+;;           ;; (chdir "/")
+;;           ;; (format #t "reflection: files in /:  ~a\n" (ls-command))
+;;           ;; (copy-recursively (assoc-ref %build-inputs "source") %output)
+;;           (mkdir-p #$%emacs-config)
+;;           (copy-recursively (assoc-ref %build-inputs "source") #$%emacs-config)
+;;           (copy-recursively #$%emacs-config #$output)
+;;           ;;   (copy-recursively (assoc-ref %build-inputs "source") %emacs-config)
+
+;;           )))))
 
 ;; (define %doom-emacs
 ;;   (git-checkout
@@ -49,6 +92,7 @@
                           binutils ;; used by `doom install`
                           sed
                           grep
+                          ;doom-emacs
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
