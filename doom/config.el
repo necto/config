@@ -160,14 +160,14 @@
   (setq lsp-headerline-breadcrumb-segments '(symbols))
   (setq lsp-log-io t))
 
-;; TODO: sholud these be configured before loading lsp-sonarlint?
-(after! lsp-sonarlint
-  (setq lsp-sonarlint-show-analyzer-logs t)
-  (setq lsp-sonarlint-verbose-logs t)
-  (require 'lsp-sonarlint-cpp)
-  (setq lsp-sonarlint-cpp-enabled t)
-  (require 'lsp-sonarlint-java)
-  (setq lsp-sonarlint-java-enabled t))
+;; ;; TODO: sholud these be configured before loading lsp-sonarlint?
+;; (after! lsp-sonarlint
+;;   (setq lsp-sonarlint-show-analyzer-logs t)
+;;   (setq lsp-sonarlint-verbose-logs t)
+;;   (require 'lsp-sonarlint-cpp)
+;;   (setq lsp-sonarlint-cpp-enabled t)
+;;   (require 'lsp-sonarlint-java)
+;;   (setq lsp-sonarlint-java-enabled t))
 
 ;; To display line numbers on the side:
 ;; M-x linum-mode
