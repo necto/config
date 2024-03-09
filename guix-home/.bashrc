@@ -6,7 +6,6 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias rehash='hash -r'
 alias gr='grep -r'
-alias vi='vim'
 PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] '
 
 #export PATH=/opt/mpich2/bin:$PATH

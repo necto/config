@@ -56,6 +56,7 @@
                    (aliases '(("grep" . "grep --color=auto")
                               ("ls" . "ls --color=auto")
                               ("rehash" . "hash -r")
+                              ("vi" . "vim")
                               ("suspend" . "systemctl -i suspend")))
                    (bashrc (list (local-file ".bashrc"
                                   "bashrc")))
@@ -65,9 +66,13 @@
          (simple-service 'bash-timer
                          home-xdg-configuration-files-service-type
                          (list `("bash-command-timer.sh"
-                                 ,(local-file
-                                   "bash-command-timer.sh"
-                                   "bash-command-timer.sh"))))
+                                 ,(local-file "bash-command-timer.sh"))))
+         (simple-service 'doom-config
+                         home-xdg-configuration-files-service-type
+                         (list `("doom/init.el" ,(local-file "doom/init.el"))
+                               `("doom/config.el" ,(local-file "doom/config.el"))
+                               `("doom/packages.el" ,(local-file "doom/packages.el"))
+                               `("doom/custom.el" ,(local-file "doom/custom.el"))))
          (simple-service 'doom-checkout
                          home-activation-service-type
                          (with-imported-modules '((guix build utils))
