@@ -95,27 +95,39 @@
                          home-xdg-configuration-files-service-type
                          (list `("bash-command-timer.sh"
                                  ,(local-file "bash-command-timer.sh"))))
+         (simple-service 'git-config
+                         home-xdg-configuration-files-service-type
+                         (list `("gitconfig" ,(local-file ".gitconfig"))))
          (simple-service 'doom-config
                          home-xdg-configuration-files-service-type
                          (list `("doom/init.el" ,(local-file "doom/init.el"))
                                `("doom/config.el" ,(local-file "doom/config.el"))
                                `("doom/packages.el" ,(local-file "doom/packages.el"))
-                               `("doom/custom.el" ,(local-file "doom/custom.el"))))
+                               `("doom/custom.el" ,(local-file "doom/custom.el"))
+                               `("doom/post-checkout.sh"
+                                 ,(plain-file
+                                   "doom-post-checkout.sh"
+                                   (string-append
+                                    "#!" (string-append %home "/.guix-home/profile/bin/bash") "\n"
+                                    %emacs-config "/bin/doom env\n"
+                                    %emacs-config "/bin/doom install\n"
+                                    %emacs-config "/bin/doom sync\n"
+                                    %emacs-config "/bin/doom doctor\n")))))
          (simple-service 'doom-checkout
                          home-activation-service-type
                          (with-imported-modules '((guix build utils))
                            #~(begin
                                (use-modules (guix build utils))
                                (mkdir-p #$%emacs-config)
-                               (copy-recursively #$(git-checkout (url "https://github.com/doomemacs/doomemacs"))
+                               (copy-recursively #$(git-checkout (url "https://github.com/doomemacs/doomemacs")
+                                                                 (commit "aad8ec1895714f4fec6abfe444c9a69b4ee8f308"))
                                                  #$%emacs-config
                                                  #:log #f)
                                (substitute* (string-append #$%emacs-config "/bin/doom")
                                  (("/usr/bin/env sh")
                                   #$(string-append %home "/.guix-home/profile/bin/bash")))
                                (system (string-append "echo $'\\n\\n'Don\\'t forget to run:$'\\n'"
-                                                      #$%emacs-config "/bin/doom env $'\\n'"
-                                                      #$%emacs-config "/bin/doom install $'\\n\\n'")))))
+                                                      "bash " #$%home "/.config/doom/post-checkout.sh $'\\n\\n'")))))
          (simple-service 'redshift
                          home-redshift-service-type
                          (home-redshift-configuration
