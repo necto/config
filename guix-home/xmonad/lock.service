@@ -1,0 +1,20 @@
+# A simple lockscreen to demand auth after the awakening.
+# This file must go to /etc/systemd/system/lock.service
+# after copying it there, run
+#   systemctl enable lock
+# This unit also makes sure to set the US keyboard layout
+# to enable entering the user password.
+[Unit]
+Description=Lock the screen on resume from suspend
+Before=sleep.target
+
+[Service]
+Type=oneshot
+User=necto
+Environment=DISPLAY=:0
+ExecStartPre=-/usr/bin/setxkbmap us
+ExecStart=/usr/bin/xscreensaver-command -lock
+ExecStartPost=-/bin/sleep 1
+
+[Install]
+WantedBy=sleep.target

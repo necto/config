@@ -98,6 +98,9 @@
          (simple-service 'git-config
                          home-xdg-configuration-files-service-type
                          (list `("git/config" ,(local-file "gitconfig"))))
+         (simple-service 'xmonad-config
+                         home-xdg-configuration-files-service-type
+                         (list `("xmonad" ,(local-file "xmonad" #:recursive? #t))))
          (simple-service 'doom-config
                          home-xdg-configuration-files-service-type
                          (list `("doom/init.el" ,(local-file "doom/init.el"))

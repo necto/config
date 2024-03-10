@@ -1,0 +1,24 @@
+
+xmonad.hs:62:25: warning: [-Wdeprecations]
+    In the use of ‘defaultConfig’
+    (imported from XMonad, but defined in XMonad.Config):
+    Deprecated: "Use def (from Data.Default, and re-exported by XMonad and XMonad.Config) instead."
+   |
+62 |   xmonad $ ewmh $ docks defaultConfig
+   |                         ^^^^^^^^^^^^^
+
+xmonad.hs:63:66: warning: [-Wdeprecations]
+    In the use of ‘defaultConfig’
+    (imported from XMonad, but defined in XMonad.Config):
+    Deprecated: "Use def (from Data.Default, and re-exported by XMonad and XMonad.Config) instead."
+   |
+63 |     { manageHook = manageZoomHook <+> manageDocks <+> manageHook defaultConfig
+   |                                                                  ^^^^^^^^^^^^^
+
+xmonad.hs:64:60: warning: [-Wdeprecations]
+    In the use of ‘defaultConfig’
+    (imported from XMonad, but defined in XMonad.Config):
+    Deprecated: "Use def (from Data.Default, and re-exported by XMonad and XMonad.Config) instead."
+   |
+64 |     , layoutHook = smartBorders . avoidStruts $ layoutHook defaultConfig
+   |                                                            ^^^^^^^^^^^^^
