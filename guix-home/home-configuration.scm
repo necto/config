@@ -19,6 +19,15 @@
              (gnu packages version-control)
              (gnu packages rust-apps) ; For ripgrep
              (gnu packages fontutils) ; For fontconfig
+
+             ; python
+             (gnu packages python)
+             (gnu packages python-xyz) ; for poetry
+             (gnu packages check) ; for pytest
+
+             ; C++
+             (gnu packages llvm)
+             (gnu packages cmake)
              )
 
 (define %home
@@ -43,6 +52,17 @@
                           fd ;; used by doom emacs
                           which
                           fontconfig ;; used by doom doctor
+
+                          python
+                          poetry
+                          python-language-server
+                          python-isort
+                          python-pytest
+                          python-nose
+
+                          clang-17 ; Includes tools such as clangd, clang-format, clang-tidy
+                          cmake
+                          python-lit
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
@@ -57,6 +77,7 @@
                               ("ls" . "ls --color=auto")
                               ("rehash" . "hash -r")
                               ("vi" . "vim")
+                              ("python" . "python3")
                               ("suspend" . "systemctl -i suspend")))
                    (bashrc (list (local-file ".bashrc"
                                   "bashrc")))
