@@ -97,7 +97,7 @@
                                  ,(local-file "bash-command-timer.sh"))))
          (simple-service 'git-config
                          home-xdg-configuration-files-service-type
-                         (list `("gitconfig" ,(local-file ".gitconfig"))))
+                         (list `("git/config" ,(local-file "gitconfig"))))
          (simple-service 'doom-config
                          home-xdg-configuration-files-service-type
                          (list `("doom/init.el" ,(local-file "doom/init.el"))
