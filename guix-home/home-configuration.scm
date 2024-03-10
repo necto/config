@@ -46,6 +46,7 @@
   (packages (append (list emacs
                           vim
                           nss-certs ;; HTTPS sertificates for git and other CLI tools
+                          glibc-locales ;; Fix the warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
                           git
                           binutils ;; used by `doom install`
                           sed
@@ -118,4 +119,9 @@
                           (location-provider 'manual)
                           (latitude 46.2)
                           (longitude 6.14)
-                          (nighttime-brightness 0.5))))))
+                          (nighttime-brightness 0.5)))
+         (simple-service
+          'env-vars
+          home-environment-variables-service-type
+          `(;; Fix the warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+            ("GUIX_LOCPATH" . "$HOME/.guix-profile/lib/locale:$HOME/.guix-home/profile/lib/locale"))))))
