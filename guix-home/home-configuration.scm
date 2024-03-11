@@ -30,6 +30,9 @@
              ; C++
              (gnu packages llvm)
              (gnu packages cmake)
+
+             (gnu packages guile)
+             (gnu packages guile-xyz)
              )
 
 (define %home
@@ -67,6 +70,10 @@
                           clang-17 ; Includes tools such as clangd, clang-format, clang-tidy
                           cmake
                           python-lit
+
+                          guile-3.0
+                          guile-readline
+                          guile-colorized
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
@@ -105,6 +112,10 @@
                          ;; .config/xmonad to /gnu/store read-only, so it fails when
                          ;; starting xmonad.
                          (list `("xmonad" ,(local-file "xmonad" #:recursive? #t))))
+         (simple-service 'guile-config
+                         home-files-service-type
+                         ;; Guile seems to not support XDG_CONFIG stuff
+                         (list `(".guile" ,(local-file ".guile"))))
          (simple-service 'doom-config
                          home-xdg-configuration-files-service-type
                          (list `("doom/init.el" ,(local-file "doom/init.el"))
