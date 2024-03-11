@@ -115,7 +115,7 @@
          (simple-service 'guile-config
                          home-files-service-type
                          ;; Guile seems to not support XDG_CONFIG stuff
-                         (list `(".guile" ,(local-file ".guile"))))
+                         (list `(".guile" ,(local-file "guile.scm"))))
          (simple-service 'doom-config
                          home-xdg-configuration-files-service-type
                          (list `("doom/init.el" ,(local-file "doom/init.el"))
