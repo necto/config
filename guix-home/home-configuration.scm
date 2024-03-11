@@ -100,6 +100,10 @@
                          (list `("git/config" ,(local-file "gitconfig"))))
          (simple-service 'xmonad-config
                          home-xdg-configuration-files-service-type
+                         ;; FIXME: xmonad expects the config dir to be writable
+                         ;; to be able to compile itself there. this links the
+                         ;; .config/xmonad to /gnu/store read-only, so it fails when
+                         ;; starting xmonad.
                          (list `("xmonad" ,(local-file "xmonad" #:recursive? #t))))
          (simple-service 'doom-config
                          home-xdg-configuration-files-service-type
