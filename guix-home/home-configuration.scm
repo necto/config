@@ -33,6 +33,7 @@
 
              (gnu packages guile)
              (gnu packages guile-xyz)
+             (gnu packages package-management)
              )
 
 (define %home
@@ -74,6 +75,7 @@
                           guile-3.0
                           guile-readline
                           guile-colorized
+                          guix
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
@@ -127,25 +129,30 @@
                                    "doom-post-checkout.sh"
                                    (string-append
                                     "#!" (string-append %home "/.guix-home/profile/bin/bash") "\n"
+                                    ;; the line below could be executed with the doom-checkout simple service
+                                    ;; if it worked
+                                    "git clone https://github.com/doomemacs/doomemacs " %emacs-config "\n"
                                     %emacs-config "/bin/doom env\n"
                                     %emacs-config "/bin/doom install\n"
                                     %emacs-config "/bin/doom sync\n"
                                     %emacs-config "/bin/doom doctor\n")))))
-         (simple-service 'doom-checkout
-                         home-activation-service-type
-                         (with-imported-modules '((guix build utils))
-                           #~(begin
-                               (use-modules (guix build utils))
-                               (mkdir-p #$%emacs-config)
-                               (copy-recursively #$(git-checkout (url "https://github.com/doomemacs/doomemacs")
-                                                                 (commit "aad8ec1895714f4fec6abfe444c9a69b4ee8f308"))
-                                                 #$%emacs-config
-                                                 #:log #f)
-                               (substitute* (string-append #$%emacs-config "/bin/doom")
-                                 (("/usr/bin/env sh")
-                                  #$(string-append %home "/.guix-home/profile/bin/bash")))
-                               (system (string-append "echo $'\\n\\n'Don\\'t forget to run:$'\\n'"
-                                                      "bash " #$%home "/.config/doom/post-checkout.sh $'\\n\\n'")))))
+         ; This is not reentrant at the moment. also
+         ; it triggers some weird behavior with substitute* trying to call "/usr/bin/env sh"
+         ;; (simple-service 'doom-checkout
+         ;;                 home-activation-service-type
+         ;;                 (with-imported-modules '((guix build utils))
+         ;;                   #~(begin
+         ;;                       (use-modules (guix build utils))
+         ;;                       (mkdir-p #$%emacs-config)
+         ;;                       (copy-recursively #$(git-checkout (url "https://github.com/doomemacs/doomemacs")
+         ;;                                                         (commit "aad8ec1895714f4fec6abfe444c9a69b4ee8f308"))
+         ;;                                         #$%emacs-config
+         ;;                                         #:log #f)
+         ;;                       (substitute* (string-append #$%emacs-config "/bin/doom")
+         ;;                         (("/usr/bin/env sh")
+         ;;                          #$(string-append %home "/.guix-home/profile/bin/bash")))
+         ;;                       (system (string-append "echo $'\\n\\n'Don\\'t forget to run:$'\\n'"
+         ;;                                              "bash " #$%home "/.config/doom/post-checkout.sh $'\\n\\n'")))))
          (simple-service 'redshift
                          home-redshift-service-type
                          (home-redshift-configuration
