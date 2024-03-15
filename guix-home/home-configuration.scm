@@ -34,6 +34,10 @@
              (gnu packages guile)
              (gnu packages guile-xyz)
              (gnu packages package-management)
+
+             ; xmonad
+             (gnu packages haskell)
+             (gnu packages wm)
              )
 
 (define %home
@@ -76,6 +80,11 @@
                           guile-readline
                           guile-colorized
                           guix
+
+                          ; xmonad
+                          ghc
+                          xmonad
+                          ghc-xmonad-contrib
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
