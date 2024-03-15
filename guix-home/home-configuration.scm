@@ -97,9 +97,10 @@
                    (bash-logout (list (local-file
                                        ".bash_logout"
                                        "bash_logout")))
-                   (environment-variables
-                    `(;; Make sure emacs and doom-emacs scripts use the correct shell, not /bin/emacs
-                      ("SHELL" . ,(string-append %home "/.guix-home/profile/bin/bash"))))))
+                   ;; (environment-variables
+                   ;;  `(;; Make sure emacs and doom-emacs scripts use the correct shell, not /bin/emacs
+                   ;;    ("SHELL" . ,(string-append %home "/.guix-home/profile/bin/bash"))))
+                   ))
          (simple-service 'bash-timer
                          home-xdg-configuration-files-service-type
                          (list `("bash-command-timer.sh"

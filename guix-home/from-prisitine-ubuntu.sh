@@ -3,8 +3,9 @@ sudo apt install -y xmonad guix git
 
 # takes long time and can take advantage of many cores
 guix pull
-export GUIX_PROFILE="$HOME/.config/guix/current"
-. "$GUIX_PROFILE/etc/profile"
+echo 'export GUIX_PROFILE="$HOME/.config/guix/current"' >> ~/.profile
+echo '. "$GUIX_PROFILE/etc/profile"' >> .. ~/.profile
+# restart
 guix pull
 
 git clone https://github.com/necto/config
