@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run the second screen in extended mode, instead of the default mirror
-. ~/.xmonad/other-screen-on.sh
+#. ~/.config/xmonad/other-screen-on.sh
 
 xscreensaver -nosplash &
 

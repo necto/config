@@ -22,8 +22,8 @@ import qualified XMonad.Layout.IndependentScreens as LIS
 togglevga = do
   screencount <- LIS.countScreens
   if screencount > 1
-    then spawn "bash ~/.xmonad/other-screen-off.sh"
-    else spawn "bash ~/.xmonad/other-screen-on.sh"
+    then spawn "bash ~/.config/xmonad/other-screen-off.sh"
+    else spawn "bash ~/.config/xmonad/other-screen-on.sh"
 
 -- Does not quite work for now: when called
 -- many times in a row, places all the windows in to the
@@ -58,7 +58,7 @@ manageZoomHook =
     doSink = (ask >>= doF . W.sink) <+> doF W.swapDown
 
 main = do
-  xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
+  xmproc <- spawnPipe "xmobar ~/.config/xmonad/xmobar.hs"
   xmonad $ ewmh $ docks defaultConfig
     { manageHook = manageZoomHook <+> manageDocks <+> manageHook defaultConfig
     , layoutHook = smartBorders . avoidStruts $ layoutHook defaultConfig
@@ -80,8 +80,8 @@ main = do
     , startupHook = startupHook'
     } `additionalKeys`
     [ ((mod4Mask .|. shiftMask, xK_z ), spawn "xscreensaver-command -lock")
-    , ((0, xK_Print           ), spawn "~/.xmonad/switch_keyboard_layout.sh")
-    , ((0, xK_Menu           ), spawn "~/.xmonad/switch_keyboard_layout.sh")
+    , ((0, xK_Print           ), spawn "~/.config/xmonad/switch_keyboard_layout.sh")
+    , ((0, xK_Menu           ), spawn "~/.config/xmonad/switch_keyboard_layout.sh")
     , ((0, xF86XK_AudioLowerVolume   ), spawn "amixer set Master 2-")
     , ((0, xF86XK_AudioRaiseVolume   ), spawn "amixer set Master 2+")
     , ((0, xF86XK_AudioMute          ), spawn "amixer set Master toggle && amixer set Speaker unmute && amixer set Headphone unmute")
@@ -89,8 +89,8 @@ main = do
     , ((0, xK_KP_Right                  ), spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")
     , ((0, xK_KP_Left                   ), spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")
     , ((0, xK_KP_Begin                  ), spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")
-    , ((0, xF86XK_MonBrightnessUp    ), spawn "~/.xmonad/light/light -A 7")
-    , ((0, xF86XK_MonBrightnessDown  ), spawn "~/.xmonad/light/light -U 5")
+    , ((0, xF86XK_MonBrightnessUp    ), spawn "~/.config/xmonad/light/light -A 7")
+    , ((0, xF86XK_MonBrightnessDown  ), spawn "~/.config/xmonad/light/light -U 5")
     , ((mod4Mask, xK_b               ), sendMessage ToggleStruts)
     , ((mod4Mask, xK_s               ), do
           spawn "dropbox start"

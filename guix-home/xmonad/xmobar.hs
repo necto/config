@@ -13,8 +13,8 @@ Config { font = "xft:Ubuntu-12"
                                    ] 10
                     , Run Memory ["-t","<usedratio>%"] 10
                     , Run Date "%a %b %_d %H:%M" "date" 10
-                    , Run Com "/bin/bash" ["-c", "~/.xmonad/get-volume"] "myvolume" 10
-                    , Run Com "/bin/bash" ["-c", "~/.xmonad/query-keyboard-layout.sh"] "mylayout" 10
+                    , Run Com "/bin/bash" ["-c", "~/.config/xmonad/get-volume"] "myvolume" 10
+                    , Run Com "/bin/bash" ["-c", "~/.config/xmonad/query-keyboard-layout.sh"] "mylayout" 10
                     , Run Battery        [ "--template" , "<acstatus>"
                                          , "--Low"      , "10"        -- units: %
                                          , "--High"     , "80"        -- units: %
@@ -42,5 +42,5 @@ Config { font = "xft:Ubuntu-12"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %dynnetwork% | <fc=green>[%mylayout%]</fc><fn=1><%multicpu% : %memory%></fn>| <icon=/home/necto/.xmonad/icons/volume.xbm/> %myvolume% | %battery%  %date%"
+       , template = "%StdinReader% }{ %dynnetwork% | <fc=green>[%mylayout%]</fc><fn=1><%multicpu% : %memory%></fn>| <icon=/home/necto/.config/xmonad/icons/volume.xbm/> %myvolume% | %battery%  %date%"
        }
