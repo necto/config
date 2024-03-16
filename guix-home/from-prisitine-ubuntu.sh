@@ -1,5 +1,7 @@
 
-sudo apt install -y xmonad guix git
+set -euo pipefail
+
+sudo apt install -y guix git sway
 
 # takes long time and can take advantage of many cores
 guix pull
@@ -7,6 +9,8 @@ echo 'export GUIX_PROFILE="$HOME/.config/guix/current"' >> ~/.profile
 echo '. "$GUIX_PROFILE/etc/profile"' >> .. ~/.profile
 # restart
 guix pull
+
+cd "$HOME"
 
 git clone https://github.com/necto/config
 

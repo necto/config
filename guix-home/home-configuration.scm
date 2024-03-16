@@ -34,10 +34,6 @@
              (gnu packages guile)
              (gnu packages guile-xyz)
              (gnu packages package-management)
-
-             ; xmonad
-             (gnu packages haskell)
-             (gnu packages wm)
              )
 
 (define %home
@@ -80,11 +76,6 @@
                           guile-readline
                           guile-colorized
                           guix
-
-                          ; xmonad
-                          ghc
-                          xmonad
-                          ghc-xmonad-contrib
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
@@ -123,6 +114,7 @@
                          ;; to be able to compile itself there. this links the
                          ;; .config/xmonad to /gnu/store read-only, so it fails when
                          ;; starting xmonad.
+                         ;; The problem is fixed in a later xmonad version (0.17)
                          (list `("xmonad" ,(local-file "xmonad" #:recursive? #t))))
          (simple-service 'guile-config
                          home-files-service-type
@@ -141,6 +133,7 @@
                                     "#!" (string-append %home "/.guix-home/profile/bin/bash") "\n"
                                     ;; the line below could be executed with the doom-checkout simple service
                                     ;; if it worked
+                                    "SHELL=" %home "/.guix-home/profile/bin/bash"
                                     "git clone https://github.com/doomemacs/doomemacs " %emacs-config "\n"
                                     %emacs-config "/bin/doom env\n"
                                     %emacs-config "/bin/doom install\n"
