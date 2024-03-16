@@ -156,13 +156,6 @@
          ;;                          #$(string-append %home "/.guix-home/profile/bin/bash")))
          ;;                       (system (string-append "echo $'\\n\\n'Don\\'t forget to run:$'\\n'"
          ;;                                              "bash " #$%home "/.config/doom/post-checkout.sh $'\\n\\n'")))))
-         (simple-service 'redshift
-                         home-redshift-service-type
-                         (home-redshift-configuration
-                          (location-provider 'manual)
-                          (latitude 46.2)
-                          (longitude 6.14)
-                          (nighttime-brightness 0.5)))
          (simple-service
           'env-vars
           home-environment-variables-service-type
