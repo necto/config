@@ -21,3 +21,25 @@ git clone https://github.com/necto/config
 # ice-9/boot-9.scm:1685:16: In procedure raise-exception:
 # Wrong type to apply: "/usr/bin/env sh"
 guix home reconfigure config/guix-home/home-configuration.scm
+
+
+# unordered continuation
+
+# to be able to lock screen
+# maybe available on guix
+sudo apt install swaylock
+
+# control screen color temperature according to time of the day
+# maybe available on guix
+sudo apt install gammastep
+
+# tip:
+# wev - shows the input events (like xev), e.g. key codes
+
+# change screen brightness
+# maybe available on guix
+sudo apt install brightnessctl
+# add user to the group "video" to allow them to control brightness of the screen
+sudo usermod -a -G video necto
+
+
