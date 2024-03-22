@@ -101,6 +101,7 @@ window#waybar {
 }
 
 #network {
+    min-width: 25em; /*prevent modules on the left from jumping on every change of the number of digits */ 
 }
 
 #network.disconnected {
