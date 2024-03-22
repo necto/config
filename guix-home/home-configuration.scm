@@ -11,8 +11,6 @@
              (guix gexp)
              (gnu home services shells)
              (gnu home services)
-             (gnu packages xdisorg) ; For redshift
-             (gnu home services desktop) ; for home-redshift-service-type
 
              (gnu packages emacs)
              (gnu packages vim)
@@ -34,6 +32,9 @@
              (gnu packages guile)
              (gnu packages guile-xyz)
              (gnu packages package-management)
+
+             (gnu packages wm) ; for waybar
+             (gnu packages xdisorg) ; for gammastep
              )
 
 (define %home
@@ -59,7 +60,6 @@
                           fd ;; used by doom emacs
                           which
                           fontconfig ;; used by doom doctor
-                          redshift
 
                           python
                           poetry
@@ -76,6 +76,10 @@
                           guile-readline
                           guile-colorized
                           ;; guix -- must be already installed (avoid circular dep)
+
+                          waybar
+                          ;; swaylock -- can't install as a user, it doesn't collaborate with pam_authenticate
+                          gammastep ;; control screen color temperature according to time of the day
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"

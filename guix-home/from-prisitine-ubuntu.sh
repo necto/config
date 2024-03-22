@@ -38,12 +38,8 @@ guix home reconfigure config/guix-home/home-configuration.scm
 # unordered continuation
 
 # to be able to lock screen
-# maybe available on guix
+# must be installed with the host package manager to collaborate with pam_authenticate
 sudo apt install swaylock
-
-# control screen color temperature according to time of the day
-# maybe available on guix
-sudo apt install gammastep
 
 # tip:
 # wev - shows the input events (like xev), e.g. key codes
