@@ -36,6 +36,8 @@
              (gnu packages wm) ; for waybar
              (gnu packages xdisorg) ; for gammastep
              (gnu packages image) ; for slurp
+
+             (gnu packages syncthing)
              )
 
 (define %home
@@ -83,6 +85,8 @@
                           gammastep ;; control screen color temperature according to time of the day
                           grimshot ;; take screenshots
                           slurp ;; select area for a screenshot
+
+                          syncthing
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
