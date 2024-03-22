@@ -47,7 +47,7 @@
 (home-environment
   ;; Below is the list of packages that will show up in your
   ;; Home profile, under ~/.guix-home/profile.
-  (packages (append (list emacs
+  (packages (append (list emacs-pgtk ;; pgtk enables smooth rendering in wayland
                           vim
                           nss-certs ;; HTTPS sertificates for git and other CLI tools
                           glibc-locales ;; Fix the warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
@@ -75,7 +75,7 @@
                           guile-3.0
                           guile-readline
                           guile-colorized
-                          guix
+                          ;; guix -- must be already installed (avoid circular dep)
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
@@ -133,7 +133,6 @@
                                     "#!" (string-append %home "/.guix-home/profile/bin/bash") "\n"
                                     ;; the line below could be executed with the doom-checkout simple service
                                     ;; if it worked
-                                    "SHELL=" %home "/.guix-home/profile/bin/bash"
                                     "git clone https://github.com/doomemacs/doomemacs " %emacs-config "\n"
                                     %emacs-config "/bin/doom env\n"
                                     %emacs-config "/bin/doom install\n"
