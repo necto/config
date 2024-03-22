@@ -22,6 +22,9 @@ git clone https://github.com/necto/config
 # Wrong type to apply: "/usr/bin/env sh"
 guix home reconfigure config/guix-home/home-configuration.scm
 
+# Make sure GDM sources the guix paths before starting sway
+sudo sed -i 's:Exec=sway:Exec=/usr/bin/bash -l -c sway:' /usr/share/wayland-sessions/sway.desktop
+
 
 # unordered continuation
 
