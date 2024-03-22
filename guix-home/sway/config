@@ -242,4 +242,9 @@ bar {
     bindsym $brighter exec brightnessctl s 7%+
     bindsym $darker exec brightnessctl s 6%-
 
+#
+# Take screenshots
+#
+    bindsym Print exec slurp | grimshot savecopy area
+
 include /etc/sway/config.d/*

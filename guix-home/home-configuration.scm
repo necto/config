@@ -35,6 +35,7 @@
 
              (gnu packages wm) ; for waybar
              (gnu packages xdisorg) ; for gammastep
+             (gnu packages image) ; for slurp
              )
 
 (define %home
@@ -80,6 +81,8 @@
                           waybar
                           ;; swaylock -- can't install as a user, it doesn't collaborate with pam_authenticate
                           gammastep ;; control screen color temperature according to time of the day
+                          grimshot ;; take screenshots
+                          slurp ;; select area for a screenshot
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
