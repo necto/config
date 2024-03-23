@@ -131,6 +131,15 @@
                          home-files-service-type
                          ;; Guile seems to not support XDG_CONFIG stuff
                          (list `(".guile" ,(local-file "guile.scm"))))
+
+         (simple-service 'waybar-config
+                         home-xdg-configuration-files-service-type
+                         (list `("waybar" ,(local-file "waybar" #:recursive? #t))))
+
+         (simple-service 'sway-config
+                         home-xdg-configuration-files-service-type
+                         (list `("sway" ,(local-file "sway" #:recursive? #t))))
+
          (simple-service 'doom-config
                          home-xdg-configuration-files-service-type
                          (list `("doom/init.el" ,(local-file "doom/init.el"))
