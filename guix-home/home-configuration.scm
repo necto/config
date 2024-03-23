@@ -80,6 +80,7 @@
                           guile-colorized
                           ;; guix -- must be already installed (avoid circular dep)
 
+                          swayidle ; lock and suspend on inactivity or lid close
                           waybar
                           ;; swaylock -- can't install as a user, it doesn't collaborate with pam_authenticate
                           gammastep ;; control screen color temperature according to time of the day
