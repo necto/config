@@ -34,6 +34,10 @@ set $screendimmer gammastep
 # XDG_CURRENT_DESKTOP=Unity is needed for a proper functioning of the waybar tray
 exec systemctl --user set-environment XDG_CURRENT_DESKTOP=Unity
 
+# Workaround for firefox flooding /var/log/syslog with "Error: WaylandMessage::Write() too many files to send"
+# see https://bugs.launchpad.net/ubuntu/+source/firefox/+bug/2051838
+exec systemctl --user set-environment MOZ_DISABLE_WAYLAND_PROXY=1
+
 # launch gammastep for Geneva coordinates
 exec $screendimmer -l 45.2:6.14
 
