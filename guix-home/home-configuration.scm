@@ -80,6 +80,8 @@
                           guile-colorized
                           ;; guix -- must be already installed (avoid circular dep)
 
+                          sway
+                          swaybg
                           swayidle ; lock and suspend on inactivity or lid close
                           waybar
                           ;; swaylock -- can't install as a user, it doesn't collaborate with pam_authenticate

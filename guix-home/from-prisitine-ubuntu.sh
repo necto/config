@@ -1,23 +1,21 @@
 
-set -euo pipefail
+set -xeuo pipefail
 
-sudo apt install -y guix git sway
+bash ./framework-ubuntu22-kernel-fixed.sh 
+
+# brightnessctl adds udev rules, so better installed through apt change screen brightness
+# swaylock must be installed with the host package manager to collaborate with pam_authenticate
+sudo apt install -y guix git swaylock brightnessctl
+
+# add user to the group "video" to allow them to control brightness of the screen
+sudo usermod -a -G video necto
 
 # takes long time and can take advantage of many cores
 guix pull
 echo 'export GUIX_PROFILE="$HOME/.config/guix/current"' >> ~/.profile
 echo '. "$GUIX_PROFILE/etc/profile"' >> .. ~/.profile
 # Make sure GDM sources the guix paths before starting sway
-# TODO: as you are already modifying the .desktop file, why not install sway from guix too?
-# Here is the full /usr/share/wayland-sessions/sway.desktop:
-#
-# [Desktop Entry]
-# Name=Sway
-# Comment=An i3-compatible Wayland compositor
-# Exec=/usr/bin/bash -l -c sway
-# Type=Application
-#
-sudo sed -i 's:Exec=sway:Exec=/usr/bin/bash -l -c sway:' /usr/share/wayland-sessions/sway.desktop
+sudo cp sway.desktop /usr/share/wayland-sessions/sway.desktop 
 
 # restart
 guix pull
@@ -35,19 +33,8 @@ git clone https://github.com/necto/config
 guix home reconfigure config/guix-home/home-configuration.scm
 
 
-# unordered continuation
-
-# to be able to lock screen
-# must be installed with the host package manager to collaborate with pam_authenticate
-sudo apt install swaylock
-
 # tip:
 # wev - shows the input events (like xev), e.g. key codes
 
-# change screen brightness
-# maybe available on guix
-sudo apt install brightnessctl
-# add user to the group "video" to allow them to control brightness of the screen
-sudo usermod -a -G video necto
 
 
