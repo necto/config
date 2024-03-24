@@ -20,15 +20,6 @@
              (gnu packages rust-apps) ; For ripgrep
              (gnu packages fontutils) ; For fontconfig
 
-             ; python
-             (gnu packages python)
-             (gnu packages python-xyz) ; for poetry
-             (gnu packages check) ; for pytest
-
-             ; C++
-             (gnu packages llvm)
-             (gnu packages cmake)
-
              (gnu packages guile)
              (gnu packages guile-xyz)
              (gnu packages package-management)
@@ -36,8 +27,9 @@
              (gnu packages wm) ; for waybar
              (gnu packages xdisorg) ; for gammastep
              (gnu packages image) ; for slurp
-	     (gnu packages terminals) ; for foot
-	     (gnu packages suckless) ; for dmenu
+             (gnu packages terminals) ; for foot
+             (gnu packages suckless) ; for dmenu
+             (gnu packages pulseaudio) ; for pactl
 
              (gnu packages syncthing)
              )
@@ -65,21 +57,6 @@
                           fd ;; used by doom emacs
                           which
                           fontconfig ;; used by doom doctor
-
-                          python
-                          poetry
-                          python-language-server
-                          python-isort
-                          python-pytest
-                          python-nose
-
-                          clang-17 ; Includes tools such as clangd, clang-format, clang-tidy
-                          cmake
-                          python-lit
-
-                          guile-3.0
-                          guile-readline
-                          guile-colorized
                           ;; guix -- must be already installed (avoid circular dep)
 
                           sway
@@ -92,6 +69,8 @@
                           slurp ;; select area for a screenshot
                           foot ;; sway default terminal emulator
                           dmenu ;; keyboard-centered app launcher
+                          pulseaudio ;; for pactl
+                          pavucontrol
 
                           syncthing
                           )
@@ -112,19 +91,17 @@
                               ("suspend" . "systemctl -i suspend")))
                    (bashrc (list (local-file ".bashrc"
                                   "bashrc")))
-		   (bash-profile (list (plain-file
-					 "bash-profile"
-					 (string-append
-					  "\n" ;; Use guix as the package manager
-					  "GUIX_PROFILE=\"/home/necto/.guix-profile\"\n"
-					  "source \"$GUIX_PROFILE/etc/profile\" \n" ))))
+                   (bash-profile (list (plain-file
+                                        "bash-profile"
+                                        (string-append
+                                         "\n" ;; Use guix as the package manager
+                                         "GUIX_PROFILE=\"/home/necto/.guix-profile\"\n"
+                                         "source \"$GUIX_PROFILE/etc/profile\" \n"
+                                         "\n" ;; ssh agent daemon
+                                         "eval \"$(ssh-agent -s)\"\n"))))
                    (bash-logout (list (local-file
                                        ".bash_logout"
-                                       "bash_logout")))
-                   ;; (environment-variables
-                   ;;  `(;; Make sure emacs and doom-emacs scripts use the correct shell, not /bin/emacs
-                   ;;    ("SHELL" . ,(string-append %home "/.guix-home/profile/bin/bash"))))
-                   ))
+                                       "bash_logout")))))
          (simple-service 'bash-timer
                          home-xdg-configuration-files-service-type
                          (list `("bash-command-timer.sh"
@@ -147,6 +124,11 @@
                          home-files-service-type
                          ;; Guile seems to not support XDG_CONFIG stuff
                          (list `(".guile" ,(local-file "guile.scm"))))
+
+         (simple-service 'ssh-config
+                         home-files-service-type
+                         ;; open_ssh does not support XDG_CONFIG directory
+                         (list `(".ssh/config" ,(local-file "ssh/config"))))
 
          (simple-service 'waybar-config
                          home-xdg-configuration-files-service-type
