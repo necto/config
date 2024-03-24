@@ -11,6 +11,9 @@ sudo apt install -y guix git swaylock brightnessctl
 # add user to the group "video" to allow them to control brightness of the screen
 sudo usermod -a -G video necto
 
+# Make sure GDM sources the guix paths before starting sway
+sudo cp config/guix-home/sway.desktop /usr/share/wayland-sessions/sway.desktop
+
 # takes long time and can take advantage of many cores
 guix pull
 GUIX_PROFILE="$HOME/.config/guix/current"
@@ -22,9 +25,6 @@ guix pull
 cd "$HOME"
 
 git clone https://github.com/necto/config
-
-# Make sure GDM sources the guix paths before starting sway
-sudo cp config/guix-home/sway.desktop /usr/share/wayland-sessions/sway.desktop
 
 # takes long time and can take advantage of many cores
 # FIXME: fails at the end if I uncomment doom-checkout service

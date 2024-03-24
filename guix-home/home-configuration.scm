@@ -112,6 +112,12 @@
                               ("suspend" . "systemctl -i suspend")))
                    (bashrc (list (local-file ".bashrc"
                                   "bashrc")))
+		   (bash-profile (list (plain-file
+					 "bash-profile"
+					 (string-append
+					  "\n" ;; Use guix as the package manager
+					  "GUIX_PROFILE=\"/home/necto/.guix-profile\"\n"
+					  "source \"$GUIX_PROFILE/etc/profile\" \n" ))))
                    (bash-logout (list (local-file
                                        ".bash_logout"
                                        "bash_logout")))
@@ -123,9 +129,11 @@
                          home-xdg-configuration-files-service-type
                          (list `("bash-command-timer.sh"
                                  ,(local-file "bash-command-timer.sh"))))
+
          (simple-service 'git-config
                          home-xdg-configuration-files-service-type
                          (list `("git/config" ,(local-file "gitconfig"))))
+
          (simple-service 'xmonad-config
                          home-xdg-configuration-files-service-type
                          ;; FIXME: xmonad expects the config dir to be writable
@@ -134,6 +142,7 @@
                          ;; starting xmonad.
                          ;; The problem is fixed in a later xmonad version (0.17)
                          (list `("xmonad" ,(local-file "xmonad" #:recursive? #t))))
+
          (simple-service 'guile-config
                          home-files-service-type
                          ;; Guile seems to not support XDG_CONFIG stuff
@@ -146,6 +155,10 @@
          (simple-service 'sway-config
                          home-xdg-configuration-files-service-type
                          (list `("sway" ,(local-file "sway" #:recursive? #t))))
+
+         (simple-service 'guix-config
+                         home-xdg-configuration-files-service-type
+                         (list `("guix/channels.scm" ,(local-file "guix/channels.scm"))))
 
          (simple-service 'doom-config
                          home-xdg-configuration-files-service-type
