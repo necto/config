@@ -36,6 +36,8 @@
              (gnu packages wm) ; for waybar
              (gnu packages xdisorg) ; for gammastep
              (gnu packages image) ; for slurp
+	     (gnu packages terminals) ; for foot
+	     (gnu packages suckless) ; for dmenu
 
              (gnu packages syncthing)
              )
@@ -88,6 +90,8 @@
                           gammastep ;; control screen color temperature according to time of the day
                           grimshot ;; take screenshots
                           slurp ;; select area for a screenshot
+			  foot ;; sway default terminal emulator
+			  dmenu ;; keyboard-centered app launcher
 
                           syncthing
                           )
