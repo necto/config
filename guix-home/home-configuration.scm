@@ -90,8 +90,8 @@
                           gammastep ;; control screen color temperature according to time of the day
                           grimshot ;; take screenshots
                           slurp ;; select area for a screenshot
-			  foot ;; sway default terminal emulator
-			  dmenu ;; keyboard-centered app launcher
+                          foot ;; sway default terminal emulator
+                          dmenu ;; keyboard-centered app launcher
 
                           syncthing
                           )
@@ -166,9 +166,9 @@
                                `("doom/config.el" ,(local-file "doom/config.el"))
                                `("doom/packages.el" ,(local-file "doom/packages.el"))
                                `("doom/custom.el" ,(local-file "doom/custom.el"))
-                               `("doom/post-checkout.sh"
+                               `("doom/install.sh"
                                  ,(plain-file
-                                   "doom-post-checkout.sh"
+                                   "doom-install.sh"
                                    (string-append
                                     "#!" (string-append %home "/.guix-home/profile/bin/bash") "\n"
                                     ;; the line below could be executed with the doom-checkout simple service
@@ -178,23 +178,6 @@
                                     %emacs-config "/bin/doom install\n"
                                     %emacs-config "/bin/doom sync\n"
                                     %emacs-config "/bin/doom doctor\n")))))
-         ; This is not reentrant at the moment. also
-         ; it triggers some weird behavior with substitute* trying to call "/usr/bin/env sh"
-         ;; (simple-service 'doom-checkout
-         ;;                 home-activation-service-type
-         ;;                 (with-imported-modules '((guix build utils))
-         ;;                   #~(begin
-         ;;                       (use-modules (guix build utils))
-         ;;                       (mkdir-p #$%emacs-config)
-         ;;                       (copy-recursively #$(git-checkout (url "https://github.com/doomemacs/doomemacs")
-         ;;                                                         (commit "aad8ec1895714f4fec6abfe444c9a69b4ee8f308"))
-         ;;                                         #$%emacs-config
-         ;;                                         #:log #f)
-         ;;                       (substitute* (string-append #$%emacs-config "/bin/doom")
-         ;;                         (("/usr/bin/env sh")
-         ;;                          #$(string-append %home "/.guix-home/profile/bin/bash")))
-         ;;                       (system (string-append "echo $'\\n\\n'Don\\'t forget to run:$'\\n'"
-         ;;                                              "bash " #$%home "/.config/doom/post-checkout.sh $'\\n\\n'")))))
          (simple-service
           'env-vars
           home-environment-variables-service-type
