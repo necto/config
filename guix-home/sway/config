@@ -44,6 +44,9 @@ exec $screendimmer -l 45.2:6.14
 # launch network manager with a tray icon
 exec nm-applet
 
+# launch file sync daemon
+# listens to localhost:8384
+exec syncthing --no-browser
 
 include /etc/sway/config-vars.d/*
 
