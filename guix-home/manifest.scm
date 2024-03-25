@@ -19,5 +19,6 @@
         "python-lit"
         "cmake"
         "llvm"
+        "clang"
         "firefox"
         "icecat"))

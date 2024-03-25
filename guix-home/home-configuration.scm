@@ -142,6 +142,16 @@
                          home-xdg-configuration-files-service-type
                          (list `("guix/channels.scm" ,(local-file "guix/channels.scm"))))
 
+         ;; Used by doom emacs and waybar icons
+         (simple-service 'nerd-fonts
+                         home-xdg-data-files-service-type
+                         (list `("fonts/NFM.ttf" ,(local-file "fonts/NFM.ttf"))))
+
+         ;; Installing doom-emacs will be done by the .config/doom/install.sh after
+         ;; home reconfigure.
+         ;; It can not be part of it because it takes long time, and can't be cached
+         ;; - it must be done in the user home directory (probably).
+         ;; So after guix home reconfigure, you should invoke the produced install.sh script
          (simple-service 'doom-config
                          home-xdg-configuration-files-service-type
                          (list `("doom/init.el" ,(local-file "doom/init.el"))
@@ -153,13 +163,13 @@
                                    "doom-install.sh"
                                    (string-append
                                     "#!" (string-append %home "/.guix-home/profile/bin/bash") "\n"
-                                    ;; the line below could be executed with the doom-checkout simple service
-                                    ;; if it worked
+                                    "set -xeuo pipefail\n"
                                     "git clone https://github.com/doomemacs/doomemacs " %emacs-config "\n"
                                     %emacs-config "/bin/doom env\n"
                                     %emacs-config "/bin/doom install\n"
                                     %emacs-config "/bin/doom sync\n"
                                     %emacs-config "/bin/doom doctor\n")))))
+
          (simple-service
           'env-vars
           home-environment-variables-service-type
