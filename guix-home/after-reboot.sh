@@ -13,4 +13,4 @@ guix pull --fallback
 guix package -m "$SCRIPT_DIR/manifest.scm"
 
 # Install doom
-bush "$HOME/.config/doom/install.sh"
+bash "$HOME/.config/doom/install.sh"
