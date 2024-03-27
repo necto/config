@@ -5,7 +5,8 @@
 ;; See the "Replicating Guix" section in the manual.
 
 (specifications->manifest
-  (list "clang"
+  (list "lld-wrapper"
+        "clang"
         "llvm"
         "fzf"
         "gcc-toolchain@11"
