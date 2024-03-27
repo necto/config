@@ -106,8 +106,7 @@
 (setq lsp-clients-clangd-args '("-j=8"
                                 "--background-index"
                                 "--clang-tidy"
-                                "--completion-style=detailed")
-      lsp-clangd-binary-path "/usr/bin/clangd-17")
+                                "--completion-style=detailed"))
 
 (after! lsp-clangd (set-lsp-priority! 'clangd 2)
   (setq lsp-headerline-breadcrumb-enable t))

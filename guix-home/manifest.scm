@@ -5,7 +5,9 @@
 ;; See the "Replicating Guix" section in the manual.
 
 (specifications->manifest
-  (list "lld-wrapper"
+  (list "node"
+        "firefox"
+        "lld-wrapper"
         "clang"
         "llvm"
         "fzf"
@@ -22,5 +24,4 @@
         "guile-readline"
         "guile"
         "python-lit"
-        "cmake"
-        "firefox"))
+        "cmake"))
