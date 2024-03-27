@@ -71,6 +71,7 @@
                           dmenu ;; keyboard-centered app launcher
                           pulseaudio ;; for pactl
                           pavucontrol
+                          dunst ;; display notifications
 
                           syncthing
                           )

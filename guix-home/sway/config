@@ -48,6 +48,10 @@ exec nm-applet
 # listens to localhost:8384
 exec syncthing --no-browser
 
+
+# launch notification-display daemon
+exec dunst
+
 include /etc/sway/config-vars.d/*
 
 
