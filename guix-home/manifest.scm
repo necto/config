@@ -5,7 +5,11 @@
 ;; See the "Replicating Guix" section in the manual.
 
 (specifications->manifest
-  (list "ninja"
+  (list "clang"
+        "llvm"
+        "fzf"
+        "gcc-toolchain@11"
+        "ninja"
         "htop"
         "python-nose"
         "python-pytest"
@@ -18,7 +22,4 @@
         "guile"
         "python-lit"
         "cmake"
-        "llvm"
-        "clang"
-        "firefox"
-        "icecat"))
+        "firefox"))
