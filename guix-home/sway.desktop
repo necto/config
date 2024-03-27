@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Sway
 Comment=An i3-compatible Wayland compositor
-Exec=/usr/bin/bash -l -c /home/necto/.guix-home/profile/bin/sway
+Exec=/usr/bin/bash -l -c $HOME/.guix-home/profile/bin/sway
 Type=Application
 

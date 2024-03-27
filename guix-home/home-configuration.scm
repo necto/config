@@ -95,7 +95,7 @@
                                         "bash-profile"
                                         (string-append
                                          "\n" ;; Use guix as the package manager
-                                         "GUIX_PROFILE=\"/home/necto/.guix-profile\"\n"
+                                         "GUIX_PROFILE=\"" %home "/.guix-profile\"\n"
                                          "source \"$GUIX_PROFILE/etc/profile\" \n"
                                          "\n" ;; ssh agent daemon
                                          "eval \"$(ssh-agent -s)\"\n"))))

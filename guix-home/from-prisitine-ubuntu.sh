@@ -7,10 +7,14 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 sudo apt update
 
 # add user to the group "video" to allow them to control brightness of the screen
-sudo usermod -a -G video necto
+sudo usermod -a -G video $USER
 
 # Make sure GDM sources the guix paths before starting sway
-sudo cp "$SCRIPT_DIR/sway.desktop" /usr/share/wayland-sessions/sway.desktop
+GDM_SWAY_SESSION_FILE="/usr/share/wayland-sessions/sway.desktop"
+sudo cp "$SCRIPT_DIR/sway.desktop" "$GDM_SWAY_SESSION_FILE"
+# Make the shell substitution in the .desktop file
+# because GDM might not perform shell substitutions
+sudo sed -i "s@\$HOME@$HOME@" "$GDM_SWAY_SESSION_FILE"
 
 # installing
 # - guix to manage most of the software
