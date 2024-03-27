@@ -5,6 +5,9 @@ set -xeuo pipefail
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+# requires sudo access
+bash add-nonguix-substitute-server.sh
+
 # Refresh all channels, including nonguix that was added by guix-home
 # --fallback will make guix build the missing package from source if substitute fails
 guix pull --fallback
