@@ -139,6 +139,12 @@
                          home-xdg-configuration-files-service-type
                          (list `("sway" ,(local-file "sway" #:recursive? #t))))
 
+         ;; Use xdg-desktop-portal-wlr for screencast (screen sharing)
+         (simple-service 'desktop-portal-wlr-config
+                         home-xdg-configuration-files-service-type
+                         (list `("xdg-desktop-portal" ,(local-file "xdg-desktop-portal" #:recursive? #t))
+                               `("xdg-desktop-portal-wlr" ,(local-file "xdg-desktop-portal-wlr" #:recursive? #t))))
+
          (simple-service 'guix-config
                          home-xdg-configuration-files-service-type
                          (list `("guix/channels.scm" ,(local-file "guix/channels.scm"))))

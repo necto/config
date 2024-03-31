@@ -21,7 +21,9 @@ sudo sed -i "s@\$HOME@$HOME@" "$GDM_SWAY_SESSION_FILE"
 # - git to fetch the config repository initially
 # - brightnessctl adds udev rules, so better installed through apt change screen brightness
 # - swaylock must be installed with the host package manager to collaborate with pam_authenticate
-sudo apt install -y guix git swaylock brightnessctl
+# - xdg-desktop-portal-wlr is needed for screensharing (works only in /usr/bin/firefox - installed through flatpack)
+# TODO: check if xdg-desktop-portal-wlr can be installed with guix instead
+sudo apt install -y guix git swaylock brightnessctl xdg-desktop-portal-wlr
 
 # workaround for https://gitlab.gnome.org/GNOME/xdg-desktop-portal-gnome/-/issues/74
 # see also https://bbs.archlinux.org/viewtopic.php?id=285590

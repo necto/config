@@ -31,8 +31,12 @@ set $screenlock swaylock
 # according to the time of the day.
 set $screendimmer gammastep
 
-# XDG_CURRENT_DESKTOP=Unity is needed for a proper functioning of the waybar tray
-exec systemctl --user set-environment XDG_CURRENT_DESKTOP=Unity
+# XDG_CURRENT_DESKTOP=sway is needed for proper initialization of xdg-desktop-portal
+# and xdg-desktop-portal-wlr
+# xdg-desktop-portal uses XDG_CURRENT_DESKTOP to choose the backend
+# xdg-desktop-portal-wlr starts only if WAYLAND_DISPLAY is set
+exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # Workaround for firefox flooding /var/log/syslog with "Error: WaylandMessage::Write() too many files to send"
 # see https://bugs.launchpad.net/ubuntu/+source/firefox/+bug/2051838
