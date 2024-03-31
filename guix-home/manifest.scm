@@ -5,7 +5,8 @@
 ;; See the "Replicating Guix" section in the manual.
 
 (specifications->manifest
-  (list "node"
+  (list "telegram-desktop"
+        "node"
         "firefox"
         "lld-wrapper"
         "clang"
