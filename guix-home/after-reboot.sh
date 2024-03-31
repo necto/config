@@ -5,6 +5,9 @@ set -xeuo pipefail
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+# install the systemd and xdg-desktop-portal configs for xdg-desktop-portal-wlr
+sudo bash ".config/xdg-desktop-portal-wlr-install.sh"
+
 # Refresh all channels, including nonguix that was added by guix-home
 # --fallback will make guix build the missing package from source if substitute fails
 guix pull --fallback

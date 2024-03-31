@@ -30,6 +30,7 @@
              (gnu packages terminals) ; for foot
              (gnu packages suckless) ; for dmenu
              (gnu packages pulseaudio) ; for pactl
+             (gnu packages freedesktop) ; for xdg-desktop-portal-wlr
 
              (gnu packages syncthing)
              )
@@ -72,6 +73,7 @@
                           pulseaudio ;; for pactl
                           pavucontrol
                           dunst ;; display notifications
+                          xdg-desktop-portal-wlr ;; for screencast (screen sharing)
 
                           syncthing
                           )
@@ -143,7 +145,15 @@
          (simple-service 'desktop-portal-wlr-config
                          home-xdg-configuration-files-service-type
                          (list `("xdg-desktop-portal" ,(local-file "xdg-desktop-portal" #:recursive? #t))
-                               `("xdg-desktop-portal-wlr" ,(local-file "xdg-desktop-portal-wlr" #:recursive? #t))))
+                               `("xdg-desktop-portal-wlr" ,(local-file "xdg-desktop-portal-wlr" #:recursive? #t))
+                               `("xdg-desktop-portal-wlr-install.sh"
+                                 ,(mixed-text-file
+                                   "xdg-desktop-portal-wlr-install.sh"
+                                      "#!" %home "/.guix-home/profile/bin/bash\n"
+                                      "set -xeuo pipefail\n"
+                                      "sudo cp " (file-append xdg-desktop-portal-wlr "/share/dbus-1/services/org.freedesktop.impl.portal.desktop.wlr.service") " /usr/share/dbus-1/services/org.freedesktop.impl.portal.desktop.wlr.service\n"
+                                      "sudo cp " (file-append xdg-desktop-portal-wlr "/share/xdg-desktop-portal/portals/wlr.portal") " /usr/share/xdg-desktop-portal/portals/wlr.portal\n"
+                                      ))))
 
          (simple-service 'guix-config
                          home-xdg-configuration-files-service-type
