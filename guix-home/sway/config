@@ -79,10 +79,10 @@ output DP-10 {
 output eDP-1 {
        scale 1.7
 }
-output DP-4 {
+output DP-6 {
        scale 1.7
 }
-output DP-5 {
+output DP-7 {
        scale 1.7
 }
 #
