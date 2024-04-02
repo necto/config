@@ -1,3 +1,3 @@
 [screencast]
 chooser_type=simple
-chooser_cmd=/home/necto/.guix-home/profile/bin/slurp -f %o -or
+chooser_cmd=~/.guix-home/profile/bin/slurp -f %o -or
