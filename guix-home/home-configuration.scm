@@ -101,7 +101,10 @@
                                          "GUIX_PROFILE=\"" %home "/.guix-profile\"\n"
                                          "source \"$GUIX_PROFILE/etc/profile\" \n"
                                          "\n" ;; ssh agent daemon
-                                         "eval \"$(ssh-agent -s)\"\n"))))
+                                         "eval \"$(ssh-agent -s)\"\n"
+                                         "\n" ;; custom scripts
+                                         "export PATH=\"~/.config/exe/:$PATH\""
+                                         ))))
                    (bash-logout (list (local-file
                                        ".bash_logout"
                                        "bash_logout")))))
@@ -109,6 +112,10 @@
                          home-xdg-configuration-files-service-type
                          (list `("bash-command-timer.sh"
                                  ,(local-file "bash-command-timer.sh"))))
+
+         (simple-service 'custom-scripts
+                         home-xdg-configuration-files-service-type
+                         (list `("exe" ,(local-file "exe" #:recursive? #t))))
 
          (simple-service 'git-config
                          home-xdg-configuration-files-service-type
