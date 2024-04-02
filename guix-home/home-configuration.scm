@@ -141,6 +141,10 @@
                          home-xdg-configuration-files-service-type
                          (list `("sway" ,(local-file "sway" #:recursive? #t))))
 
+         (simple-service 'foot-config
+                         home-xdg-configuration-files-service-type
+                         (list `("foot" ,(local-file "foot" #:recursive? #t))))
+
          ;; Use xdg-desktop-portal-wlr for screencast (screen sharing)
          (simple-service 'desktop-portal-wlr-config
                          home-xdg-configuration-files-service-type
