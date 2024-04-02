@@ -12,6 +12,10 @@
              (gnu home services shells)
              (gnu home services)
 
+             (guix packages) ; for home-scripts
+             (guix build-system copy)
+             ((guix licenses) #:prefix license:)
+
              (gnu packages emacs)
              (gnu packages vim)
              (gnu packages certs)
@@ -42,6 +46,22 @@
 
 (define %emacs-config
   (string-append %home "/.config/emacs"))
+
+(define home-scripts
+  (package
+   (name "home-scripts")
+   (version "0.1")
+   (source (local-file "exe"
+                       #:recursive? #t))
+   (build-system copy-build-system)
+   (arguments
+    `(#:install-plan
+      '(("slackw.sh" "bin/slackw")
+        ("islandw.sh" "bin/islandw"))))
+   (home-page "https://github.com/necto/config")
+   (synopsis "My personal scripts.")
+   (description "My personal scripts.")
+   (license license:expat)))
 
 (home-environment
   ;; Below is the list of packages that will show up in your
@@ -76,6 +96,8 @@
                           xdg-desktop-portal-wlr ;; for screencast (screen sharing)
 
                           syncthing
+
+                          home-scripts
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
@@ -101,10 +123,7 @@
                                          "GUIX_PROFILE=\"" %home "/.guix-profile\"\n"
                                          "source \"$GUIX_PROFILE/etc/profile\" \n"
                                          "\n" ;; ssh agent daemon
-                                         "eval \"$(ssh-agent -s)\"\n"
-                                         "\n" ;; custom scripts
-                                         "export PATH=\"~/.config/exe/:$PATH\""
-                                         ))))
+                                         "eval \"$(ssh-agent -s)\"\n"))))
                    (bash-logout (list (local-file
                                        ".bash_logout"
                                        "bash_logout")))))
@@ -112,10 +131,6 @@
                          home-xdg-configuration-files-service-type
                          (list `("bash-command-timer.sh"
                                  ,(local-file "bash-command-timer.sh"))))
-
-         (simple-service 'custom-scripts
-                         home-xdg-configuration-files-service-type
-                         (list `("exe" ,(local-file "exe" #:recursive? #t))))
 
          (simple-service 'git-config
                          home-xdg-configuration-files-service-type
