@@ -145,6 +145,10 @@
                          home-xdg-configuration-files-service-type
                          (list `("foot" ,(local-file "foot" #:recursive? #t))))
 
+         (simple-service 'gammastep-config
+                         home-xdg-configuration-files-service-type
+                         (list `("gammastep" ,(local-file "gammastep" #:recursive? #t))))
+
          ;; Use xdg-desktop-portal-wlr for screencast (screen sharing)
          (simple-service 'desktop-portal-wlr-config
                          home-xdg-configuration-files-service-type

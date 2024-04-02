@@ -42,8 +42,8 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 # see https://bugs.launchpad.net/ubuntu/+source/firefox/+bug/2051838
 exec systemctl --user set-environment MOZ_DISABLE_WAYLAND_PROXY=1
 
-# launch gammastep for Geneva coordinates
-exec $screendimmer -l 45.2:6.14
+# launch gammastep, see gammastep/config.ini for the coordinates
+exec $screendimmer
 
 # launch network manager with a tray icon
 exec nm-applet
