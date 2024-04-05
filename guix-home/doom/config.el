@@ -182,4 +182,6 @@
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 (after! copilot
-  (setq copilot-idle-delay 0))
+  (setq copilot-idle-delay 0)
+  (add-to-list 'warning-suppress-types '(copilot copilot-exceeds-max-char))
+  (add-to-list 'warning-suppress-types '(copilot copilot-no-mode-ident)))
