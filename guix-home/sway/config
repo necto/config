@@ -65,6 +65,13 @@ default_border pixel 2
 
 output * bg ~/.config/sway/wallpaper-tree-horizon.jpg fill
 
+# Custom theming
+
+    #client.<class> <border> <background> <text> <indicator> <child_border>
+    client.focused "#ff0000" "#285577" "#ffffff" "#2e9ef4" "#ff0000"
+    # client.focused_inactive "#23242a" "#2b2b2b" "#888888" "#000000" "#000000"
+    # client.unfocused "#2c2c2c" "#2b2b2b" "#888888" "#000000" "#000000"
+
 #
 # Example configuration:
 #
