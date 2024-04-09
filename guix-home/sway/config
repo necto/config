@@ -272,6 +272,7 @@ bar {
 # Lock screen
 #
     bindsym $mod+z exec $screenlock
+    bindsym $mod+Shift+z exec $screenlock
 
 #
 # Control brightness
