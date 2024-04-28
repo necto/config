@@ -23,6 +23,13 @@ sudo sed -i "s@\$HOME@$HOME@" "$GDM_SWAY_SESSION_FILE"
 # - swaylock must be installed with the host package manager to collaborate with pam_authenticate
 sudo apt install -y guix git swaylock brightnessctl
 
+# Allow reading from guix store, which contains also configs and stuff like pointer icons.
+if [ ! -f /etc/apparmor.d/abstractions/base.d/guix.store.ro ]; then
+    sudo mkdir -p /etc/apparmor.d/abstractions/base.d
+    sudo cp apparmor-guix.store.ro /etc/apparmor.d/abstractions/base.d/guix.store.ro
+    sudo service apparmor reload
+fi
+
 # workaround for https://gitlab.gnome.org/GNOME/xdg-desktop-portal-gnome/-/issues/74
 # see also https://bbs.archlinux.org/viewtopic.php?id=285590
 systemctl --user mask xdg-desktop-portal-gtk

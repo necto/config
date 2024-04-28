@@ -1,0 +1,3 @@
+# Enable access to gtk config and cursor icons
+# Provenance: from-pristine-ubuntu.sh
+/gnu/store/** r,
