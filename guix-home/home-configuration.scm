@@ -35,6 +35,7 @@
              (gnu packages suckless) ; for dmenu
              (gnu packages pulseaudio) ; for pactl
              (gnu packages freedesktop) ; for xdg-desktop-portal-wlr
+             (gnu packages xorg) ; for xcursor-themes
 
              (gnu packages syncthing)
              )
@@ -98,6 +99,8 @@
                           syncthing
 
                           home-scripts
+
+                          xcursor-themes ;; this is where apps will look for cursor themes
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
@@ -132,6 +135,16 @@
                          (list `("bash-command-timer.sh"
                                  ,(local-file "bash-command-timer.sh"))))
 
+         (simple-service 'cursor-config
+                         home-xdg-configuration-files-service-type
+                         (list `("gtk-2.0/gtkrc" ,(plain-file "gtkrc" "gtk-cursor-theme-size=108\ngtk-cursor-theme-name=\"redglass\"\n"))
+                               `("gtk-3.0/settings.ini" ,(plain-file "gtk3-settings.ini" "[Settings]\ngtk-cursor-theme-size=108\ngtk-cursor-theme-name=\"redglass\"\n"))
+                               `("settings.ini" ,(plain-file "settings.ini" "gtk-cursor-theme-size=108\ngtk-cursor-theme-name=\"redglass\"\n"))
+                               `("shell/profile" ,(plain-file "shell-profile" "export XCURSOR_SIZE=\"108\"\nexport XCURSOR_THEME=\"redglass\"\n"))
+                               `("x11/xresources" ,(plain-file "Xresources" "Xcursor.size:108\nXcursor.theme: redglass\n"))
+                               `("glib-2.0/settings/keyfile" ,(plain-file "glib-2.0-settings" "[org/gnome/desktop/interface]\ncursor-size=108\ncursor-theme=\"redglass\"\n"))
+                               `("sway/cursor.theme" ,(plain-file "sway-cursor-theme" "set $cursor_size 108\nset $cursor_theme redglass\n"))))
+
          (simple-service 'git-config
                          home-xdg-configuration-files-service-type
                          (list `("git/config" ,(local-file "gitconfig"))))
@@ -161,7 +174,8 @@
 
          (simple-service 'sway-config
                          home-xdg-configuration-files-service-type
-                         (list `("sway" ,(local-file "sway" #:recursive? #t))))
+                         (list `("sway/config" ,(local-file "sway/config"))
+                               `("sway/resources" ,(local-file "sway/resources" #:recursive? #t))))
 
          (simple-service 'foot-config
                          home-xdg-configuration-files-service-type

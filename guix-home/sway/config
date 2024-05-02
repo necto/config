@@ -29,7 +29,7 @@ set $screenlock swaylock
 
 # redshift analog - gammastep allows for automatic screen color temperature adjustment
 # according to the time of the day.
-set $screendimmer gammastep
+set $screendimmer gammastep-indicator
 
 # XDG_CURRENT_DESKTOP=sway is needed for proper initialization of xdg-desktop-portal
 # and xdg-desktop-portal-wlr
@@ -63,7 +63,7 @@ default_border pixel 2
 
 ### Output configuration
 
-output * bg ~/.config/sway/wallpaper-tree-horizon.jpg fill
+output * bg ~/.config/sway/resources/wallpaper-tree-horizon.jpg fill
 
 # Custom theming
 
@@ -71,6 +71,17 @@ output * bg ~/.config/sway/wallpaper-tree-horizon.jpg fill
     client.focused "#ff0000" "#285577" "#ffffff" "#2e9ef4" "#ff0000"
     # client.focused_inactive "#23242a" "#2b2b2b" "#888888" "#000000" "#000000"
     # client.unfocused "#2c2c2c" "#2b2b2b" "#888888" "#000000" "#000000"
+
+include cursor.theme
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+  gsettings set $gnome-schema cursor-theme $cursor_theme
+  gsettings set $gnome-schema cursor-size $cursor_size
+}
+
+# Mouse
+seat * xcursor_theme $cursor_theme $cursor_size
+
 
 #
 # Example configuration:
