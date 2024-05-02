@@ -136,6 +136,12 @@
                    (bash-logout (list (local-file
                                        ".bash_logout"
                                        "bash_logout")))))
+
+         (simple-service 'mimeapps
+                         home-xdg-configuration-files-service-type
+                         (list `("mimeapps.list"
+                                 ,(local-file "mimeapps.list"))))
+
          (simple-service 'bash-timer
                          home-xdg-configuration-files-service-type
                          (list `("bash-command-timer.sh"

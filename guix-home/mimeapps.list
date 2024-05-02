@@ -1,0 +1,11 @@
+[Default Applications]
+text/html=firefox.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+x-scheme-handler/about=firefox.desktop
+x-scheme-handler/unknown=firefox.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-L5SEL2.desktop
+application/x-web-browser=firefox.desktop
+
+[Added Associations]
+x-scheme-handler/tg=userapp-Telegram Desktop-L5SEL2.desktop;
