@@ -6,7 +6,7 @@
 set -eux
 
 # Parameters.
-id=ubuntu-22.04.4-desktop-amd64
+id=noble-desktop-amd64
 disk_img="${id}.img.qcow2"
 disk_img_snapshot="${id}.snapshot.qcow2"
 iso="${id}.iso"
@@ -25,8 +25,8 @@ if [ ! -f "$disk_img" ]; then
     -cdrom "$iso" \
     -drive "file=${disk_img},format=qcow2" \
     -enable-kvm \
-    -m 2G \
-    -smp 2 \
+    -m 8G \
+    -smp 8 \
   ;
 fi
 
