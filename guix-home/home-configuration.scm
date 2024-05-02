@@ -35,7 +35,7 @@
              (gnu packages suckless) ; for dmenu
              (gnu packages pulseaudio) ; for pactl
              (gnu packages freedesktop) ; for xdg-desktop-portal-wlr
-             (gnu packages xorg) ; for xcursor-themes
+             (gnu packages gnome-xyz) ; for bibata-cursor-theme
 
              (gnu packages syncthing)
              )
@@ -47,6 +47,12 @@
 
 (define %emacs-config
   (string-append %home "/.config/emacs"))
+
+(define %cursor-theme
+  "Bibata-Modern-Ice")
+
+(define %cursor-size
+  "24")
 
 (define home-scripts
   (package
@@ -100,7 +106,7 @@
 
                           home-scripts
 
-                          xcursor-themes ;; this is where apps will look for cursor themes
+                          bibata-cursor-theme ;; this is where apps will look for cursor themes
                           )
                     (specifications->packages (list)) ; in case I don't know which package to import,
                                                       ; use a string here e.g. "emacs"
@@ -137,13 +143,13 @@
 
          (simple-service 'cursor-config
                          home-xdg-configuration-files-service-type
-                         (list `("gtk-2.0/gtkrc" ,(plain-file "gtkrc" "gtk-cursor-theme-size=108\ngtk-cursor-theme-name=\"redglass\"\n"))
-                               `("gtk-3.0/settings.ini" ,(plain-file "gtk3-settings.ini" "[Settings]\ngtk-cursor-theme-size=108\ngtk-cursor-theme-name=\"redglass\"\n"))
-                               `("settings.ini" ,(plain-file "settings.ini" "gtk-cursor-theme-size=108\ngtk-cursor-theme-name=\"redglass\"\n"))
-                               `("shell/profile" ,(plain-file "shell-profile" "export XCURSOR_SIZE=\"108\"\nexport XCURSOR_THEME=\"redglass\"\n"))
-                               `("x11/xresources" ,(plain-file "Xresources" "Xcursor.size:108\nXcursor.theme: redglass\n"))
-                               `("glib-2.0/settings/keyfile" ,(plain-file "glib-2.0-settings" "[org/gnome/desktop/interface]\ncursor-size=108\ncursor-theme=\"redglass\"\n"))
-                               `("sway/cursor.theme" ,(plain-file "sway-cursor-theme" "set $cursor_size 108\nset $cursor_theme redglass\n"))))
+                         (list `("gtk-2.0/gtkrc" ,(plain-file "gtkrc" (string-append "gtk-cursor-theme-size=" %cursor-size "\ngtk-cursor-theme-name=\"" %cursor-theme "\"\n")))
+                               `("gtk-3.0/settings.ini" ,(plain-file "gtk3-settings.ini" (string-append "[Settings]\ngtk-cursor-theme-size=" %cursor-size "\ngtk-cursor-theme-name=\"" %cursor-theme "\"\n")))
+                               `("settings.ini" ,(plain-file "settings.ini" (string-append "gtk-cursor-theme-size=" %cursor-size "\ngtk-cursor-theme-name=\"" %cursor-theme "\"\n")))
+                               `("shell/profile" ,(plain-file "shell-profile" (string-append "export XCURSOR_SIZE=\"" %cursor-size "\"\nexport XCURSOR_THEME=\"" %cursor-theme "\"\n")))
+                               `("x11/xresources" ,(plain-file "Xresources" (string-append "Xcursor.size:" %cursor-size "\nXcursor.theme: " %cursor-theme "\n")))
+                               `("glib-2.0/settings/keyfile" ,(plain-file "glib-2.0-settings" (string-append "[org/gnome/desktop/interface]\ncursor-size=" %cursor-size "\ncursor-theme=\"" %cursor-theme "\"\n")))
+                               `("sway/cursor.theme" ,(plain-file "sway-cursor-theme" (string-append "set $cursor_size " %cursor-size "\nset $cursor_theme " %cursor-theme "\n")))))
 
          (simple-service 'git-config
                          home-xdg-configuration-files-service-type
