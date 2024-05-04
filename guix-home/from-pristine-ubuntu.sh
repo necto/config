@@ -1,20 +1,11 @@
 #!/bin/bash
 set -xeuo pipefail
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
 # perform fast "sudo" actions first to avoid password prompt later
 sudo apt update
 
 # add user to the group "video" to allow them to control brightness of the screen
 sudo usermod -a -G video $USER
-
-# Make sure GDM sources the guix paths before starting sway
-GDM_SWAY_SESSION_FILE="/usr/share/wayland-sessions/sway.desktop"
-sudo cp "$SCRIPT_DIR/sway.desktop" "$GDM_SWAY_SESSION_FILE"
-# Make the shell substitution in the .desktop file
-# because GDM might not perform shell substitutions
-sudo sed -i "s@\$HOME@$HOME@" "$GDM_SWAY_SESSION_FILE"
 
 # installing
 # - guix to manage most of the software
@@ -23,10 +14,28 @@ sudo sed -i "s@\$HOME@$HOME@" "$GDM_SWAY_SESSION_FILE"
 # - swaylock must be installed with the host package manager to collaborate with pam_authenticate
 sudo apt install -y guix git swaylock brightnessctl
 
+# Make sure to clone the entire config repo first
+# to enable the later steps copy some files from it.
+cd "$HOME"
+# Preserve an existing `config` directory if any
+if [ -e "$HOME/config" ]; then
+    mv "$HOME/config" "$HOME/bkp-config-$(date '+%F-%T')"
+fi
+git clone https://github.com/necto/config
+CONFIG_DIR="$HOME/config/guix-home"
+cd config && git remote set-url origin 'git@github.com:necto/config'
+
+# Make sure GDM sources the guix paths before starting sway
+GDM_SWAY_SESSION_FILE="/usr/share/wayland-sessions/sway.desktop"
+sudo cp "$CONFIG_DIR/sway.desktop" "$GDM_SWAY_SESSION_FILE"
+# Make the shell substitution in the .desktop file
+# because GDM might not perform shell substitutions
+sudo sed -i "s@\$HOME@$HOME@" "$GDM_SWAY_SESSION_FILE"
+
 # Allow reading from guix store, which contains also configs and stuff like pointer icons.
 if [ ! -f /etc/apparmor.d/abstractions/base.d/guix.store.ro ]; then
     sudo mkdir -p /etc/apparmor.d/abstractions/base.d
-    sudo cp apparmor-guix.store.ro /etc/apparmor.d/abstractions/base.d/guix.store.ro
+    sudo cp "$CONFIG_DIR/apparmor-guix.store.ro" /etc/apparmor.d/abstractions/base.d/guix.store.ro
     sudo service apparmor reload
 fi
 
@@ -44,14 +53,8 @@ GUIX_PROFILE="$HOME/.config/guix/current"
 hash -r
 guix pull --fallback
 
-cd "$HOME"
-
-git clone https://github.com/necto/config
-
-cd config && git remote set-url origin 'git@github.com:necto/config'
-
 # takes a long time and can take advantage of many cores
-guix home reconfigure "$HOME/config/guix-home/home-configuration.scm"
+guix home reconfigure "$CONFIG_DIR/home-configuration.scm"
 
 echo "Now you can reboot and log into sway."
-echo "Then run $SCRIPT_DIR/after-reboot.sh"
+echo "Then run $CONFIG_DIR/after-reboot.sh"

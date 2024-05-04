@@ -18,5 +18,8 @@ guix package -m "$SCRIPT_DIR/manifest.scm"
 # Install doom
 bash "$HOME/.config/doom/install.sh"
 
-# go to the bitwarden page to install it interactively
-firefox https://addons.mozilla.org/en-US/firefox/addon/bitwarden-password-manager/
+echo "Go to the Bitwarden page to install it interactively"
+$HOME/.guix-home/bin/firefox https://addons.mozilla.org/en-US/firefox/addon/bitwarden-password-manager/
+
+echo "Go to the Syncthing page to configure the peers"
+$HOME/.guix-home/bin/firefox https://localhost:8384
