@@ -249,5 +249,3 @@
            home-environment-variables-service-type
            `(;; Fix the warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
              ("GUIX_LOCPATH" . "$HOME/.guix-profile/lib/locale:$HOME/.guix-home/profile/lib/locale")))))))
-
-(home-env "personal")

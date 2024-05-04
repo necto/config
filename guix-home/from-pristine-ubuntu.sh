@@ -1,5 +1,20 @@
 #!/bin/bash
+# This is the entry point of the bootstrapping process.
+# It installs the necessary software and workarounds and passes over to guix home.
+# To lunch it, it is enough to fetch just the script file and run it:
+# wget https://raw.githubusercontent.com/necto/config/master/guix-home/from-pristine-ubuntu.sh
+# bash from-pristine-ubuntu.sh
 set -xeuo pipefail
+
+if [ "$#" -eq 0 ]; then
+    echo "Usage: $0 <profile>"
+    echo "Available profiles:"
+    echo "  - personal"
+    echo "  - professional"
+    exit 1
+fi
+
+PROFILE="$1"
 
 # perform fast "sudo" actions first to avoid password prompt later
 sudo apt update
@@ -54,7 +69,7 @@ hash -r
 guix pull --fallback
 
 # takes a long time and can take advantage of many cores
-guix home reconfigure "$CONFIG_DIR/home-configuration.scm"
+guix home reconfigure "$CONFIG_DIR/$PROFILE.scm"
 
 echo "Now you can reboot and log into sway."
 echo "Then run $CONFIG_DIR/after-reboot.sh"
