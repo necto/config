@@ -1,0 +1,20 @@
+[Added Associations]
+application/vnd.debian.binary-package=snap-store_ubuntu-software-local-file.desktop;
+x-scheme-handler/rdp=org.remmina.Remmina.desktop;
+x-scheme-handler/spice=org.remmina.Remmina.desktop;
+x-scheme-handler/vnc=org.remmina.Remmina.desktop;
+x-scheme-handler/remmina=org.remmina.Remmina.desktop;
+application/x-remmina=org.remmina.Remmina.desktop;
+
+[Default Applications]
+text/html=island-browser.desktop
+x-scheme-handler/http=island-browser.desktop
+x-scheme-handler/https=island-browser.desktop
+x-scheme-handler/about=island-browser.desktop
+x-scheme-handler/unknown=island-browser.desktop
+x-scheme-handler/webcal=island-browser.desktop
+x-scheme-handler/rdp=org.remmina.Remmina.desktop
+x-scheme-handler/spice=org.remmina.Remmina.desktop
+x-scheme-handler/vnc=org.remmina.Remmina.desktop
+x-scheme-handler/remmina=org.remmina.Remmina.desktop
+application/x-remmina=org.remmina.Remmina.desktop
