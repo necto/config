@@ -29,10 +29,9 @@
              (gnu packages package-management)
 
              (gnu packages wm) ; for waybar
-             (gnu packages xdisorg) ; for gammastep
+             (gnu packages xdisorg) ; for gammastep, fuzzel
              (gnu packages image) ; for slurp
              (gnu packages terminals) ; for foot
-             (gnu packages suckless) ; for dmenu
              (gnu packages pulseaudio) ; for pactl
              (gnu packages freedesktop) ; for xdg-desktop-portal-wlr
              (gnu packages gnome-xyz) ; for bibata-cursor-theme
@@ -97,7 +96,7 @@
                            grimshot ;; take screenshots
                            slurp ;; select area for a screenshot
                            foot ;; sway default terminal emulator
-                           dmenu ;; keyboard-centered app launcher
+                           fuzzel ;; keyboard-centered app launcher
                            pulseaudio ;; for pactl
                            pavucontrol
                            dunst ;; display notifications
@@ -140,6 +139,9 @@
 
           (simple-service 'mimeapps
                           home-xdg-configuration-files-service-type
+                          ;; FIXME: this path is resolved relative to the directory where user
+                          ;; ran `guix home reconfigure`. It should be resolved relative to
+                          ;; the current script directory.
                           (list `("mimeapps.list"
                                   ,(local-file (string-append %custom-dir "/mimeapps.list")))))
 
