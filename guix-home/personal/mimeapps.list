@@ -9,3 +9,4 @@ application/x-web-browser=firefox.desktop
 
 [Added Associations]
 x-scheme-handler/tg=userapp-Telegram Desktop-L5SEL2.desktop;
+image/svg+xml=firefox.desktop
