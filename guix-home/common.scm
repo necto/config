@@ -164,6 +164,10 @@
                           home-xdg-configuration-files-service-type
                           (list `("git/config" ,(local-file "gitconfig"))))
 
+          (simple-service 'fuzzel-config
+                          home-xdg-configuration-files-service-type
+                          (list `("fuzzel/fuzzel.ini" ,(local-file "fuzzel/fuzzel.ini"))))
+
           (simple-service 'xmonad-config
                           home-xdg-configuration-files-service-type
                           ;; FIXME: xmonad expects the config dir to be writable
