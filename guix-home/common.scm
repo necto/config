@@ -69,6 +69,9 @@
    (description "My personal scripts.")
    (license license:expat)))
 
+(define %guix-config-dir
+  (dirname (current-filename)))
+
 (define (home-env %custom-dir)
   (home-environment
    ;; Below is the list of packages that will show up in your
@@ -139,11 +142,8 @@
 
           (simple-service 'mimeapps
                           home-xdg-configuration-files-service-type
-                          ;; FIXME: this path is resolved relative to the directory where user
-                          ;; ran `guix home reconfigure`. It should be resolved relative to
-                          ;; the current script directory.
                           (list `("mimeapps.list"
-                                  ,(local-file (string-append %custom-dir "/mimeapps.list")))))
+                                  ,(local-file (string-append %guix-config-dir "/" %custom-dir "/mimeapps.list")))))
 
           (simple-service 'bash-timer
                           home-xdg-configuration-files-service-type
