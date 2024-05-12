@@ -7,7 +7,19 @@
 	// Choose the order of the modules
 	"modules-left": ["sway/workspaces", "sway/mode"],
 	"modules-center": ["sway/window"],
-	"modules-right": ["custom/disk_root","temperature", "cpu", "memory", "network", "backlight", "pulseaudio", "battery", "clock", "idle_inhibitor", "tray"],
+	"modules-right": ["custom/disk_root",
+        "temperature",
+        "cpu",
+        "memory",
+        "network",
+        "backlight",
+        "pulseaudio",
+        "battery",
+        "clock",
+        "sway/language",
+        "tray",
+        "idle_inhibitor",
+    ],
 
 	// Modules configuration
 	// "sway/workspaces": {
@@ -109,6 +121,9 @@
 		"format": "⏰ {:%d/%m %H:%M}",
 		"tooltip-format": "{:%d %B %Y | %H:%M}"
 	},
+    "sway/language": {
+        "format": "{short}",
+    },
 	"idle_inhibitor": {
 		"format": "<span color='#589df6'>{icon}</span>",
 		"format-icons": {

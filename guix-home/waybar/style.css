@@ -121,3 +121,9 @@ window#waybar {
 #tray {
 }
 
+#language {
+    min-width: 20px;
+    color: rgb(102, 220, 105);
+    background: #1b1d1e;
+    border: 1px dotted #00afd7;
+}
