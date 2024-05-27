@@ -90,6 +90,7 @@
                            which
                            fontconfig ;; used by doom doctor
                            ;; guix -- must be already installed (avoid circular dep)
+                           eza ;; Alternative to `ls`
 
                            sway
                            swaybg
@@ -121,8 +122,7 @@
    (services
     (list (service home-bash-service-type
                    (home-bash-configuration
-                    (aliases '(("grep" . "grep --color=auto")
-                               ("ls" . "ls --color=auto")
+                    (aliases '(("ls" . "eza")
                                ("rehash" . "hash -r")
                                ("vi" . "vim")
                                ("python" . "python3")

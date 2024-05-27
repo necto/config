@@ -2,10 +2,6 @@
 # Check for an interactive session
 [ -z "$PS1" ] && return
 
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias rehash='hash -r'
-alias gr='grep -r'
 PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] '
 
 #export PATH=/opt/mpich2/bin:$PATH
@@ -84,8 +80,6 @@ export PATH=~/.local/bin:$PATH
 export PATH=~/config/xmonad/light:$PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-alias suspend="systemctl -i suspend"
 
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
