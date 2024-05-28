@@ -88,3 +88,12 @@ export PATH=~/config/xmonad/light:$PATH
 alias suspend="systemctl -i suspend"
 
 export PATH="$HOME/.config/emacs/bin:$PATH"
+
+# Add separators for foot terminal emulator
+# to find beginning and end of a command output
+# See https://codeberg.org/dnkl/foot/wiki#bash-2
+PS0+='\e]133;C\e\\'
+command_done() {
+    printf '\e]133;D\e\\'
+}
+PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }command_done
