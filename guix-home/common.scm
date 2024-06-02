@@ -226,7 +226,7 @@
           ;; Used by doom emacs and waybar icons
           (simple-service 'nerd-fonts
                           home-xdg-data-files-service-type
-                          (list `("fonts/NFM.ttf" ,(local-file "fonts/NFM.ttf"))))
+                          (list `("fonts/NFM.ttf" ,(local-file "fonts/SymbolsNerdFontMono-Regular-v3.2.1.ttf"))))
 
           ;; Installing doom-emacs will be done by the .config/doom/install.sh after
           ;; home reconfigure.
