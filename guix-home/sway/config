@@ -94,13 +94,23 @@ output DP-9 {
 output DP-10 {
        scale 2
 }
-# swaylock 1.5 provided by ubuntu-22.04 does not support
-# display scaling
-output DP-6 {
-       scale 1
+
+# home office
+output DP-5 {
+       scale 2
 }
+
+output DP-4 {
+       scale 2
+}
+
+# office
+output DP-6 {
+       scale 2
+}
+
 output DP-7 {
-       scale 1
+       scale 2
 }
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs

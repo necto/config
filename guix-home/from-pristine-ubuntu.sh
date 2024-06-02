@@ -27,6 +27,8 @@ sudo usermod -a -G video $USER
 # - git to fetch the config repository initially
 # - brightnessctl adds udev rules, so better installed through apt change screen brightness
 # - swaylock must be installed with the host package manager to collaborate with pam_authenticate
+#   for Ubuntu 22.04:
+#   use https://launchpad.net/~pv-safronov/+archive/ubuntu/backports PPA to get a swaylock 1.7 that supports fractional sceen scaling
 sudo apt install -y guix git swaylock brightnessctl
 
 # Make sure to clone the entire config repo first
