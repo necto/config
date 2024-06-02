@@ -24,6 +24,11 @@
    "include": [
      "~/.config/waybar/default-modules.json",
    ],
+   "cpu": {
+     "interval": 1,
+     "format": "{icon0}{icon1}{icon2}{icon3} {usage:>2}% ",
+     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+   },
  },
  {
    "output": ["!eDP-1", "*"],

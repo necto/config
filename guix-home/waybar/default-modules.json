@@ -31,12 +31,6 @@
     "format": "<span color='#e88939'>{icon}</span> {temperatureC}°C",
     "format-icons": ["", "", "", ""]
   },
-  "cpu": {
-    "interval": 1,
-    // TODO: extend with more CPUs on a longer display
-    "format": "{icon0}{icon1}{icon2}{icon3} {usage:>2}% ",
-    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
-  },
   "memory": {
     "format": "💾 {used:0.1f}/{total:0.0f}G"
   },
