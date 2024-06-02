@@ -51,7 +51,7 @@
 		"critical-threshold": 80,
 		// "format-critical": "{temperatureC}°C {icon}",
 		"format": "<span color='#e88939'>{icon}</span> {temperatureC}°C",
-		"format-icons": ["", "", ""]
+		"format-icons": ["", "", "", ""]
 	},
 	"cpu": {
 		"interval": 1,
@@ -66,8 +66,8 @@
 		"family": "ipv6",
 		//"interface": "wlp1s0", // (Optional) To force the use of this interface
 		"format-wifi": "<span color='#589df6'></span> <span color='gray'>{essid}</span> <span color='#589df6'>⇵</span> {bandwidthUpBytes} : {bandwidthDownBytes}",
-		"format-ethernet": "{bandwidthUpBytes} : {bandwidthDownBytes} ",
-		"format-linked": "{ifname} (No IP) ",
+		"format-ethernet": "{bandwidthUpBytes} : {bandwidthDownBytes} ",
+		"format-linked": "{ifname} (No IP) 󰈀",
 		"format-disconnected": "Disconnected ⚠",
 		"format-alt": "{ifname}: {ipaddr}/{cidr}",
 		"interval": 1
