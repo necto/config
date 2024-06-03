@@ -99,11 +99,11 @@ output DP-10 {
 
 # home office
 output DP-5 {
-       scale 2
+       scale 1.7
 }
 
 output DP-4 {
-       scale 2
+       scale 1.7
 }
 
 # office
