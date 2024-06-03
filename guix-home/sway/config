@@ -25,7 +25,9 @@ set $term foot
 # on the original workspace that the command was run on.
 set $menu fuzzel -T $term | xargs swaymsg exec --
 
-set $screenlock swaylock
+# background picture compressed with
+# convert james-webb-space-telescope-jwst-first-image-full-resolution.png -resize 3440x1440! -quality 90 out.jpg
+set $screenlock 'swaylock -FkFl -s stretch -i ~/.config/sway/resources/wallpaper-webb-universe.jpg'
 
 # redshift analog - gammastep allows for automatic screen color temperature adjustment
 # according to the time of the day.
@@ -121,9 +123,9 @@ output DP-7 {
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+         timeout 300 $screenlock \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep $screenlock
 
 ### Input configuration
 #
