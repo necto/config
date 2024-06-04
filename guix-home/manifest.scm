@@ -22,32 +22,40 @@
 ;;; it has libraries listed, which is useful when compiling our work project
 ;;; since it injects the home-built standard library to the CMAKE_CXX_FLAGS
 ;;; which is expanded in the beginning of a compiler invocation.
-(define clang-with-lld
+(define clang-with-lld-18
   (package
     (inherit (package-with-configure-flags clang-18 #~(list "-DCLANG_DEFAULT_LINKER=lld")))
+    (inputs (modify-inputs (package-inputs clang-18) (replace "gcc" "gcc-13")))
     (name "clang-with-lld")))
 
-(concatenate-manifests
- (list (specifications->manifest
-        (list "telegram-desktop"
-              "node"
-              "firefox"
-              "lld-wrapper"
-              "llvm"
-              "fzf"
-              "gcc-toolchain@11"
-              "ninja"
-              "htop"
-              "python-nose"
-              "python-pytest"
-              "python-isort"
-              "python-lsp-server"
-              "poetry"
-              "python"
-              "guile-colorized"
-              "guile-readline"
-              "guile"
-              "python-lit"
-              "cmake"))
-       (packages->manifest
-        (list clang-with-lld))))
+(define clang-toolchain-with-lld-18
+  (make-clang-toolchain clang-with-lld-18 libomp-18))
+
+;;; Not installing gcc-toolchain on purpose to avoid conflicts with clang-toolchain
+(packages->manifest
+  (list clang-toolchain-with-lld-18
+        (make-lld-wrapper lld-18)
+        (specification->package "cmake")
+        (specification->package "firefox")
+        (specification->package "fzf")
+        (specification->package "gimp")
+        (specification->package "git")
+        (specification->package "gnuplot")
+        (specification->package "guile")
+        (specification->package "guile-colorized")
+        (specification->package "guile-readline")
+        (specification->package "hotspot")
+        (specification->package "htop")
+        (specification->package "kcachegrind")
+        (specification->package "libunwind")
+        (specification->package "moreutils")
+        (specification->package "ninja")
+        (specification->package "node")
+        (specification->package "patchelf")
+        (specification->package "perf")
+        (specification->package "perf-tools")
+        (specification->package "poetry")
+        (specification->package "python")
+        (specification->package "python-lit")
+        (specification->package "python-lsp-server")
+        (specification->package "telegram-desktop")))
