@@ -52,7 +52,7 @@ BCT_ENABLE=1
 # If empty, disable colored output. Set them to empty if your terminal does not
 # support VT100 escape sequences.
 BCT_SUCCESS_COLOR='32'
-BCT_ERROR_COLOR='91'
+BCT_ERROR_COLOR='31'
 
 # The display format of the current time.
 #
@@ -118,18 +118,29 @@ fi
 BCT_AT_PROMPT=1
 function BCTPreCommand() {
   local EXIT="$?"
-  if [ $EXIT == 0 ]
+  if [ -z "$FIRST_AFTER_PROMPT" ];
   then
-    # colour for exit without error
-    BCT_COLOR=$BCT_SUCCESS_COLOR
+    # This is not the first invocation of BCTPreCommand after a previous command finished
+    # so the exit code is not preserved, and there changing the colors would be misleading
+    :
   else
-    # colour for exit with error
-    BCT_COLOR=$BCT_ERROR_COLOR
+    unset FIRST_AFTER_PROMPT
+    if [ $EXIT == 0 ];
+    then
+      # colour for exit without error
+      BCT_COLOR=$BCT_SUCCESS_COLOR
+    else
+      # colour for exit with error
+      BCT_COLOR=$BCT_ERROR_COLOR
+    fi
   fi
   if [ -z "$BCT_AT_PROMPT" ]; then
     return
   fi
   unset BCT_AT_PROMPT
+  # Note for the next invocation of BCTPreCommand that it will be
+  # the time to collect the exit code of the previous command
+  FIRST_AFTER_PROMPT=1
   BCT_COMMAND_START_TIME=$(eval $BCTTime)
   BCT_COMMAND_LINE=$(history 1 | sed "s/^[ ]*[0-9]*[ ]*//g")
 }

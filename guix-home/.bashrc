@@ -57,8 +57,10 @@ function set_terminal_windowname() {
 source ~/.config/bash-command-timer.sh
 
 function before_every_command() {
-    set_terminal_windowname
+    # Important to have BCTPreCommand first for it to catch the exit status
+    # of the last command
     BCTPreCommand
+    set_terminal_windowname
 }
 if [ $TERM = "dumb" ]
 then
@@ -90,4 +92,6 @@ PS0+='\e]133;C\e\\'
 command_done() {
     printf '\e]133;D\e\\'
 }
-PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }command_done
+# Keep the original prompt command last, because bash-command-timer relies
+# on it being last to set the proper time reference point
+PROMPT_COMMAND=command_done${PROMPT_COMMAND:+; $PROMPT_COMMAND}
