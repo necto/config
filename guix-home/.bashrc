@@ -60,7 +60,9 @@ function before_every_command() {
     # Important to have BCTPreCommand first for it to catch the exit status
     # of the last command
     BCTPreCommand
-    set_terminal_windowname
+    if [ -z "$INSIDE_EMACS" ]; then
+        set_terminal_windowname
+    fi
 }
 if [ $TERM = "dumb" ]
 then
@@ -85,13 +87,15 @@ export PATH=~/config/xmonad/light:$PATH
 
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
-# Add separators for foot terminal emulator
-# to find beginning and end of a command output
-# See https://codeberg.org/dnkl/foot/wiki#bash-2
-PS0+='\e]133;C\e\\'
-command_done() {
-    printf '\e]133;D\e\\'
-}
-# Keep the original prompt command last, because bash-command-timer relies
-# on it being last to set the proper time reference point
-PROMPT_COMMAND=command_done${PROMPT_COMMAND:+; $PROMPT_COMMAND}
+if [ -z "$INSIDE_EMACS" ]; then
+    # Add separators for foot terminal emulator
+    # to find beginning and end of a command output
+    # See https://codeberg.org/dnkl/foot/wiki#bash-2
+    PS0+='\e]133;C\e\\'
+    command_done() {
+        printf '\e]133;D\e\\'
+    }
+    # Keep the original prompt command last, because bash-command-timer relies
+    # on it being last to set the proper time reference point
+    PROMPT_COMMAND=command_done${PROMPT_COMMAND:+; $PROMPT_COMMAND}
+fi
