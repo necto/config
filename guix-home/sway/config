@@ -27,7 +27,7 @@ set $menu fuzzel -T $term | xargs swaymsg exec --
 
 # background picture compressed with
 # convert james-webb-space-telescope-jwst-first-image-full-resolution.png -resize 3440x1440! -quality 90 out.jpg
-set $screenlock 'swaylock -FkFl -s stretch -i ~/.config/sway/resources/wallpaper-webb-universe.jpg'
+set $screenlock 'swaylock -fkFl -s stretch -i ~/.config/sway/resources/wallpaper-webb-universe.jpg'
 
 # redshift analog - gammastep allows for automatic screen color temperature adjustment
 # according to the time of the day.
