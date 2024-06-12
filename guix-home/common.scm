@@ -73,6 +73,18 @@
 (define %guix-config-dir
   (dirname (current-filename)))
 
+(define %bash-profile-file
+  (plain-file
+   "bash-profile"
+   (string-append
+    "\n" ;; Use guix as the package manager
+    "GUIX_PROFILE=\"" %home "/.guix-profile\"\n"
+    "source \"$GUIX_PROFILE/etc/profile\" \n"
+    "\n" ;; For some reason this variable is not exported in guix-profile/etc/profile
+    "export XDG_DATA_DIRS=\"" %home "/.guix-profile/share${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS\""
+    "\n" ;; ssh agent daemon
+    "eval \"$(ssh-agent -s)\"\n")))
+
 (define (home-env %custom-dir)
   (home-environment
    ;; Below is the list of packages that will show up in your
@@ -129,14 +141,7 @@
                                ("suspend" . "systemctl -i suspend")))
                     (bashrc (list (local-file ".bashrc"
                                               "bashrc")))
-                    (bash-profile (list (plain-file
-                                         "bash-profile"
-                                         (string-append
-                                          "\n" ;; Use guix as the package manager
-                                          "GUIX_PROFILE=\"" %home "/.guix-profile\"\n"
-                                          "source \"$GUIX_PROFILE/etc/profile\" \n"
-                                          "\n" ;; ssh agent daemon
-                                          "eval \"$(ssh-agent -s)\"\n"))))
+                    (bash-profile (list %bash-profile-file))
                     (bash-logout (list (local-file
                                         ".bash_logout"
                                         "bash_logout")))))
