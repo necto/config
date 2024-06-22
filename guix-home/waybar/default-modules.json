@@ -79,7 +79,7 @@
       "critical": 10
     },
     "interval": 20,
-    "format": "<span color='#e88939'>{icon}</span> {capacity}<span color='#e88939'>%</span> {power:.1f}<span color='#e88939'></span> {time}",
+    "format": "<span color='#e88939'>{icon}</span> {capacity}<span color='#e88939'>%</span> {power:.1f}<span color='#e88939'>W</span> {time}",
     "format-time": "{H}° {M}'",
     //  is from https://www.nerdfonts.com/cheat-sheet nf-fa-charging_station
     "format-charging": "<span color='#e88939'> </span> {capacity}%",
