@@ -116,15 +116,25 @@
 (map! :leader :desc "Switch to the previously shown buffer" "TAB" #'mode-line-other-buffer)
 (map! :leader :desc "Switch to the previously shown buffer" "<tab>" #'mode-line-other-buffer)
 
+(defun my-org-capture-cleanup ()
+  "Clean up the frame created while capturing via org-protocol."
+  (-when-let ((&alist 'name name) (frame-parameters))
+    (when (equal name "org-protocol-capture")
+      (delete-frame))))
+
 (after! org
   (setq org-agenda-files '("~/notes/gtd/general.org"
                            "~/notes/gtd/inbox.org"
                            "~/notes/gtd/projects.org"
                            "~/notes/gtd/tickler.org")
         org-capture-templates
-        '(("t" "Add a todo item" entry
-           (file+headline "~/notes/gtd/inbox.org" "Todos")
-           "** TODO [#B] %?
+        '(("n" "Add a note" entry
+           (file "~/notes/gtd/inbox.org")
+           "* %?
+  OPEN: %U" :jump-to-captured t :empty-lines 1)
+          ("t" "Add a todo item" entry
+           (file "~/notes/gtd/inbox.org")
+           "* TODO [#B] %?
   OPEN: %U" :jump-to-captured t :empty-lines 1))
         org-refile-targets
         '(("~/notes/gtd/projects.org" :maxlevel . 2)
@@ -134,6 +144,7 @@
         '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
   (setq org-log-done t
         org-log-into-drawer t)
+  (add-hook 'org-capture-after-finalize-hook 'my-org-capture-cleanup)
   )
 
 

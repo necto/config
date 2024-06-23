@@ -23,9 +23,12 @@ set $term foot
 # Start a new emacs frame
 # -c - create a new frame instead of trying to reuse one
 # -n - return immediately without waiting until the frame is closed
-# -e '(switch-to-buffer nil)' - open a useful buffer (most recently used but not visible now)
+# --eval '(switch-to-buffer nil)' - open a useful buffer (most recently used but not visible now)
 # -a emacs - start a full emacs if no emacs server is found
-set $emacs emacsclient -c -n -e '(switch-to-buffer nil)' -a emacs
+set $emacs emacsclient -c -n -a emacs --eval '(switch-to-buffer nil)'
+set $agenda emacsclient -c -n --eval '(org-agenda-list)'
+set $captodo emacsclient -c -F '((name . "org-protocol-capture"))' -n --eval '(org-capture :keys "t")'
+set $capnote emacsclient -c -F '((name . "org-protocol-capture"))' -n --eval '(org-capture :keys "n")'
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -161,6 +164,12 @@ input * {
     # Start emacs
     bindsym $mod+backslash exec $emacs
 
+    # Pop-up Org agenda
+    bindsym $mod+a exec $agenda
+    bindsym $mod+t exec $captodo
+    bindsym $mod+c exec $capnote
+    bindsym $mod+n exec $capnote
+
     # Kill focused window
     bindsym $mod+Shift+q kill
 
@@ -259,7 +268,8 @@ input * {
     bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
-    bindsym $mod+a focus parent
+    # Conflicts with Org-agenda binding
+    # bindsym $mod+a focus parent
 #
 # Scratchpad:
 #
