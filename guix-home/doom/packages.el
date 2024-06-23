@@ -66,3 +66,6 @@
            :files ("lsp-sonarlint.el"
                    ("languages" "languages/*/*.el" "languages/*/*.jar")
                    ("server" "server/*"))))
+
+(package! frames-only-mode
+  :recipe (:host github :repo "davidshepherd7/frames-only-mode"))

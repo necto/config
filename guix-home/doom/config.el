@@ -185,3 +185,8 @@
   (setq copilot-idle-delay 0)
   (add-to-list 'warning-suppress-types '(copilot copilot-exceeds-max-char))
   (add-to-list 'warning-suppress-types '(copilot copilot-no-mode-ident)))
+
+;; Enable frames-only-mode immediately on startup
+(after! frames-only-mode
+  (frames-only-mode))
+

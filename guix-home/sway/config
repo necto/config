@@ -20,6 +20,12 @@ set $darker XF86MonBrightnessDown
 
 # Your preferred terminal emulator
 set $term foot
+# Start a new emacs frame
+# -c - create a new frame instead of trying to reuse one
+# -n - return immediately without waiting until the frame is closed
+# -e '(switch-to-buffer nil)' - open a useful buffer (most recently used but not visible now)
+# -a emacs - start a full emacs if no emacs server is found
+set $emacs emacsclient -c -n -e '(switch-to-buffer nil)' -a emacs
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -151,6 +157,9 @@ input * {
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+
+    # Start emacs
+    bindsym $mod+backslash exec $emacs
 
     # Kill focused window
     bindsym $mod+Shift+q kill
