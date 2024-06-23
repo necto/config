@@ -1,26 +1,26 @@
 [user]
-       email = necto.ne@gmail.com
-       name = Arseniy Zaostrovnykh
+    email = necto.ne@gmail.com
+    name = Arseniy Zaostrovnykh
 [color]
-       ui = true
+    ui = true
 [url "git@github.com:"]
-     insteadOf = gh:
+    insteadOf = gh:
 [push]
-	default = matching
+    default = matching
 [alias]
-	lol = log --graph --oneline --decorate
-	pandiff = difftool -t pandiff
+    lol = log --graph --oneline --decorate
+    pandiff = difftool -t pandiff
 [difftool "pandiff"]
-	cmd = pandiff \"$LOCAL\" \"$REMOTE\"
+    cmd = pandiff \"$LOCAL\" \"$REMOTE\"
 [merge]
-	tool = ec-merge
+    tool = ec-merge
 [mergetool "ec-merge"]
-	cmd = ~/config/ec-merge.sh $LOCAL $REMOTE $MERGED $BASE
-	trustExitCode = true
+    cmd = ~/config/ec-merge.sh $LOCAL $REMOTE $MERGED $BASE
+    trustExitCode = true
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 [init]
-	defaultBranch = main
+    defaultBranch = main
