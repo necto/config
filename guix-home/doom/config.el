@@ -122,6 +122,12 @@
     (when (equal name "org-protocol-capture")
       (delete-frame))))
 
+(defun my-org-agenda-cached ()
+  (let ((buffer (get-buffer "*Org Agenda*")))
+    (if buffer
+        (switch-to-buffer buffer)
+      (org-agenda-list))))
+
 (after! org
   (setq org-agenda-files '("~/notes/gtd/general.org"
                            "~/notes/gtd/inbox.org"

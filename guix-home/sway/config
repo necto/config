@@ -26,7 +26,7 @@ set $term foot
 # --eval '(switch-to-buffer nil)' - open a useful buffer (most recently used but not visible now)
 # -a emacs - start a full emacs if no emacs server is found
 set $emacs emacsclient -c -n -a emacs --eval '(switch-to-buffer nil)'
-set $agenda emacsclient -c -n --eval '(org-agenda-list)'
+set $agenda emacsclient -c -n --eval '(my-org-agenda-cached)'
 set $captodo emacsclient -c -F '((name . "org-protocol-capture"))' -n --eval '(org-capture :keys "t")'
 set $capnote emacsclient -c -F '((name . "org-protocol-capture"))' -n --eval '(org-capture :keys "n")'
 # Your preferred application launcher
