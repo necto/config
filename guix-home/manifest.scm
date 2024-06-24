@@ -49,6 +49,7 @@
         (specification->package "kcachegrind")
         (specification->package "libunwind")
         (specification->package "moreutils")
+        (specification->package "ncdu") ;; Disk usage analyzer
         (specification->package "ninja")
         (specification->package "node")
         (specification->package "patchelf")
