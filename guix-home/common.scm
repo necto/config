@@ -138,7 +138,8 @@
                                ("rehash" . "hash -r")
                                ("vi" . "vim")
                                ("python" . "python3")
-                               ("suspend" . "systemctl -i suspend")))
+                               ("suspend" . "systemctl -i suspend")
+                               ("e" . "emacsclient -a vim -n")))
                     (bashrc (list (local-file ".bashrc"
                                               "bashrc")))
                     (bash-profile (list %bash-profile-file))
