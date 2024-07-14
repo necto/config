@@ -176,14 +176,11 @@
   (setq lsp-headerline-breadcrumb-segments '(symbols))
   (setq lsp-log-io t))
 
-;; ;; TODO: sholud these be configured before loading lsp-sonarlint?
-;; (after! lsp-sonarlint
-;;   (setq lsp-sonarlint-show-analyzer-logs t)
-;;   (setq lsp-sonarlint-verbose-logs t)
-;;   (require 'lsp-sonarlint-cpp)
-;;   (setq lsp-sonarlint-cpp-enabled t)
-;;   (require 'lsp-sonarlint-java)
-;;   (setq lsp-sonarlint-java-enabled t))
+(after! lsp-sonarlint
+  (setq lsp-sonarlint-auto-download t
+        lsp-sonarlint-show-analyzer-logs t
+        lsp-sonarlint-verbose-logs t
+        lsp-sonarlint-cfamily-compile-commands-path "/home/arseniy/proj/lsp-sonarlint/fixtures/compile_commands.json"))
 
 ;; To display line numbers on the side:
 ;; M-x linum-mode

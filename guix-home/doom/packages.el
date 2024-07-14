@@ -60,6 +60,10 @@
   :recipe (:host github :repo "zerolfx/copilot.el"
                  :files ("*.el" "dist")))
 
+;; Helps highlighting code snippets in the rule descriptions
+;; from SonarLint (see lsp-sonarlint)
+(package! shr-tag-pre-highlight)
+
 (package! lsp-sonarlint
   :recipe (:host github :repo "necto/lsp-sonarlint" :local-repo "~/proj/lsp-sonarlint"
            :build (:not compile native-compile)
