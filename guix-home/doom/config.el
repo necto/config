@@ -179,8 +179,7 @@
 (after! lsp-sonarlint
   (setq lsp-sonarlint-auto-download t
         lsp-sonarlint-show-analyzer-logs t
-        lsp-sonarlint-verbose-logs t
-        lsp-sonarlint-cfamily-compile-commands-path "/home/arseniy/proj/lsp-sonarlint/fixtures/compile_commands.json"))
+        lsp-sonarlint-verbose-logs t))
 
 ;; To display line numbers on the side:
 ;; M-x linum-mode
