@@ -73,3 +73,9 @@
 
 (package! frames-only-mode
   :recipe (:host github :repo "davidshepherd7/frames-only-mode"))
+
+;; For lsp-mode development (tests)
+(package! msgu
+  :recipe (:host github :repo "jcs-elpa/msgu"))
+(package! elenv
+  :recipe (:host github :repo "jcs-elpa/elenv"))
