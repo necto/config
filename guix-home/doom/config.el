@@ -151,7 +151,14 @@
   (setq org-log-done t
         org-log-into-drawer t)
   (add-hook 'org-capture-after-finalize-hook 'my-org-capture-cleanup)
-  )
+  (setq org-agenda-custom-commands
+        '(("c" . "My Custom Agendas")
+          ("cu" "Unscheduled TODO"
+           ((todo ""
+                  ((org-agenda-overriding-header "\nUnscheduled TODO")
+                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp)))))
+           nil
+           nil))))
 
 
 (setq c-basic-offset 2
