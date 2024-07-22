@@ -60,6 +60,11 @@
   :recipe (:host github :repo "zerolfx/copilot.el"
                  :files ("*.el" "dist")))
 
+(package! lsp-mode
+  :type 'local ;; Make sure doom doesn't install its pinned version
+  :recipe (:host github :repo "necto/lsp-mode" :local-repo "~/proj/lsp-mode"
+           :build (:not compile native-compile)))
+
 ;; Helps highlighting code snippets in the rule descriptions
 ;; from SonarLint (see lsp-sonarlint)
 (package! shr-tag-pre-highlight)
