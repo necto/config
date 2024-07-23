@@ -99,3 +99,11 @@ if [ -z "$INSIDE_EMACS" ]; then
     # on it being last to set the proper time reference point
     PROMPT_COMMAND=command_done${PROMPT_COMMAND:+; $PROMPT_COMMAND}
 fi
+
+function tldr() {
+    if [ -z "$1" ]; then
+        echo "Usage: tldr <command>"
+        return 1
+    fi
+    emacsclient -c -e "(tldr \"$1\")"
+}

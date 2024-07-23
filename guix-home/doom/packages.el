@@ -84,3 +84,5 @@
   :recipe (:host github :repo "jcs-elpa/msgu"))
 (package! elenv
   :recipe (:host github :repo "jcs-elpa/elenv"))
+
+(package! tldr)
