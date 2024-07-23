@@ -21,7 +21,7 @@
              (gnu packages certs)
              (gnu packages base)
              (gnu packages version-control)
-             (gnu packages rust-apps) ; For ripgrep, bat
+             (gnu packages rust-apps) ; For ripgrep, bat, git-delta
              (gnu packages fontutils) ; For fontconfig
 
              (gnu packages guile)
@@ -124,6 +124,7 @@
                            home-scripts
 
                            bat ;; cat with wings (syntax highlighting)
+                           git-delta ;; git diff viewer
 
                            bibata-cursor-theme ;; this is where apps will look for cursor themes
                            )
