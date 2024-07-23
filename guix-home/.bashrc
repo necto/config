@@ -84,6 +84,7 @@ export PATH=~/.local/bin:$PATH
 export PATH=~/config/xmonad/light:$PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.guix-profile/etc/bash_completion.d/fzf ] && source ~/.guix-profile/etc/bash_completion.d/fzf
 
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
