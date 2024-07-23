@@ -21,7 +21,7 @@
              (gnu packages certs)
              (gnu packages base)
              (gnu packages version-control)
-             (gnu packages rust-apps) ; For ripgrep
+             (gnu packages rust-apps) ; For ripgrep, bat
              (gnu packages fontutils) ; For fontconfig
 
              (gnu packages guile)
@@ -122,6 +122,8 @@
                            syncthing
 
                            home-scripts
+
+                           bat ;; cat with wings (syntax highlighting)
 
                            bibata-cursor-theme ;; this is where apps will look for cursor themes
                            )
