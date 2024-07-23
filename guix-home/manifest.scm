@@ -35,6 +35,7 @@
 (packages->manifest
   (list clang-toolchain-with-lld-18
         (make-lld-wrapper lld-18)
+        (specification->package "bat") ; cat with syntax highlighting
         (specification->package "cmake")
         (specification->package "firefox")
         (specification->package "fzf")

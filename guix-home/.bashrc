@@ -107,3 +107,5 @@ function tldr() {
     fi
     emacsclient -c -e "(tldr \"$1\")"
 }
+
+export "BAT_THEME=base16-256"

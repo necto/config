@@ -139,6 +139,7 @@
                                ("vi" . "vim")
                                ("python" . "python3")
                                ("suspend" . "systemctl -i suspend")
+                               ("cat" . "bat")
                                ("e" . "emacsclient -a vim -n")))
                     (bashrc (list (local-file ".bashrc"
                                               "bashrc")))
