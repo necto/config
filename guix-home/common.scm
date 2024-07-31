@@ -85,7 +85,7 @@
     "\n" ;; ssh agent daemon
     "eval \"$(ssh-agent -s)\"\n")))
 
-(define (home-env %custom-dir)
+(define (home-env %custom-dir %extra-path)
   (home-environment
    ;; Below is the list of packages that will show up in your
    ;; Home profile, under ~/.guix-home/profile.
@@ -265,4 +265,5 @@
            'env-vars
            home-environment-variables-service-type
            `(;; Fix the warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-             ("GUIX_LOCPATH" . "$HOME/.guix-profile/lib/locale:$HOME/.guix-home/profile/lib/locale")))))))
+             ("GUIX_LOCPATH" . "$HOME/.guix-profile/lib/locale:$HOME/.guix-home/profile/lib/locale")
+             ("PATH" . ,(string-join (append %extra-path '("$PATH")) ":"))))))))
