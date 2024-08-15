@@ -109,6 +109,14 @@ output DP-4 {
 }
 
 # office
+output DP-6 {
+       scale 2
+}
+
+output DP-7 {
+       scale 2
+}
+
 output DP-8 {
        scale 2
 }
