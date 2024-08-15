@@ -98,13 +98,6 @@ seat * xcursor_theme $cursor_theme $cursor_size
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
-output DP-9 {
-       scale 2
-}
-
-output DP-10 {
-       scale 2
-}
 
 # home office
 output DP-5 {
@@ -116,11 +109,11 @@ output DP-4 {
 }
 
 # office
-output DP-6 {
+output DP-8 {
        scale 2
 }
 
-output DP-7 {
+output DP-9 {
        scale 2
 }
 #
