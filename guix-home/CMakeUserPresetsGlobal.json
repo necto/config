@@ -72,10 +72,20 @@
         "LLVM_ENABLE_DUMP": true,
         "LLVM_TARGETS_TO_BUILD": "X86",
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/../llvm-install",
-        "LLVM_ENABLE_PROJECTS": "clang;clang-tools-extra;lld",
+        "LLVM_ENABLE_PROJECTS": "clang",
         "CMAKE_CXX_STANDARD": "17",
         "LLVM_USE_LINKER": "lld",
-        "CLANG_DEFAULT_LINKER": "lld"
+        "CLANG_DEFAULT_LINKER": "lld",
+        "LLVM_APPEND_VC_REV": false
+      }
+    },
+    {
+      "name": "llvm-debug",
+      "inherits": "llvm-asserts",
+      "binaryDir": "../build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "LLVM_ENABLE_ASSERTIONS": true
       }
     }
   ]
