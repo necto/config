@@ -1,0 +1,82 @@
+{
+  "version": 4,
+  "configurePresets": [
+    {
+      "name": "debug",
+      "generator": "Ninja",
+      "binaryDir": "build/debug",
+      "cacheVariables": {
+        "USE_CCACHE": true,
+        "BUILD_SHARED_LIBS": true,
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
+        "USE_ASSERTIONS": true,
+        "USE_LINKER": "lld",
+        "USE_PCH": false,
+        "LLVM_ENABLE_ZLIB": false
+
+      }
+    },
+    {
+      "name": "asserts",
+      "generator": "Ninja",
+      "binaryDir": "build/asserts",
+      "cacheVariables": {
+        "USE_CCACHE": true,
+        "BUILD_SHARED_LIBS": true,
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
+        "USE_ASSERTIONS": true,
+        "USE_LINKER": "lld",
+        "LLVM_ENABLE_ZLIB": false
+      }
+    },
+    {
+      "name": "stlink",
+      "generator": "Ninja",
+      "binaryDir": "build/stlink",
+      "cacheVariables": {
+        "USE_CCACHE": true,
+        "BUILD_SHARED_LIBS": false,
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
+        "USE_ASSERTIONS": true,
+        "USE_LINKER": "lld",
+        "USE_PCH": false,
+        "LLVM_ENABLE_ZLIB": false
+      }
+    },
+    {
+      "name": "llvm-asserts",
+      "generator": "Ninja",
+      "binaryDir": "build/asserts",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER_LAUNCHER": "ccache",
+        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+        "LLVM_Z3_INSTALL_DIR": "${sourceDir}/../llvm-install",
+        "LLVM_ENABLE_Z3_SOLVER": true,
+        "LLVM_ENABLE_TERMINFO": false,
+        "LLVM_ENABLE_ZSTD": false,
+        "LLVM_ENABLE_ZLIB": false,
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "LLVM_ENABLE_ASSERTIONS": true,
+        "LLVM_ENABLE_DUMP": true,
+        "LLVM_TARGETS_TO_BUILD": "X86",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/../llvm-install",
+        "LLVM_ENABLE_PROJECTS": "clang;clang-tools-extra;lld",
+        "CMAKE_CXX_STANDARD": "17",
+        "LLVM_USE_LINKER": "lld",
+        "CLANG_DEFAULT_LINKER": "lld"
+      }
+    }
+  ]
+}

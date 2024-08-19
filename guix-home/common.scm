@@ -161,6 +161,11 @@
                           (list `("bash-command-timer.sh"
                                   ,(local-file "bash-command-timer.sh"))))
 
+          (simple-service 'cmake-presets
+                          home-xdg-configuration-files-service-type
+                          (list `("CMakeUserPresetsGlobal.json"
+                                  ,(local-file "CMakeUserPresetsGlobal.json"))))
+
           (simple-service 'cursor-config
                           home-xdg-configuration-files-service-type
                           (list `("gtk-2.0/gtkrc" ,(plain-file "gtkrc" (string-append "gtk-cursor-theme-size=" %cursor-size "\ngtk-cursor-theme-name=\"" %cursor-theme "\"\n")))
