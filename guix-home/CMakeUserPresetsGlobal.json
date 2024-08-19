@@ -58,7 +58,7 @@
     {
       "name": "llvm-asserts",
       "generator": "Ninja",
-      "binaryDir": "build/asserts",
+      "binaryDir": "../build/asserts",
       "cacheVariables": {
         "CMAKE_C_COMPILER_LAUNCHER": "ccache",
         "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
