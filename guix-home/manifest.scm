@@ -33,8 +33,9 @@
 
 ;;; Not installing gcc-toolchain on purpose to avoid conflicts with clang-toolchain
 (packages->manifest
-  (list clang-toolchain-with-lld-18
-        (make-lld-wrapper lld-18)
+  (list
+        (specification->package "asciinema")
+        clang-toolchain-with-lld-18
         (specification->package "cmake")
         (specification->package "firefox")
         (specification->package "fzf")
@@ -48,6 +49,7 @@
         (specification->package "htop")
         (specification->package "kcachegrind")
         (specification->package "libunwind")
+        (make-lld-wrapper lld-18)
         (specification->package "moreutils")
         (specification->package "ncdu") ;; Disk usage analyzer
         (specification->package "ninja")
@@ -57,6 +59,5 @@
         (specification->package "perf-tools")
         (specification->package "poetry")
         (specification->package "python")
-        (specification->package "python-lit")
         (specification->package "python-lsp-server")
         (specification->package "telegram-desktop")))
