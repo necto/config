@@ -4,7 +4,6 @@
 
 PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] '
 
-#export PATH=/opt/mpich2/bin:$PATH
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -74,16 +73,8 @@ else
     trap 'before_every_command' DEBUG
 fi
 
-# Use the latest version of GHC and cabal by default
-export PATH=/opt/ghc/bin:$PATH
-export PATH=/opt/cabal/bin:$PATH
-
-# Use cabal-installed binaries (mostly pandoc and pandoc-crossref)
-
 export PATH=~/.local/bin:$PATH
-export PATH=~/config/xmonad/light:$PATH
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.guix-profile/etc/bash_completion.d/fzf ] && source ~/.guix-profile/etc/bash_completion.d/fzf
 
 export PATH="$HOME/.config/emacs/bin:$PATH"
