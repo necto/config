@@ -34,6 +34,7 @@
         "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
         "USE_ASSERTIONS": true,
         "USE_LINKER": "lld",
+        "USE_PCH": false,
         "LLVM_ENABLE_ZLIB": false
       }
     },
