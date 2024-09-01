@@ -108,6 +108,10 @@ output DP-4 {
        scale 1.7
 }
 
+output DP-10 {
+       scale 1.7
+}
+
 output DP-11 {
        scale 1.7
 }
