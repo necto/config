@@ -73,15 +73,15 @@
 (define %guix-config-dir
   (dirname (current-filename)))
 
-(define %bash-profile-file
+(define (bash-profile-file %extra-path)
   (plain-file
    "bash-profile"
    (string-append
     "\n" ;; Use guix as the package manager
     "GUIX_PROFILE=\"" %home "/.guix-profile\"\n"
     "source \"$GUIX_PROFILE/etc/profile\" \n"
-    "\n" ;; For some reason this variable is not exported in guix-profile/etc/profile
-    "export XDG_DATA_DIRS=\"" %home "/.guix-profile/share${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS\""
+    "\n" ;; Add additional paths after the guix paths to override some binaries
+    "export PATH=\"" (string-join (append %extra-path '("$PATH")) ":") "\""
     "\n" ;; ssh agent daemon
     "eval \"$(ssh-agent -s)\"\n")))
 
@@ -146,7 +146,7 @@
                                ("e" . "emacsclient -a vim -n")))
                     (bashrc (list (local-file ".bashrc"
                                               "bashrc")))
-                    (bash-profile (list %bash-profile-file))
+                    (bash-profile (list (bash-profile-file %extra-path)))
                     (bash-logout (list (local-file
                                         ".bash_logout"
                                         "bash_logout")))))
@@ -264,11 +264,4 @@
                                      %emacs-config "/bin/doom env\n"
                                      %emacs-config "/bin/doom install\n"
                                      %emacs-config "/bin/doom sync\n"
-                                     %emacs-config "/bin/doom doctor\n")))))
-
-          (simple-service
-           'env-vars
-           home-environment-variables-service-type
-           `(;; Fix the warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-             ("GUIX_LOCPATH" . "$HOME/.guix-profile/lib/locale:$HOME/.guix-home/profile/lib/locale")
-             ("PATH" . ,(string-join (append %extra-path '("$PATH")) ":"))))))))
+                                     %emacs-config "/bin/doom doctor\n")))))))))
