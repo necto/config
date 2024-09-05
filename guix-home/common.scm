@@ -73,15 +73,10 @@
 (define %guix-config-dir
   (dirname (current-filename)))
 
-(define (bash-profile-file %extra-path)
+(define bash-profile-file
   (plain-file
    "bash-profile"
    (string-append
-    "\n" ;; Use guix as the package manager
-    "GUIX_PROFILE=\"" %home "/.guix-profile\"\n"
-    "source \"$GUIX_PROFILE/etc/profile\" \n"
-    "\n" ;; Add additional paths after the guix paths to override some binaries
-    "export PATH=\"" (string-join (append %extra-path '("$PATH")) ":") "\""
     "\n" ;; ssh agent daemon
     "eval \"$(ssh-agent -s)\"\n")))
 
@@ -146,7 +141,7 @@
                                ("e" . "emacsclient -a vim -n")))
                     (bashrc (list (local-file ".bashrc"
                                               "bashrc")))
-                    (bash-profile (list (bash-profile-file %extra-path)))
+                    (bash-profile (list bash-profile-file))
                     (bash-logout (list (local-file
                                         ".bash_logout"
                                         "bash_logout")))))
@@ -264,4 +259,8 @@
                                      %emacs-config "/bin/doom env\n"
                                      %emacs-config "/bin/doom install\n"
                                      %emacs-config "/bin/doom sync\n"
-                                     %emacs-config "/bin/doom doctor\n")))))))))
+                                     %emacs-config "/bin/doom doctor\n")))))
+          (simple-service
+           'env-vars
+           home-environment-variables-service-type
+           `(("PATH" . ,(string-join (append %extra-path '("$PATH")) ":"))))))))
