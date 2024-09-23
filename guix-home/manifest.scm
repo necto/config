@@ -62,4 +62,5 @@
         (specification->package "poetry")
         (specification->package "python")
         (specification->package "python-lsp-server")
-        (specification->package "telegram-desktop")))
+        (specification->package "telegram-desktop")
+        (specification->package "valgrind")))
