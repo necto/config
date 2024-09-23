@@ -5,6 +5,8 @@
 ;; See the "Replicating Guix" section in the manual.
 
 (use-modules (guix packages)
+             (guix profiles)
+             (gnu packages)
              (gnu packages llvm)
              (guix utils)
              (guix gexp))
@@ -32,6 +34,7 @@
   (make-clang-toolchain clang-with-lld-18 libomp-18))
 
 ;;; Not installing gcc-toolchain on purpose to avoid conflicts with clang-toolchain
+;;; Skip git package as it should be installed with guix home already
 (packages->manifest
   (list
         (specification->package "asciinema")
@@ -40,7 +43,6 @@
         (specification->package "firefox")
         (specification->package "fzf")
         (specification->package "gimp")
-        (specification->package "git")
         (specification->package "gnuplot")
         (specification->package "guile")
         (specification->package "guile-colorized")
