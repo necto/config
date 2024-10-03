@@ -199,7 +199,17 @@
               ("<tab>" . 'copilot-accept-completion)
               ("TAB" . 'copilot-accept-completion)
               ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+              ("C-<tab>" . 'copilot-accept-completion-by-word)
+              ("C-n" . 'copilot-next-completion)
+              ("C-p" . 'copilot-previous-completion))
+
+  :config
+  (add-to-list 'copilot-indentation-alist '(prog-mode 2))
+  ; emacs-lisp-mode is already present in copilot-indentation-alist,
+  ; but it is set to lisp-indent-offset, which is nil,
+  ; and setting it to non-nil makes the lisp formatting less readable
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2))
+  (add-to-list 'copilot-indentation-alist '(scheme-mode 2)))
 
 (after! copilot
   (setq copilot-idle-delay 0)
