@@ -1,3 +1,3 @@
 (load "common.scm")
 
-(home-env "professional" '("~/.sonar/bin/"))
+(home-env "professional" '("/home/arseniy/.sonar/bin/"))
