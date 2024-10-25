@@ -2,6 +2,26 @@
   "version": 4,
   "configurePresets": [
     {
+      "name": "perf",
+      "generator": "Ninja",
+      "binaryDir": "build/perf",
+      "cacheVariables": {
+        "USE_CCACHE": true,
+        "BUILD_SHARED_LIBS": false,
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "CMAKE_CXX_FLAGS": "-fno-omit-frame-pointer",
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
+        "USE_ASSERTIONS": true,
+        "USE_LINKER": "lld",
+        "USE_PCH": false,
+        "LLVM_ENABLE_ZLIB": false
+
+      }
+    },
+    {
       "name": "debug",
       "generator": "Ninja",
       "binaryDir": "build/debug",
