@@ -2,6 +2,25 @@
   "version": 4,
   "configurePresets": [
     {
+      "name": "run-stats",
+      "generator": "Ninja",
+      "binaryDir": "build/run-stats",
+      "cacheVariables": {
+        "USE_CCACHE": true,
+        "BUILD_SHARED_LIBS": false,
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "SONAR_CPP_ENABLE_STATS": true,
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
+        "USE_ASSERTIONS": false,
+        "USE_LINKER": "lld",
+        "USE_PCH": false,
+        "LLVM_ENABLE_ZLIB": false
+      }
+    },
+    {
       "name": "perf",
       "generator": "Ninja",
       "binaryDir": "build/perf",
