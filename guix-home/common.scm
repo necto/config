@@ -37,6 +37,8 @@
              (gnu packages gnome-xyz) ; for bibata-cursor-theme
 
              (gnu packages syncthing)
+
+             (gnu packages emacs-xyz) ; for emacs-telega-server
              )
 
 (define %home
@@ -115,6 +117,8 @@
                            xdg-desktop-portal-wlr ;; for screencast (screen sharing)
 
                            syncthing
+
+                           emacs-telega-server ;; telegram client for emacs, server part. emacs-telega is installed by doom emacs
 
                            home-scripts
 

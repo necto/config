@@ -220,3 +220,11 @@
 (after! frames-only-mode
   (frames-only-mode))
 
+(use-package! telega
+  :defer t
+  :custom
+  (telega-directory (expand-file-name "telega" doom-cache-dir))
+  (telega-video-player-command '(concat "mpv"
+                                        (when telega-ffplay-media-timestamp
+                                          (format " --start=%f" telega-ffplay-media-timestamp))))
+  (telega-completing-read-function completing-read-function))

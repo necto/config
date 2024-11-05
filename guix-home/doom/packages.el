@@ -86,3 +86,10 @@
   :recipe (:host github :repo "jcs-elpa/elenv"))
 
 (package! tldr)
+
+(package! telega
+  :recipe (:files (:defaults
+                   "contrib/*.el"
+                   "etc"
+                   "server"
+                   "Makefile")))
