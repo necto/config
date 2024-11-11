@@ -63,4 +63,6 @@
         (specification->package "python")
         (specification->package "python-lsp-server")
         (specification->package "telegram-desktop")
-        (specification->package "valgrind")))
+        (specification->package "valgrind")
+        (specification->package "qtwayland") ;; for crisp rendering of kcachegrind, hotspot and other Qt apps
+    ))
