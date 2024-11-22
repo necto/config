@@ -93,3 +93,5 @@
                    "etc"
                    "server"
                    "Makefile")))
+
+(package! gptel)
