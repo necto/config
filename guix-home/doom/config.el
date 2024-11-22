@@ -230,6 +230,6 @@
   (telega-completing-read-function completing-read-function))
 
 (after! gptel
-  (setq gptel-backend (gptel-make-gemini "Gemini" :key "AIzaSyDyOqd7deidlwneCklQ1eXnb7bg3D4NcF0" :stream t))
+  (setq gptel-backend (gptel-make-gemini "Gemini" :key "XXX" :stream t))
   (setq gptel-model 'gemini-1.5-flash)
   (setq gptel-default-mode 'org-mode))
