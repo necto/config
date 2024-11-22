@@ -40,6 +40,7 @@
         (specification->package "asciinema")
         clang-toolchain-with-lld-18
         (specification->package "cmake")
+        (specification->package "evince")
         (specification->package "firefox")
         (specification->package "fzf")
         (specification->package "gimp")
@@ -53,6 +54,7 @@
         (specification->package "libunwind")
         (make-lld-wrapper lld-18)
         (specification->package "moreutils")
+        (specification->package "mpv")
         (specification->package "ncdu") ;; Disk usage analyzer
         (specification->package "ninja")
         (specification->package "node")
@@ -65,4 +67,4 @@
         (specification->package "telegram-desktop")
         (specification->package "valgrind")
         (specification->package "qtwayland") ;; for crisp rendering of kcachegrind, hotspot and other Qt apps
-    ))
+        (specification->package "ungoogled-chromium-wayland")))
