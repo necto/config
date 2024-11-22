@@ -267,4 +267,9 @@
           (simple-service
            'env-vars
            home-environment-variables-service-type
-           `(("PATH" . ,(string-join (append %extra-path '("$PATH")) ":"))))))))
+           `(("PATH" . ,(string-join (append %extra-path '("$PATH")) ":"))
+             ;; Make sure apps can find the ca-certificates installed by nss-certs
+             ;; For some reason these variables need to be exported explicitly and
+             ;; it is not done automatically upon installing nss-scripts
+             ("SSL_CERT_DIR" . ,(string-append %home "/.guix-home/profile/etc/ssl/certs"))
+             ("SSL_CERT_FILE" . ,(string-append %home "/.guix-home/profile/etc/ssl/certs/ca-certificates.crt"))))))))
