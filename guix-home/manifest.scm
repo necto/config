@@ -66,5 +66,6 @@
         (specification->package "python-lsp-server")
         (specification->package "telegram-desktop")
         (specification->package "valgrind")
+        (specification->package "wdisplays") ;; arandr replacement, graphical arrangement of multiple screens
         (specification->package "qtwayland") ;; for crisp rendering of kcachegrind, hotspot and other Qt apps
         (specification->package "ungoogled-chromium-wayland")))
