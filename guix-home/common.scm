@@ -268,6 +268,8 @@
            'env-vars
            home-environment-variables-service-type
            `(("PATH" . ,(string-join (append %extra-path '("$PATH")) ":"))
+             ;; Fix the warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+             ("GUIX_LOCPATH" . "$HOME/.guix-profile/lib/locale:$HOME/.guix-home/profile/lib/locale")
              ;; Make sure apps can find the ca-certificates installed by nss-certs
              ;; For some reason these variables need to be exported explicitly and
              ;; it is not done automatically upon installing nss-scripts
