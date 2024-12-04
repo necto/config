@@ -1,0 +1,2 @@
+CompileFlags:
+  Add: ["-isystem/home/arseniy/.guix-profile/lib/clang/18/include/"]

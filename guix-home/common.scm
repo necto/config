@@ -155,6 +155,11 @@
                           (list `("mimeapps.list"
                                   ,(local-file (string-append %guix-config-dir "/" %custom-dir "/mimeapps.list")))))
 
+          (simple-service 'clangd-config
+                          home-xdg-configuration-files-service-type
+                          (list `("clangd/config.yaml"
+                                  ,(local-file (string-append %guix-config-dir "/" %custom-dir "/clangd/config.yaml")))))
+
           (simple-service 'bash-timer
                           home-xdg-configuration-files-service-type
                           (list `("bash-command-timer.sh"

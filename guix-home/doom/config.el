@@ -181,7 +181,7 @@
 (after! lsp-mode
   (setq lsp-headerline-breadcrumb-enable t)
   (setq lsp-headerline-breadcrumb-segments '(symbols))
-  (setq lsp-log-io t))
+  (setq lsp-log-io nil))
 
 (after! lsp-sonarlint
   (setq lsp-sonarlint-auto-download t
