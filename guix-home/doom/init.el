@@ -113,7 +113,7 @@
        org               ; organize your plain life in plain text
        (python +lsp +tree-sitter)            ; beautiful is better than ugly
        ;;rest              ; Emacs as a REST client
-       ;;(rust +lsp)       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (rust +lsp)       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        (scheme +guile)   ; a fully conniving family of lisps
        sh                ; she sells {ba,z,fi}sh shells on the C xor

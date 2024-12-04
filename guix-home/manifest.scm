@@ -66,6 +66,7 @@
         (specification->package "poetry")
         (specification->package "python")
         (specification->package "python-lsp-server")
+        (specification->package "rust-analyzer")
         (specification->package "telegram-desktop")
         (specification->package "valgrind")
         (specification->package "wdisplays") ;; arandr replacement, graphical arrangement of multiple screens
