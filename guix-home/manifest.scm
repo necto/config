@@ -24,6 +24,8 @@
 ;;; it has libraries listed, which is useful when compiling our work project
 ;;; since it injects the home-built standard library to the CMAKE_CXX_FLAGS
 ;;; which is expanded in the beginning of a compiler invocation.
+;;; Hold off on using clang-19 as it is not yet supported by the work project z3
+;;; contains a bug in template code that breaks clang-19 compilation.
 (define clang-with-lld-18
   (package
     (inherit (package-with-configure-flags clang-18 #~(list "-DCLANG_DEFAULT_LINKER=lld")))
