@@ -127,6 +127,14 @@
         "CMAKE_BUILD_TYPE": "Debug",
         "LLVM_ENABLE_ASSERTIONS": true
       }
+    },
+    {
+      "name": "z3",
+      "generator": "Ninja",
+      "Z3_BUILD_LIBZ3_SHARED": true,
+      "CMAKE_BUILD_TYPE": "Release",
+      "CMAKE_INSTALL_PREFIX": "../llvm-install",
+      "CMAKE_CXX_FLAGS": "-nostdinc++ -isystem ${sourceDir}/../llvm-install/include/c++/v1 -Wno-unused-command-line-argument -nostdlib++ -Wl,${PWD}/../llvm-install/lib/libc++.a"
     }
   ]
 }
