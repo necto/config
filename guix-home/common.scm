@@ -28,7 +28,7 @@
              (gnu packages guile-xyz)
              (gnu packages package-management)
 
-             (gnu packages wm) ; for waybar
+             (gnu packages wm) ; for waybar, kanshi
              (gnu packages xdisorg) ; for gammastep, fuzzel
              (gnu packages image) ; for slurp
              (gnu packages terminals) ; for foot
@@ -105,6 +105,7 @@
                            swaybg
                            swayidle ; lock and suspend on inactivity or lid close
                            waybar
+                           kanshi ;; dynamic display configuration
                            ;; swaylock -- can't install as a user, it doesn't collaborate with pam_authenticate
                            gammastep ;; control screen color temperature according to time of the day
                            grimshot ;; take screenshots
@@ -214,6 +215,7 @@
           (simple-service 'sway-config
                           home-xdg-configuration-files-service-type
                           (list `("sway/config" ,(local-file "sway/config"))
+                                `("sway/kanshi.config" ,(local-file "sway/kanshi.config"))
                                 `("sway/resources" ,(local-file "sway/resources" #:recursive? #t))))
 
           (simple-service 'foot-config
