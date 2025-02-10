@@ -31,7 +31,7 @@
         "CMAKE_C_COMPILER": "clang",
         "CMAKE_CXX_COMPILER": "clang++",
         "CMAKE_EXPORT_COMPILE_COMMANDS": true,
-        "CMAKE_CXX_FLAGS": "-fno-omit-frame-pointer",
+        "CMAKE_CXX_FLAGS": "-fno-omit-frame-pointer -pg",
         "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
         "USE_ASSERTIONS": true,
         "USE_LINKER": "lld",
@@ -126,6 +126,14 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "LLVM_ENABLE_ASSERTIONS": true
+      }
+    },
+    {
+      "name": "clang-tidy",
+      "inherits": "llvm-asserts",
+      "binaryDir": "../build/clang-tidy",
+      "cacheVariables": {
+        "LLVM_ENABLE_PROJECTS": "clang;clang-tools-extra"
       }
     },
     {
