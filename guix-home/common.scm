@@ -215,7 +215,8 @@
           (simple-service 'sway-config
                           home-xdg-configuration-files-service-type
                           (list `("sway/config" ,(local-file "sway/config"))
-                                `("sway/kanshi.config" ,(local-file "sway/kanshi.config"))
+                                `("sway/kanshi.config"
+                                  ,(local-file (string-append %guix-config-dir "/" %custom-dir "/kanshi.config")))
                                 `("sway/resources" ,(local-file "sway/resources" #:recursive? #t))))
 
           (simple-service 'foot-config
