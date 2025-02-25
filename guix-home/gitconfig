@@ -29,6 +29,8 @@
     defaultBranch = main
 [core]
     pager = delta
+    fsmonitor = true
+    untrackedCache = true
 [branch]
     sort = -committerdate
 [column]
