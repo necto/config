@@ -8,6 +8,8 @@
 [push]
     default = simple
     autoSetupRemote = true
+[pull]
+    rebase = true
 [alias]
     lol = log --graph --oneline --decorate
     pandiff = difftool -t pandiff
