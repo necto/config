@@ -6,7 +6,8 @@
 [url "git@github.com:"]
     insteadOf = gh:
 [push]
-    default = matching
+    default = simple
+    autoSetupRemote = true
 [alias]
     lol = log --graph --oneline --decorate
     pandiff = difftool -t pandiff
@@ -26,6 +27,12 @@
     defaultBranch = main
 [core]
     pager = delta
+[branch]
+    sort = -committerdate
+[column]
+    ui = auto
+[diff]
+    algorithm = histogram
 
 [interactive]
     diffFilter = delta --color-only
