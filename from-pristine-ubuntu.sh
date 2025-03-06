@@ -2,8 +2,10 @@
 # This is the entry point of the bootstrapping process.
 # It installs the necessary software and workarounds and passes over to guix home.
 # To lunch it, it is enough to fetch just the script file and run it:
-# wget https://raw.githubusercontent.com/necto/config/master/from-pristine-ubuntu.sh
-# bash from-pristine-ubuntu.sh
+#   wget https://raw.githubusercontent.com/necto/config/master/from-pristine-ubuntu.sh
+#   bash from-pristine-ubuntu.sh personal
+# or
+#   bash from-pristine-ubuntu.sh professional
 set -xeuo pipefail
 
 if [ "$#" -eq 0 ]; then
