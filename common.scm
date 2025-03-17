@@ -189,15 +189,6 @@
                           home-xdg-configuration-files-service-type
                           (list `("fuzzel/fuzzel.ini" ,(local-file "fuzzel/fuzzel.ini"))))
 
-          (simple-service 'xmonad-config
-                          home-xdg-configuration-files-service-type
-                          ;; FIXME: xmonad expects the config dir to be writable
-                          ;; to be able to compile itself there. this links the
-                          ;; .config/xmonad to /gnu/store read-only, so it fails when
-                          ;; starting xmonad.
-                          ;; The problem is fixed in a later xmonad version (0.17)
-                          (list `("xmonad" ,(local-file "xmonad" #:recursive? #t))))
-
           (simple-service 'guile-config
                           home-files-service-type
                           ;; Guile seems to not support XDG_CONFIG stuff
