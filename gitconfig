@@ -51,3 +51,11 @@
 
 [diff]
     colorMoved = default
+
+[sendemail]
+    smtpserver = smtp.gmail.com
+    smtpuser = necto.ne@gmail.com
+    smtpencryption = tls
+    smtpserverport = 587
+    smtphelo =
+    smtpdomain =
