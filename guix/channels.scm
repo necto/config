@@ -1,4 +1,8 @@
 (cons* (channel
+        (name 'guix-azaostro)
+        (url "https://github.com/necto/guix-azaostro")
+        (branch "main"))
+       (channel
         (name 'nonguix)
         (url "https://gitlab.com/nonguix/nonguix")
         ;; Enable signature verification:

@@ -11,36 +11,12 @@
              (guix utils)
              (guix gexp))
 
-(define (package-with-configure-flags p flags)
-  "Return P with FLAGS as additional 'configure' flags."
-  (package/inherit p
-    (arguments
-     (substitute-keyword-arguments (package-arguments p)
-       ((#:configure-flags original-flags #~(list))
-        #~(append #$original-flags #$flags))))))
-
-;;; Use LLD as the default linker instead of BFD used by clang-18.
-;;; LLD has the advantage of being insensitive to the order in which
-;;; it has libraries listed, which is useful when compiling our work project
-;;; since it injects the home-built standard library to the CMAKE_CXX_FLAGS
-;;; which is expanded in the beginning of a compiler invocation.
-;;; Hold off on using clang-19 as it is not yet supported by the work project z3
-;;; contains a bug in template code that breaks clang-19 compilation.
-(define clang-with-lld-18
-  (package
-    (inherit (package-with-configure-flags clang-18 #~(list "-DCLANG_DEFAULT_LINKER=lld")))
-    (inputs (modify-inputs (package-inputs clang-18) (replace "gcc" "gcc-13")))
-    (name "clang-with-lld")))
-
-(define clang-toolchain-with-lld-18
-  (make-clang-toolchain clang-with-lld-18 libomp-18))
-
 ;;; Not installing gcc-toolchain on purpose to avoid conflicts with clang-toolchain
 ;;; Skip git package as it should be installed with guix home already
 (packages->manifest
   (list
         (specification->package "asciinema")
-        clang-toolchain-with-lld-18
+        (specification->package "clang-with-lld-toolchain")
         (specification->package "cmake")
         (specification->package "cloc")
         (specification->package "curl")
@@ -76,6 +52,8 @@
         (specification->package "python")
         (specification->package "python-lsp-server")
         (specification->package "rust-analyzer")
+        (specification->package "rust-cargo")
+        (specification->package "rust")
         (specification->package "rbw")
         (specification->package "telegram-desktop")
         (specification->package "valgrind")
