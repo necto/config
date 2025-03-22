@@ -56,6 +56,26 @@
 (define %cursor-size
   "24")
 
+(define (glib2-settings-keyfile cursor-size cursor-theme)
+  (plain-file
+   "glib-2.0-settings"
+   (string-append "[org/gnome/desktop/interface]\ncursor-size=" cursor-size "\n"
+                  "cursor-theme=\"" cursor-theme "\"\n"
+                  "\n"
+                  "[org/gtk/settings/file-chooser]\n"
+                  "window-position=(26, 23)\n"
+                  "window-size=(1231, 902)\n"
+                  "date-format='regular'\n"
+                  "location-mode='path-bar'\n"
+                  "show-hidden=false\n"
+                  "show-size-column=true\n"
+                  "show-type-column=true\n"
+                  "sidebar-width=163\n"
+                  "sort-column='name'\n"
+                  "sort-directories-first=false\n"
+                  "sort-order='ascending'\n"
+                  "type-format='category'\n")))
+
 (define home-scripts
   (package
    (name "home-scripts")
@@ -179,7 +199,7 @@
                                 `("settings.ini" ,(plain-file "settings.ini" (string-append "gtk-cursor-theme-size=" %cursor-size "\ngtk-cursor-theme-name=\"" %cursor-theme "\"\n")))
                                 `("shell/profile" ,(plain-file "shell-profile" (string-append "export XCURSOR_SIZE=\"" %cursor-size "\"\nexport XCURSOR_THEME=\"" %cursor-theme "\"\n")))
                                 `("x11/xresources" ,(plain-file "Xresources" (string-append "Xcursor.size:" %cursor-size "\nXcursor.theme: " %cursor-theme "\n")))
-                                `("glib-2.0/settings/keyfile" ,(plain-file "glib-2.0-settings" (string-append "[org/gnome/desktop/interface]\ncursor-size=" %cursor-size "\ncursor-theme=\"" %cursor-theme "\"\n")))
+                                `("glib-2.0/settings/keyfile" ,(glib2-settings-keyfile %cursor-size %cursor-theme))
                                 `("sway/cursor.theme" ,(plain-file "sway-cursor-theme" (string-append "set $cursor_size " %cursor-size "\nset $cursor_theme " %cursor-theme "\n")))))
 
           (simple-service 'git-config
