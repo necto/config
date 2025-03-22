@@ -39,6 +39,7 @@
              (gnu packages syncthing)
 
              (gnu packages emacs-xyz) ; for emacs-telega-server
+             (azaostro home services)
              )
 
 (define %home
@@ -246,13 +247,9 @@
           ;; It can not be part of it because it takes long time, and can't be cached
           ;; - it must be done in the user home directory (probably).
           ;; So after guix home reconfigure, you should invoke the produced install.sh script
-          (simple-service 'doom-config
+          (simple-service 'doom-install-script
                           home-xdg-configuration-files-service-type
-                          (list `("doom/init.el" ,(local-file "doom/init.el"))
-                                `("doom/config.el" ,(local-file "doom/config.el"))
-                                `("doom/packages.el" ,(local-file "doom/packages.el"))
-                                `("doom/custom.el" ,(local-file "doom/custom.el"))
-                                `("doom/install.sh"
+                          (list `("doom-install.sh"
                                   ,(plain-file
                                     "doom-install.sh"
                                     (string-append
@@ -263,6 +260,11 @@
                                      %emacs-config "/bin/doom install\n"
                                      %emacs-config "/bin/doom sync\n"
                                      %emacs-config "/bin/doom doctor\n")))))
+
+          (simple-service 'doom-config
+                          home-direct-symlink-service-type
+                          (path-to-local "doom"))
+
           (simple-service
            'env-vars
            home-environment-variables-service-type
