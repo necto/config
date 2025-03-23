@@ -75,7 +75,7 @@ fi
 
 export PATH=~/.local/bin:$PATH
 
-[ -f ~/.guix-profile/etc/bash_completion.d/fzf ] && source ~/.guix-profile/etc/bash_completion.d/fzf
+eval "$(fzf --bash)"
 
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
