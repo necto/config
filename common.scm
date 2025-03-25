@@ -101,7 +101,9 @@
    "bash-profile"
    (string-append
     "\n" ;; ssh agent daemon
-    "eval \"$(ssh-agent -s)\"\n")))
+    "eval \"$(ssh-agent -s)\"\n"
+    "\n" ;; set FZF completions and shortcuts, e.g. Ctrl-R
+    "eval \"$(fzf --bash)\"\n")))
 
 (define (home-env %custom-dir %extra-path)
   (home-environment

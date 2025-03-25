@@ -75,7 +75,10 @@ fi
 
 export PATH=~/.local/bin:$PATH
 
-eval "$(fzf --bash)"
+# this is too slow to eval on every bash start
+# (i.e., every new terminal window)
+# moved to bash_profile to run once per login
+# eval "$(fzf --bash)"
 
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
