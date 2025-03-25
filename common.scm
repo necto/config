@@ -103,7 +103,7 @@
     "\n" ;; ssh agent daemon
     "eval \"$(ssh-agent -s)\"\n"
     "\n" ;; set FZF completions and shortcuts, e.g. Ctrl-R
-    "eval \"$(fzf --bash)\"\n")))
+    "if which fzf >/dev/null 2>&1 ; then eval \"$(fzf --bash)\"; fi\n")))
 
 (define (home-env %custom-dir %extra-path)
   (home-environment
