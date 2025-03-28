@@ -57,8 +57,10 @@
                  :build (:not compile native-compile)))
 
 (package! copilot
-  :recipe (:host github :repo "zerolfx/copilot.el"
-                 :files ("*.el" "dist")))
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
+
+(package! copilot-chat
+  :recipe (:host github :repo "chep/copilot-chat.el" :files ("*.el")))
 
 (package! lsp-mode
   :type 'local ;; Make sure doom doesn't install its pinned version
