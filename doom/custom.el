@@ -58,7 +58,13 @@
           (add-to-list 'tempel-path guix-tempel-snippets))))
      (eval setq-local guix-directory
       (locate-dominating-file default-directory ".dir-locals.el"))
-     (eval add-to-list 'completion-ignored-extensions ".go"))))
+     (eval add-to-list 'completion-ignored-extensions ".go")))
+ '(warning-suppress-types
+   '((copilot copilot-no-mode-indent)
+     (copilot copilot-no-mode-ident)
+     (copilot copilot-exceeds-max-char)
+     (defvaralias)
+     (lexical-binding))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
