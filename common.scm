@@ -101,9 +101,7 @@
    "bash-profile"
    (string-append
     "\n" ;; ssh agent daemon
-    "eval \"$(ssh-agent -s)\"\n"
-    "\n" ;; set FZF completions and shortcuts, e.g. Ctrl-R
-    "if which fzf >/dev/null 2>&1 ; then eval \"$(fzf --bash)\"; fi\n")))
+    "eval \"$(ssh-agent -s)\"\n")))
 
 (define (home-env %custom-dir %extra-path)
   (home-environment
@@ -168,7 +166,9 @@
                                ("cat" . "bat")
                                ("e" . "emacsclient -a vim -n")))
                     (bashrc (list (local-file ".bashrc"
-                                              "bashrc")))
+                                              "bashrc")
+                                  (local-file "fzf.key-bindings.bash"
+                                              "fzf.key-bindings.bash")))
                     (bash-profile (list bash-profile-file))
                     (bash-logout (list (local-file
                                         ".bash_logout"
