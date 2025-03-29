@@ -104,3 +104,16 @@ function tldr() {
 }
 
 export "BAT_THEME=base16-256"
+
+## Command history
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+# Erase duplicates in the history on every command
+export "HISTCONTROL=erasedups:ignorespace"
+# Number of cached commands. Once it overflows, the old commands are forgotten
+export "HISTSIZE=1000"
+# Number of lines in the history file saved there once the shell exits
+export "HISTFILESIZE=1000000"
+# one dot-file less in the home directory
+export "HISTFILE=$HOME/.cache/bash_history"
