@@ -1,6 +1,6 @@
 * {
 	border: none;
-	border-radius: 0;
+	border-radius: 4px;
 	font-family: "monospace";
 	font-size: 9px;
 	min-height: 0;
@@ -65,7 +65,6 @@ window#waybar {
 #clock {
     background-color: #00446b;
     color: #f2f2a2;
-    border-radius: 3px;
 }
 
 #battery {
@@ -88,6 +87,7 @@ window#waybar {
 	background-color: #ff8700;
 	color: #1b1d1e;
 }
+
 #battery.critical:not(.charging) {
     color: white;
     animation-name: blink;
@@ -98,9 +98,12 @@ window#waybar {
 }
 
 #cpu {
+    background: #2ecc71;
+    color: #000000;
 }
 
 #memory {
+    background: #331340;
 }
 
 #network {
@@ -108,13 +111,18 @@ window#waybar {
 }
 
 #network.disconnected {
-    background: #f53c3c;
+    background: #662d07;
 }
 
 #pulseaudio {
+    background: #471f04;
+    border: 2px solid #e6300b;
 }
 
 #pulseaudio.muted {
+    border: 2px solid #bd530d;
+    background: #261103;
+    color: #d1c2b8;
 }
 
 #custom-spotify {
@@ -129,5 +137,4 @@ window#waybar {
     color: rgb(102, 220, 105);
     background: #1b1d1e;
     border: 2px dotted #00afd7;
-    border-radius: 5px;
 }
