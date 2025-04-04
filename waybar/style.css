@@ -98,12 +98,11 @@ window#waybar {
 }
 
 #cpu {
-    background: #2ecc71;
-    color: #000000;
+    background: #0f2409;
 }
 
 #memory {
-    background: #331340;
+    background: #4f3a01;
 }
 
 #memory.warning {
