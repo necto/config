@@ -106,6 +106,15 @@ window#waybar {
     background: #331340;
 }
 
+#memory.warning {
+    border: 2px solid red;
+}
+
+#memory.critical {
+    background: crimson;
+    border: 3px solid orange;
+}
+
 #network {
     min-width: 12em; /*prevent modules on the left from jumping on every change of the number of digits */
 }

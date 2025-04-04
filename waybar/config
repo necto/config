@@ -56,7 +56,7 @@
    // Other screens are normally longer than the laptop screen, so we can show more CPU bars
    "cpu": {
      "interval": 1,
-     "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13} {usage:>2}% ",
+     "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15} {usage:>2}% ",
      "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
    },
  },
