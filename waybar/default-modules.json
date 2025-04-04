@@ -5,11 +5,12 @@
   //   "all-outputs": true,
   //   "format": "{name}: {icon}",
   //   "format-icons": {
-  //     "1": "",
+  //     "1": "",
   //     "2": "",
-  //     "3": "",
-  //     "4": "",
-  //     "5": "",
+  //     "3": "",
+  //     "4": "",
+  //     "6": "",
+  //     "9": "",
   //     "urgent": "",
   //     "focused": "",
   //     "default": ""
@@ -74,7 +75,8 @@
       "default": ["🔈", "🔉", "🔊"]
     },
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-    "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+    "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+    "on-click-middle": "pavucontrol"
   },
   "battery": {
     "states": {
