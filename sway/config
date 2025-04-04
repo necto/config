@@ -59,7 +59,7 @@ exec $screendimmer
 # launch network manager with a tray icon
 exec nm-applet
 
-exec kanshi -c ~/.config/sway/kanshi.config
+exec_always pkill kanshi; kanshi -c ~/.config/sway/kanshi.config
 
 # launch file sync daemon
 # listens to localhost:8384
