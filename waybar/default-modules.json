@@ -69,8 +69,8 @@
       "car": "",
       "default": ["🔈", "🔉", "🔊"]
     },
-    "on-click": "ponymix -N -t sink toggle",
-    "on-click-right": "ponymix -N -t source toggle"
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
   },
   "battery": {
     "states": {
