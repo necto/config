@@ -108,6 +108,10 @@
                                 "--clang-tidy"
                                 "--completion-style=detailed"))
 
+;; Enable strict code formatter
+(setq lsp-pylsp-plugins-black-enabled t)
+(setq lsp-pylsp-plugins-flake8-max-line-length 88) ;; for compatibility with black
+
 (after! lsp-clangd (set-lsp-priority! 'clangd 2)
   (setq lsp-headerline-breadcrumb-enable t))
 
