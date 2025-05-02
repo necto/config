@@ -97,3 +97,5 @@
                    "Makefile")))
 
 (package! gptel)
+
+(package! csv-mode)
