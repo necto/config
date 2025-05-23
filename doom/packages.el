@@ -99,3 +99,5 @@
 (package! gptel)
 
 (package! csv-mode)
+
+(package! cov) ; display test code coverage in emacs

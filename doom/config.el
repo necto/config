@@ -237,3 +237,6 @@
   (setq gptel-backend (gptel-make-gemini "Gemini" :key "XXX" :stream t))
   (setq gptel-model 'gemini-1.5-flash)
   (setq gptel-default-mode 'org-mode))
+
+(after! cov
+  (setq cov-coverage-mode t))
