@@ -316,3 +316,8 @@ include /etc/sway/config.d/*
     bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
     bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
     bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+#
+# Startup setup
+#
+bindsym $mod+Shift+s workspace 6; exec slackw; workspace 3; exec foot --working-directory=/home/arseniy/proj/sonar-cpp; workspace 2; exec islandw; workspace 1; exec emacs

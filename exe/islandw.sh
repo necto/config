@@ -3,4 +3,4 @@
 # --enable-features=WaylandWindowDecorations seems to be unnecessary
 # Slack seems to ignore the ~/.config/electron25-flags.conf file
 # so passing it as in a cmdline instead
-island-browser --ozone-platform-hint=auto
+island-browser --ozone-platform-hint=auto "$@"
