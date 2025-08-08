@@ -135,6 +135,7 @@
       "binaryDir": "../build/debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
+        "LLVM_ENABLE_ZLIB": false,
         "LLVM_ENABLE_ASSERTIONS": true
       }
     },
