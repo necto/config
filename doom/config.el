@@ -240,3 +240,6 @@
 
 (after! cov
   (setq cov-coverage-mode t))
+
+;; Start calendar on Monday
+(setq calendar-week-start-day 1)
