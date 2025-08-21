@@ -36,6 +36,8 @@
              (gnu packages freedesktop) ; for xdg-desktop-portal-wlr
              (gnu packages gnome-xyz) ; for bibata-cursor-theme
 
+             (gnu packages nss) ; for nss-certs
+
              (gnu packages syncthing)
 
              (gnu packages emacs-xyz) ; for emacs-telega-server
