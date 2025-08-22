@@ -17,7 +17,7 @@
               "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))
       (channel
         (name 'guix)
-        (url "https://codeberg.org/guix/guix.git")
+        (url "https://git.guix.gnu.org/git/guix.git")
         (branch "master")
         (commit
           "28bc0e870b4d48b8e3e773382bb0e999df2e3611")
