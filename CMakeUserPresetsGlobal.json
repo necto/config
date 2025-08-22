@@ -68,7 +68,7 @@
         "BUILD_SHARED_LIBS": true,
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_C_COMPILER": "clang",
-        "ENABLE_WERROR": true,
+        "ENABLE_WERROR": false,
         "CMAKE_CXX_COMPILER": "clang++",
         "CMAKE_EXPORT_COMPILE_COMMANDS": true,
         "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
