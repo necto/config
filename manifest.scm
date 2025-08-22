@@ -33,13 +33,13 @@
         (specification->package "guile-readline")
         (specification->package "gzip")
         (specification->package "help2man")
-        (specification->package "hotspot")
+        ; (specification->package "hotspot") ;; temporarily remove because it fails to compile on 18.08.2025
         (specification->package "htop")
         (specification->package "imagemagick")
         (specification->package "kcachegrind")
         (specification->package "less")
         (specification->package "libunwind")
-        (make-lld-wrapper lld-18)
+        (make-lld-wrapper lld-20)
         (specification->package "moreutils")
         (specification->package "mpv")
         (specification->package "ncdu") ;; Disk usage analyzer
@@ -59,5 +59,5 @@
         (specification->package "valgrind")
         (specification->package "wdisplays") ;; arandr replacement, graphical arrangement of multiple screens
         (specification->package "qtwayland") ;; for crisp rendering of kcachegrind, hotspot and other Qt apps
-        (specification->package "ungoogled-chromium-wayland")
+        ; (specification->package "ungoogled-chromium-wayland") ;; temporarily remove because it fails to compile on 19.08.2025
         (specification->package "xdot")))
