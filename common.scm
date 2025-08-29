@@ -31,7 +31,7 @@
              (gnu packages wm) ; for waybar, kanshi
              (gnu packages xdisorg) ; for gammastep, fuzzel
              (gnu packages image) ; for slurp
-             (gnu packages terminals) ; for foot
+             (gnu packages terminals) ; for foot, fzf
              (gnu packages pulseaudio) ; for pactl
              (gnu packages freedesktop) ; for xdg-desktop-portal-wlr
              (gnu packages gnome-xyz) ; for bibata-cursor-theme
@@ -134,6 +134,7 @@
                            grimshot ;; take screenshots
                            slurp ;; select area for a screenshot
                            foot ;; sway default terminal emulator
+                           fzf ;; command-line fuzzy finder
                            fuzzel ;; keyboard-centered app launcher
                            pulseaudio ;; for pactl
                            pavucontrol
