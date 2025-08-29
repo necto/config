@@ -115,7 +115,7 @@
         "LLVM_ENABLE_Z3_SOLVER": true,
         "LLVM_ENABLE_TERMINFO": false,
         "LLVM_ENABLE_ZSTD": true,
-        "LLVM_ENABLE_ZLIB": "FORCE_ON",
+        "LLVM_ENABLE_ZLIB": false,
         "LLVM_USE_STATIC_ZSTD": true,
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "LLVM_ENABLE_ASSERTIONS": true,
