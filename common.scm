@@ -258,10 +258,6 @@
                                     "sudo cp " (file-append xdg-desktop-portal-wlr "/share/xdg-desktop-portal/portals/wlr.portal") " /usr/share/xdg-desktop-portal/portals/wlr.portal\n"
                                     ))))
 
-          (simple-service 'guix-config
-                          home-xdg-configuration-files-service-type
-                          (list `("guix/channels.scm" ,(local-file "guix/channels.scm"))))
-
           ;; Used by doom emacs and waybar icons
           (simple-service 'nerd-fonts
                           home-xdg-data-files-service-type

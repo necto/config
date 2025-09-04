@@ -65,11 +65,12 @@ systemctl --user mask xdg-desktop-portal-gnome
 
 # takes a long time and can take advantage of many cores
 # --fallback will make guix build the missing package from source if substitute fails
-guix pull --fallback
+guix pull --fallback --channels="$CONFIG_DIR/guix/channels.scm"
 GUIX_PROFILE="$HOME/.config/guix/current"
 . "$GUIX_PROFILE/etc/profile"
 # make sure the new guix is used
 hash -r
+guix describe --format=channels > ~/.config/guix/channels.scm
 guix pull --fallback
 
 # takes a long time and can take advantage of many cores
