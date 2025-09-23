@@ -11,53 +11,54 @@
    '("/home/necto/proj/nutri-journal/journals/" "/home/necto/.config/doom/"
      "/home/necto/.config/emacs/"))
  '(safe-local-variable-values
-   '((eval when
-      (string-equal (file-name-nondirectory buffer-file-name) "clean.csv")
-      (nutri-journal-mode))
+   '((geiser-insert-actual-lambda)
+     (eval when
+           (string-equal (file-name-nondirectory buffer-file-name) "clean.csv")
+           (nutri-journal-mode))
      (eval with-eval-after-load 'git-commit
-      (add-to-list 'git-commit-trailers "Change-Id"))
+           (add-to-list 'git-commit-trailers "Change-Id"))
      (eval progn (require 'lisp-mode)
-      (defun emacs27-lisp-fill-paragraph (&optional justify)
-        (interactive "P")
-        (or (fill-comment-paragraph justify)
-            (let
-                ((paragraph-start
-                  (concat paragraph-start
-                          "\\|\\s-*\\([(;\"]\\|\\s-:\\|`(\\|#'(\\)"))
-                 (paragraph-separate
-                  (concat paragraph-separate "\\|\\s-*\".*[,\\.]$"))
-                 (fill-column
-                  (if
-                      (and (integerp emacs-lisp-docstring-fill-column)
-                           (derived-mode-p 'emacs-lisp-mode))
-                      emacs-lisp-docstring-fill-column
-                    fill-column)))
-              (fill-paragraph justify))
-            t))
-      (setq-local fill-paragraph-function #'emacs27-lisp-fill-paragraph))
+           (defun emacs27-lisp-fill-paragraph (&optional justify)
+             (interactive "P")
+             (or (fill-comment-paragraph justify)
+                 (let
+                     ((paragraph-start
+                       (concat paragraph-start
+                               "\\|\\s-*\\([(;\"]\\|\\s-:\\|`(\\|#'(\\)"))
+                      (paragraph-separate
+                       (concat paragraph-separate "\\|\\s-*\".*[,\\.]$"))
+                      (fill-column
+                       (if
+                           (and (integerp emacs-lisp-docstring-fill-column)
+                                (derived-mode-p 'emacs-lisp-mode))
+                           emacs-lisp-docstring-fill-column
+                         fill-column)))
+                   (fill-paragraph justify))
+                 t))
+           (setq-local fill-paragraph-function #'emacs27-lisp-fill-paragraph))
      (eval modify-syntax-entry 43 "'") (eval modify-syntax-entry 36 "'")
      (eval modify-syntax-entry 126 "'") (geiser-repl-per-project-p . t)
      (eval with-eval-after-load 'yasnippet
-      (let
-          ((guix-yasnippets
-            (expand-file-name "etc/snippets/yas"
-                              (locate-dominating-file default-directory
-                                                      ".dir-locals.el"))))
-        (unless (member guix-yasnippets yas-snippet-dirs)
-          (add-to-list 'yas-snippet-dirs guix-yasnippets) (yas-reload-all))))
+           (let
+               ((guix-yasnippets
+                 (expand-file-name "etc/snippets/yas"
+                                   (locate-dominating-file default-directory
+                                                           ".dir-locals.el"))))
+             (unless (member guix-yasnippets yas-snippet-dirs)
+               (add-to-list 'yas-snippet-dirs guix-yasnippets) (yas-reload-all))))
      (eval with-eval-after-load 'tempel
-      (if (stringp tempel-path) (setq tempel-path (list tempel-path)))
-      (let
-          ((guix-tempel-snippets
-            (concat
-             (expand-file-name "etc/snippets/tempel"
-                               (locate-dominating-file default-directory
-                                                       ".dir-locals.el"))
-             "/*.eld")))
-        (unless (member guix-tempel-snippets tempel-path)
-          (add-to-list 'tempel-path guix-tempel-snippets))))
+           (if (stringp tempel-path) (setq tempel-path (list tempel-path)))
+           (let
+               ((guix-tempel-snippets
+                 (concat
+                  (expand-file-name "etc/snippets/tempel"
+                                    (locate-dominating-file default-directory
+                                                            ".dir-locals.el"))
+                  "/*.eld")))
+             (unless (member guix-tempel-snippets tempel-path)
+               (add-to-list 'tempel-path guix-tempel-snippets))))
      (eval setq-local guix-directory
-      (locate-dominating-file default-directory ".dir-locals.el"))
+           (locate-dominating-file default-directory ".dir-locals.el"))
      (eval add-to-list 'completion-ignored-extensions ".go")))
  '(warning-suppress-types
    '((copilot copilot-no-mode-indent) (copilot copilot-no-mode-ident)
