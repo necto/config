@@ -16,6 +16,8 @@
              (guix build-system copy)
              ((guix licenses) #:prefix license:)
 
+             (gnu packages admin) ; For btop
+
              (gnu packages emacs)
              (gnu packages vim)
              (gnu packages certs)
@@ -149,6 +151,7 @@
 
                            bat ;; cat with wings (syntax highlighting)
                            git-delta ;; git diff viewer
+                           btop ;; beautiful and versatile resource monitor
 
                            bibata-cursor-theme ;; this is where apps will look for cursor themes
                            )
