@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Niri
+Comment=A scrollable tiling Wayland compositor
+Exec=/usr/bin/bash -l -c $HOME/.guix-home/profile/bin/niri
+Type=Application
+

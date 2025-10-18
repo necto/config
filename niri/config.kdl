@@ -1,0 +1,138 @@
+// TODO:
+// - keybindings
+//   - [ ] switching between screens
+//   - [X] screen lock
+//   - [ ] bring up the keybindings help screen that I can see upon Mod-Shift-?
+// - [ ] keyboard layouts and the switch key
+// - [ ] kanshi
+// - [X] printscreen
+// - [X] background
+// - [X] gamma step indicator
+// - [ ] keyboard layout indicator
+// - [X] remove the hot corner
+// - [X] remove window decorations
+// - [ ] set the mouse pointer scheme
+// - [X] focus follows pointer
+
+binds {
+    // Mod key is Super (Mod4/Logo key)
+
+    // Terminal
+    Mod+Return { spawn "foot"; }
+
+    // Emacs
+    Mod+Backslash { spawn "emacsclient" "-c" "-n" "-a" "emacs" "--eval" "(switch-to-buffer nil)"; }
+
+    // Org agenda/capture
+    Mod+A { spawn "emacsclient" "-c" "-n" "--eval" "(my-org-agenda-cached)"; }
+    Mod+T { spawn "emacsclient" "-c" "-F" "((name . \"org-protocol-capture\"))" "-n" "--eval" "(org-capture :keys \"t\")"; }
+    Mod+C { spawn "emacsclient" "-c" "-F" "((name . \"org-protocol-capture\"))" "-n" "--eval" "(org-capture :keys \"n\")"; }
+    Mod+N { spawn "emacsclient" "-c" "-F" "((name . \"org-protocol-capture\"))" "-n" "--eval" "(org-capture :keys \"n\")"; }
+
+    // Kill window
+    Mod+Shift+Q { close-window; }
+
+    // Application launcher
+    Mod+D { spawn "sh" "-c" "fuzzel -T foot | xargs niri msg action spawn --"; }
+    Mod+P { spawn "sh" "-c" "fuzzel -T foot | xargs niri msg action spawn --"; }
+
+    // Exit (use a confirmation dialog)
+    Mod+Shift+E { spawn "niri" "msg" "action" "quit"; }
+
+    // Focus movement (vim keys)
+    Mod+H { focus-column-left; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+    Mod+L { focus-column-right; }
+
+    // Focus movement (arrow keys)
+    Mod+Left { focus-column-left; }
+    Mod+Down { focus-window-down; }
+    Mod+Up { focus-window-up; }
+    Mod+Right { focus-column-right; }
+
+    // Move windows (vim keys)
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+L { move-column-right; }
+
+    // Move windows (arrow keys)
+    Mod+Shift+Left { move-column-left; }
+    Mod+Shift+Down { move-window-down; }
+    Mod+Shift+Up { move-window-up; }
+    Mod+Shift+Right { move-column-right; }
+
+    // Move workspace to monitor
+    Mod+Ctrl+H { move-workspace-to-monitor-left; }
+    Mod+Ctrl+L { move-workspace-to-monitor-right; }
+
+    // Fullscreen
+    Mod+F { fullscreen-window; }
+
+    // Resize mode - Niri uses direct resize bindings
+    Mod+R { switch-preset-column-width; }
+
+    // Direct resize bindings
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    // Lock screen
+    Mod+Z { spawn "swaylock" "-fkFl" "-s" "stretch" "-i" "~/.config/sway/resources/wallpaper-webb-universe.jpg"; }
+    Mod+Shift+Z { spawn "swaylock" "-fkFl" "-s" "stretch" "-i" "~/.config/sway/resources/wallpaper-webb-universe.jpg"; }
+
+    // Brightness control
+    XF86MonBrightnessUp { spawn "brightnessctl" "s" "7%+"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "s" "6%-"; }
+
+    // Screenshots
+    Print { screenshot; }
+
+    // Volume control
+    XF86AudioMute { spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"; }
+    XF86AudioRaiseVolume { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+5%"; }
+    XF86AudioLowerVolume { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-5%"; }
+
+    // Process monitor
+    Mod+M { spawn "foot" "btop"; }
+
+    // Additional useful Niri-specific bindings
+    Mod+Comma { consume-window-into-column; }
+    Mod+Period { expel-window-from-column; }
+
+    // Workspace navigation
+    Mod+Page_Down { focus-workspace-down; }
+    Mod+Page_Up { focus-workspace-up; }
+
+    // Monitor focus
+    Mod+Ctrl+Shift+H { focus-monitor-left; }
+    Mod+Ctrl+Shift+L { focus-monitor-right; }
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+spawn-at-startup "systemctl" "--user" "set-environment" "XDG_CURRENT_DESKTOP=niri"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=niri"
+spawn-at-startup "gammastep-indicator"
+spawn-at-startup "nm-applet"
+// kanshi config is broken somewhat, also two commands with ";" delimitter seems to not work as expected
+//spawn-at-startup "pkill" "kanshi" ";" "kanshi" "-c" "~/.config/sway/kanshi.config"
+spawn-at-startup "syncthing" "--no-browser"
+spawn-at-startup "dunst"
+spawn-at-startup "waybar"
+// spawn-sh-at-startup is passed verbatim to shell and can expand "~" and variables
+spawn-sh-at-startup "swaybg -i ~/.config/sway/resources/wallpaper-tree-horizon.jpg -m fill"
+
+// Remove window decorations
+prefer-no-csd
+
+input {
+    warp-mouse-to-focus
+    focus-follows-mouse max-scroll-amount="10%"
+}
+
+// TODO: check that this works:
+// Idle configuration (using swayidle)
+spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -fkFl -s stretch -i ~/.config/sway/resources/wallpaper-webb-universe.jpg" "timeout" "600" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors" "before-sleep" "swaylock -fkFl -s stretch -i ~/.config/sway/resources/wallpaper-webb-universe.jpg"

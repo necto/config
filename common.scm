@@ -30,7 +30,7 @@
              (gnu packages guile-xyz)
              (gnu packages package-management)
 
-             (gnu packages wm) ; for waybar, kanshi
+             (gnu packages wm) ; for waybar, kanshi, niri
              (gnu packages xdisorg) ; for gammastep, fuzzel
              (gnu packages image) ; for slurp
              (gnu packages terminals) ; for foot, fzf
@@ -126,6 +126,7 @@
                            ;; guix -- must be already installed (avoid circular dep)
                            eza ;; Alternative to `ls`
 
+                           niri ;; scrolling tiling wayland compositor
                            sway
                            swaybg
                            swayidle ; lock and suspend on inactivity or lid close
@@ -238,6 +239,10 @@
                                 `("sway/kanshi.config"
                                   ,(local-file (string-append %guix-config-dir "/" %custom-dir "/kanshi.config")))
                                 `("sway/resources" ,(local-file "sway/resources" #:recursive? #t))))
+
+          (simple-service 'niri-config
+                          home-xdg-configuration-files-service-type
+                          (list `("niri/config.kdl" ,(local-file "niri/config.kdl"))))
 
           (simple-service 'foot-config
                           home-xdg-configuration-files-service-type

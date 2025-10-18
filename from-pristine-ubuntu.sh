@@ -51,6 +51,13 @@ sudo cp "$CONFIG_DIR/sway.desktop" "$GDM_SWAY_SESSION_FILE"
 # because GDM might not perform shell substitutions
 sudo sed -i "s@\$HOME@$HOME@" "$GDM_SWAY_SESSION_FILE"
 
+# Make sure GDM sources the guix paths before starting sway
+GDM_NIRI_SESSION_FILE="/usr/share/wayland-sessions/niri.desktop"
+sudo cp "$CONFIG_DIR/niri.desktop" "$GDM_NIRI_SESSION_FILE"
+# Make the shell substitution in the .desktop file
+# because GDM might not perform shell substitutions
+sudo sed -i "s@\$HOME@$HOME@" "$GDM_NIRI_SESSION_FILE"
+
 # Allow reading from guix store, which contains also configs and stuff like pointer icons.
 if [ ! -f /etc/apparmor.d/abstractions/base.d/guix.store.ro ]; then
     sudo mkdir -p /etc/apparmor.d/abstractions/base.d
