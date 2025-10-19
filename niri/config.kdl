@@ -5,7 +5,7 @@
 //   - [X] bring up the keybindings help screen that I can see upon Mod-Shift-?
 // - [X] keyboard layouts and the switch key
 //   - [X] keyboard layout indicator
-// - [ ] kanshi
+// - [X] kanshi
 // - [X] printscreen
 // - [X] background
 // - [X] gamma step indicator
@@ -133,7 +133,7 @@ spawn-at-startup "waybar"
 // spawn-sh-at-startup is passed verbatim to shell and can expand "~" and variables
 spawn-sh-at-startup "swaybg -i ~/.config/sway/resources/wallpaper-tree-horizon.jpg -m fill"
 // kanshi config is broken somewhat: it applies wrong position to the displays
-// spawn-sh-at-startup "pkill kanshi ; kanshi -c ~/.config/sway/kanshi.config"
+spawn-sh-at-startup "pkill kanshi ; kanshi -c ~/.config/sway/kanshi.config"
 
 // Remove window decorations
 prefer-no-csd
@@ -171,6 +171,7 @@ layout {
 // Idle configuration (using swayidle)
 spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -fkFl -s stretch -i ~/.config/sway/resources/wallpaper-webb-universe.jpg" "timeout" "600" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors" "before-sleep" "swaylock -fkFl -s stretch -i ~/.config/sway/resources/wallpaper-webb-universe.jpg"
 
+// TODO: include it from a generated file
 cursor {
     xcursor-theme "Bibata-Modern-Ice"
     xcursor-size 24
