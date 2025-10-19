@@ -6,8 +6,8 @@
    // "width": 1280, // Waybar width
 
    // Choose the order of the modules
-   "modules-left": ["sway/workspaces", "sway/mode"],
-   "modules-center": ["sway/window"],
+   "modules-left": ["niri/workspaces", "sway/mode"],
+   "modules-center": ["niri/window"],
    "modules-right": ["custom/disk_root",
                      "temperature",
                      "cpu",
@@ -17,7 +17,7 @@
                      "pulseaudio",
                      "battery",
                      "clock",
-                     "sway/language",
+                     "niri/language",
                      "tray",
                      "idle_inhibitor",
                     ],
@@ -36,8 +36,8 @@
    "position": "bottom",
 
    // Choose the order of the modules
-   "modules-left": ["sway/workspaces", "sway/mode"],
-   "modules-center": ["sway/window"],
+   "modules-left": ["niri/workspaces", "sway/mode"],
+   "modules-center": ["niri/window"],
    "modules-right": ["custom/disk_root",
                      "temperature",
                      "cpu",
@@ -47,7 +47,7 @@
                      "pulseaudio",
                      "battery",
                      "clock",
-                     "sway/language",
+                     "niri/language",
                      "tray",
                      "idle_inhibitor",
                     ],

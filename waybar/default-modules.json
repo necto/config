@@ -16,9 +16,6 @@
   //     "default": ""
   //   }
   // },
-  "sway/mode": {
-    "format": "{}"
-  },
   "custom/disk_root": {
     "format": "💽 {} ",
     "interval": 30,
@@ -100,7 +97,7 @@
     "format": "⏰ {:%d/%m %H:%M}",
     "tooltip-format": "{:%d %B %Y | %H:%M}"
   },
-  "sway/language": {
+  "niri/language": {
     "format": "{short}",
   },
   "idle_inhibitor": {
