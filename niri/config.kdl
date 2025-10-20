@@ -54,7 +54,8 @@ binds {
     Mod+Ctrl+Shift+K { move-window-to-workspace-up; }
 
     // Fullscreen
-    Mod+F { fullscreen-window; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+F { maximize-column; }
 
     // Resize mode - Niri uses direct resize bindings
     Mod+R { switch-preset-column-width; }
@@ -136,9 +137,9 @@ layout {
     gaps 8
 
     preset-column-widths {
-        proportion 1.0           // 100% of the output width
-        proportion 0.33          // e.g., ~33%
-        proportion 0.5           // e.g., 50%
+        proportion 0.33
+        proportion 0.5
+        proportion 0.66
     }
 
     default-column-width { proportion 0.5; }  // optional: new windows open at full width
