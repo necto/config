@@ -1,3 +1,7 @@
+
+// Script for quick iteration (niri does hot-reloading):
+// cd ~/.config/niri && rm config.kdl && ln -s ../../config/niri/config.kdl ./
+
 binds {
     // Mod key is Super (Mod4/Logo key)
 
@@ -146,8 +150,10 @@ layout {
 
     focus-ring {
         width 3
-        active-color "#ff0000"
-        inactive-color "#505050"
+        // active-color "#ff0000"
+        active-gradient from="red" to="orange" angle=45
+        //inactive-color "#505050"
+        inactive-gradient from="#505050" to="#b0b0b0" angle=-45
     }
 }
 
