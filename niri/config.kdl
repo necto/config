@@ -1,21 +1,3 @@
-// TODO:
-// - keybindings
-//   - [X] switching between screens
-//   - [X] screen lock
-//   - [X] bring up the keybindings help screen that I can see upon Mod-Shift-?
-// - [X] keyboard layouts and the switch key
-//   - [X] keyboard layout indicator
-// - [X] kanshi
-// - [X] printscreen
-// - [X] background
-// - [X] gamma step indicator
-// - [X] remove the hot corner
-// - [X] remove window decorations
-// - [X] set the mouse pointer scheme
-// - [ ] include a generated file for the cursor theme and size, generated from common.scm
-// - [X] focus follows pointer
-// - [X] display the window title in waybar
-
 binds {
     // Mod key is Super (Mod4/Logo key)
 
@@ -171,7 +153,8 @@ layout {
 // Idle configuration (using swayidle)
 spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -fkFl -s stretch -i ~/.config/sway/resources/wallpaper-webb-universe.jpg" "timeout" "600" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors" "before-sleep" "swaylock -fkFl -s stretch -i ~/.config/sway/resources/wallpaper-webb-universe.jpg"
 
-// TODO: include it from a generated file
+// TODO: when niri 25.09 is available,
+// include it from a generated file
 cursor {
     xcursor-theme "Bibata-Modern-Ice"
     xcursor-size 24
