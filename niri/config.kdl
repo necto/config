@@ -110,8 +110,12 @@ binds {
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
-spawn-at-startup "systemctl" "--user" "set-environment" "XDG_CURRENT_DESKTOP=niri"
-spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=niri"
+// XDG_CURRENT_DESKTOP=niri is needed for proper initialization of xdg-desktop-portal
+// and xdg-desktop-portal-wlr
+// xdg-desktop-portal uses XDG_CURRENT_DESKTOP to choose the backend
+// xdg-desktop-portal-wlr starts only if WAYLAND_DISPLAY is set
+spawn-sh-at-startup "export XDG_CURRENT_DESKTOP=niri && systemctl --user set-environment XDG_CURRENT_DESKTOP=niri && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+
 spawn-at-startup "gammastep-indicator"
 spawn-at-startup "nm-applet"
 spawn-at-startup "syncthing" "--no-browser"

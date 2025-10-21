@@ -46,8 +46,9 @@ set $screendimmer gammastep-indicator
 # and xdg-desktop-portal-wlr
 # xdg-desktop-portal uses XDG_CURRENT_DESKTOP to choose the backend
 # xdg-desktop-portal-wlr starts only if WAYLAND_DISPLAY is set
-exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec export XDG_CURRENT_DESKTOP=sway && \
+     systemctl --user set-environment XDG_CURRENT_DESKTOP=sway && \
+     dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
 # Workaround for firefox flooding /var/log/syslog with "Error: WaylandMessage::Write() too many files to send"
 # see https://bugs.launchpad.net/ubuntu/+source/firefox/+bug/2051838
