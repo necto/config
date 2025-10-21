@@ -32,6 +32,7 @@
 
              (gnu packages wm) ; for waybar, kanshi, niri
              (gnu packages xdisorg) ; for gammastep, fuzzel
+             (gnu packages xorg) ; for xwayland-satellite
              (gnu packages image) ; for slurp
              (gnu packages terminals) ; for foot, fzf
              (gnu packages pulseaudio) ; for pactl
@@ -139,6 +140,7 @@
                            foot ;; sway default terminal emulator
                            fzf ;; command-line fuzzy finder
                            fuzzel ;; keyboard-centered app launcher
+                           xwayland-satellite ;; needed for X11 apps to run in niri/wayland
                            pulseaudio ;; for pactl
                            pavucontrol
                            dunst ;; display notifications
