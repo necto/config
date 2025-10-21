@@ -80,6 +80,8 @@ binds {
 
     // Screenshots
     Print { screenshot; }
+    Alt+Print { screenshot-window; }
+    Ctrl+Print { screenshot-screen; }
 
     // Volume control
     XF86AudioMute { spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"; }
@@ -89,9 +91,14 @@ binds {
     // Process monitor
     Mod+M { spawn "foot" "btop"; }
 
-    // Additional useful Niri-specific bindings
+    // Columns
     Mod+Comma { consume-window-into-column; }
     Mod+Period { expel-window-from-column; }
+    Mod+bracketleft { consume-or-expel-window-left; }
+    Mod+bracketright { consume-or-expel-window-right; }
+
+    Mod+Ctrl+V { toggle-window-floating; }
+    Mod+V { switch-focus-between-floating-and-tiling; }
 
     // Workspace navigation
     Mod+Shift+J { focus-workspace-down; }
