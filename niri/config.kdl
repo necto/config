@@ -117,9 +117,12 @@ binds {
 
     Mod+B { focus-workspace "browser"; }
     Mod+Shift+B { focus-workspace "browser"; }
+    Mod+2 { focus-workspace "browser"; }
     Mod+Shift+T { focus-workspace "emacs"; }
     Mod+E { focus-workspace "emacs"; }
+    Mod+1 { focus-workspce "emacs"; }
     Mod+Shift+C { focus-workspace "chat"; }
+    Mod+6 { focus-workspace "chat"; }
 }
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
