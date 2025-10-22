@@ -120,7 +120,7 @@ binds {
     Mod+2 { focus-workspace "browser"; }
     Mod+Shift+T { focus-workspace "emacs"; }
     Mod+E { focus-workspace "emacs"; }
-    Mod+1 { focus-workspce "emacs"; }
+    Mod+1 { focus-workspace "emacs"; }
     Mod+Shift+C { focus-workspace "chat"; }
     Mod+6 { focus-workspace "chat"; }
 }
@@ -212,15 +212,13 @@ window-rule {
 }
 
 window-rule {
-    // match at-startup=true app-id=r#"^org.telegram.desktop"#
-    match app-id=r#"^org.telegram.desktop"#
+    match at-startup=true app-id=r#"^org.telegram.desktop"#
     open-on-workspace "chat"
     default-column-width { proportion 1.00; }
 }
 
 window-rule {
-    // match at-startup=true app-id="Firefox"
-    match app-id="Firefox"
+    match at-startup=true app-id="Firefox"
     open-on-workspace "browser"
     default-column-width { proportion 1.00; }
 }
