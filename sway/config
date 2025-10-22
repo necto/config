@@ -69,6 +69,7 @@ exec syncthing --no-browser
 
 # launch notification-display daemon
 exec dunst
+exec sleep 10; notify-send "Make sure to switch waybar to sway modules"
 
 include /etc/sway/config-vars.d/*
 
