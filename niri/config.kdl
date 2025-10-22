@@ -63,6 +63,7 @@ binds {
 
     // Resize mode - Niri uses direct resize bindings
     Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-window-height; }
 
     // Direct resize bindings
     Mod+Minus { set-column-width "-10%"; }
@@ -89,7 +90,7 @@ binds {
     XF86AudioLowerVolume { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-5%"; }
 
     // Process monitor
-    Mod+M { spawn "foot" "btop"; }
+    Mod+M { spawn "foot" "-T" "Btop" "btop"; }
 
     // Columns
     Mod+Comma { consume-window-into-column; }
@@ -113,6 +114,12 @@ binds {
     Mod+O { toggle-overview; }
 
     Mod+Shift+slash { show-hotkey-overlay; }
+
+    Mod+B { focus-workspace "browser"; }
+    Mod+Shift+B { focus-workspace "browser"; }
+    Mod+Shift+T { focus-workspace "emacs"; }
+    Mod+E { focus-workspace "emacs"; }
+    Mod+Shift+C { focus-workspace "chat"; }
 }
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
@@ -166,6 +173,9 @@ layout {
         //inactive-color "#505050"
         inactive-gradient from="#505050" to="#b0b0b0" angle=-45
     }
+
+    // Enable creation new workspaces also above
+    empty-workspace-above-first
 }
 
 // Idle configuration (using swayidle)
@@ -177,3 +187,46 @@ cursor {
     xcursor-theme "Bibata-Modern-Ice"
     xcursor-size 24
 }
+
+workspace "chat" {
+    open-on-output "eDP-1"
+}
+
+workspace "browser" {
+
+}
+
+workspace "emacs" {
+
+}
+
+spawn-at-startup "emacs"
+
+window-rule {
+    match at-startup=true app-id="emacs"
+    open-on-workspace "emacs"
+    default-column-width { proportion 1.00; }
+}
+
+window-rule {
+    // match at-startup=true app-id=r#"^org.telegram.desktop"#
+    match app-id=r#"^org.telegram.desktop"#
+    open-on-workspace "chat"
+    default-column-width { proportion 1.00; }
+}
+
+window-rule {
+    // match at-startup=true app-id="Firefox"
+    match app-id="Firefox"
+    open-on-workspace "browser"
+    default-column-width { proportion 1.00; }
+}
+
+window-rule {
+    match title="Btop"
+    min-width 999
+}
+
+// TODO: when niri 25.09 is available,
+// include the auto-open of apps on the workspaces
+// depending on the persona/professional: FF vs island, slack vs telegram
