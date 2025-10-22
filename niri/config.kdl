@@ -103,9 +103,9 @@ binds {
 
     // Workspace navigation
     Mod+Shift+J { focus-workspace-down; }
-    Mod+Shift+Up { focus-workspace-down; }
+    Mod+Shift+Down { focus-workspace-down; }
     Mod+Shift+K { focus-workspace-up; }
-    Mod+Shift+Down { focus-workspace-up; }
+    Mod+Shift+Up { focus-workspace-up; }
 
     // Monitor focus
     Mod+Shift+H { focus-monitor-left; }
