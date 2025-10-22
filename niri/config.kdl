@@ -245,15 +245,19 @@ window-rule {
     min-width 999
 }
 
+// Google meet and Zoom pop-ups:
 window-rule {
-    match title="Meet - .*"
+    match title=r#"Meet - .*"# app-id="island-browser"
+    match title=r#".* Zoom Meeting"# app-id="island-browser"
     exclude title=r#".* - Island"#
     open-floating true
     open-focused false
 }
 
+// screen-share popups
 window-rule {
     match title="meet.google.com is sharing your screen."
+    match title="app.zoom.us is sharing your screen."
     open-focused false
 }
 
