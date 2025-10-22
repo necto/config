@@ -109,9 +109,7 @@
    (build-system copy-build-system)
    (arguments
     `(#:install-plan
-      '(("slackw.sh" "bin/slackw")
-        ("islandw.sh" "bin/islandw")
-        ("stdin-to-emacsclient.sh" "bin/stdin-to-emacsclient.sh"))))
+      '(("stdin-to-emacsclient.sh" "bin/stdin-to-emacsclient.sh"))))
    (home-page "https://github.com/necto/config")
    (synopsis "My personal scripts.")
    (description "My personal scripts.")
