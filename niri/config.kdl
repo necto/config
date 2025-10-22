@@ -158,8 +158,16 @@ input {
     focus-follows-mouse max-scroll-amount="10%"
 }
 
+gestures {
+    // I am not used to action when I bring my mouse to the left-top corner
+    // there is a hot key for the overview
+    hot-corners {
+        off
+    }
+}
+
 layout {
-    gaps 8
+    gaps 6
 
     preset-column-widths {
         proportion 0.33
@@ -179,6 +187,13 @@ layout {
 
     // Enable creation new workspaces also above
     empty-workspace-above-first
+
+    // struts on the left and right allow scrolled off-screen windows
+    // to still peek from the side to remind me of their presence
+    struts {
+        left 4
+        right 4
+    }
 }
 
 // Idle configuration (using swayidle)
