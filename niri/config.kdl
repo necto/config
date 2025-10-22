@@ -125,6 +125,10 @@ binds {
     Mod+6 { focus-workspace "chat"; }
 }
 
+environment {
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+}
+
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 // XDG_CURRENT_DESKTOP=niri is needed for proper initialization of xdg-desktop-portal
