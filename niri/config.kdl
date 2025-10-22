@@ -228,12 +228,14 @@ window-rule {
 
 window-rule {
     match at-startup=true app-id=r#"^org.telegram.desktop"#
+    match at-startup=true app-id="Slack"
     open-on-workspace "chat"
     default-column-width { proportion 1.00; }
 }
 
 window-rule {
     match at-startup=true app-id="Firefox"
+    match at-startup=true app-id="island-browser"
     open-on-workspace "browser"
     default-column-width { proportion 1.00; }
 }
