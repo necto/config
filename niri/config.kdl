@@ -28,28 +28,28 @@ binds {
     Mod+Shift+E { quit; }
 
     // Focus movement (vim keys)
-    Mod+H { focus-column-left; }
-    Mod+J { focus-window-down; }
-    Mod+K { focus-window-up; }
-    Mod+L { focus-column-right; }
+    Mod+H { focus-column-or-monitor-left; }
+    Mod+J { focus-window-or-workspace-down; }
+    Mod+K { focus-window-or-workspace-up; }
+    Mod+L { focus-column-or-monitor-right; }
 
     // Focus movement (arrow keys)
-    Mod+Left { focus-column-left; }
-    Mod+Down { focus-window-down; }
-    Mod+Up { focus-window-up; }
-    Mod+Right { focus-column-right; }
+    Mod+Left { focus-column-or-monitor-left; }
+    Mod+Down { focus-window-or-workspace-down; }
+    Mod+Up { focus-window-or-workspace-up; }
+    Mod+Right { focus-column-or-monitor-right; }
 
     // Move windows (vim keys)
-    Mod+Ctrl+H { move-column-left; }
-    Mod+Ctrl+J { move-window-down; }
-    Mod+Ctrl+K { move-window-up; }
-    Mod+Ctrl+L { move-column-right; }
+    Mod+Ctrl+H { move-column-left-or-to-monitor-left; }
+    Mod+Ctrl+J { move-window-down-or-to-workspace-down; }
+    Mod+Ctrl+K { move-window-up-or-to-workspace-up; }
+    Mod+Ctrl+L { move-column-right-or-to-monitor-right; }
 
     // Move windows (arrow keys)
-    Mod+Ctrl+Left { move-column-left; }
-    Mod+Ctrl+Down { move-window-down; }
-    Mod+Ctrl+Up { move-window-up; }
-    Mod+Ctrl+Right { move-column-right; }
+    Mod+Ctrl+Left { move-column-left-or-to-monitor-left; }
+    Mod+Ctrl+Down { move-window-down-or-to-workspace-down; }
+    Mod+Ctrl+Up { move-window-up-or-to-workspace-up; }
+    Mod+Ctrl+Right { move-column-right-or-to-monitor-right; }
 
     // Move workspace to monitor
     Mod+Ctrl+Shift+H { move-workspace-to-monitor-left; }
