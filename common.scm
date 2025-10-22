@@ -47,6 +47,25 @@
              (azaostro home services)
              )
 
+;; chromium 140.* triggers a bug in wlroots which leads to an annoying Sway crash:
+;; sway: render/pass.c:23: wlr_render_pass_add_texture: Assertion `box->x >= 0 && box->y >= 0 && box->x + box->width <= options->texture->width && box->y + box->height <= options->texture->height' failed.
+(define wlroots-patched
+  (package
+   (inherit (@@ (gnu packages wm) wlroots))
+   (source
+    (origin
+     (inherit (package-source (@@ (gnu packages wm) wlroots)))
+     (patches
+      (list (search-patch "/home/arseniy/tmp/wlroots.patch")))))))
+
+(define sway-patched
+  (package
+   (inherit (@@ (gnu packages wm) sway))
+   (inputs
+    (modify-inputs (package-inputs (@@ (gnu packages wm) sway))
+                   (replace "wlroots" wlroots-patched)))))
+
+
 (define %home
   (and=> (getenv "HOME")
          (lambda (home)
@@ -128,7 +147,7 @@
                            eza ;; Alternative to `ls`
 
                            niri ;; scrolling tiling wayland compositor
-                           sway
+                           sway-patched
                            swaybg
                            swayidle ; lock and suspend on inactivity or lid close
                            waybar
