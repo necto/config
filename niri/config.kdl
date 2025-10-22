@@ -245,6 +245,18 @@ window-rule {
     min-width 999
 }
 
+window-rule {
+    match title="Meet - .*"
+    exclude title=r#".* - Island"#
+    open-floating true
+    open-focused false
+}
+
+window-rule {
+    match title="meet.google.com is sharing your screen."
+    open-focused false
+}
+
 // TODO: when niri 25.09 is available,
 // include the auto-open of apps on the workspaces
 // depending on the persona/professional: FF vs island, slack vs telegram
