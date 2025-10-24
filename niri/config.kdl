@@ -253,6 +253,7 @@ window-rule {
 window-rule {
     match title=r#"Meet - .*"# app-id="island-browser"
     match title=r#".* Zoom Meeting"# app-id="island-browser"
+    match title=r#"Demo Time"# app-id="island-browser"
     exclude title=r#".* - Island"#
     open-floating true
     open-focused false
