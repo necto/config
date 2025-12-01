@@ -186,6 +186,7 @@
     (list (service home-bash-service-type
                    (home-bash-configuration
                     (aliases '(("ls" . "eza")
+                               ("pd" . "guix shell python python-pandas python-colorama python-ipython -- ipython")
                                ("rehash" . "hash -r")
                                ("vi" . "vim")
                                ("python" . "python3")

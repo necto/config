@@ -1,0 +1,4 @@
+#!/bin/bash
+CSV=$1
+echo "loading $CSV into 'df'"
+guix shell python python-pandas python-colorama python-ipython -- ipython -i -c "import pandas as pd; df = pd.read_csv(\"$CSV\")"
