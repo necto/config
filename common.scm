@@ -109,7 +109,9 @@
    (build-system copy-build-system)
    (arguments
     `(#:install-plan
-      '(("stdin-to-emacsclient.sh" "bin/stdin-to-emacsclient.sh"))))
+      '(("stdin-to-emacsclient.sh" "bin/stdin-to-emacsclient.sh")
+        ("pd" "bin/pd")
+        ("slice-n-dice" "bin/slice-n-dice"))))
    (home-page "https://github.com/necto/config")
    (synopsis "My personal scripts.")
    (description "My personal scripts.")
