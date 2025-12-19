@@ -1,0 +1,39 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "asserts",
+      "inherits": "linux-asserted-release-from-sources",
+      "binaryDir": "build/asserts",
+      "cacheVariables": {
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
+      },
+      "environment": {
+        "CCACHE_BASEDIR": "${sourceDir}/build/asserts"
+      }
+    },
+    {
+      "name": "debug",
+      "inherits": "linux-debug-from-sources",
+      "binaryDir": "build/debug",
+      "cacheVariables": {
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
+      },
+      "environment": {
+        "CCACHE_BASEDIR": "${sourceDir}/build/debug"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "asserts",
+      "configurePreset": "asserts",
+      "inheritConfigureEnvironment": true
+    },
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "inheritConfigureEnvironment": true
+    }
+  ]
+}

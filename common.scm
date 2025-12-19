@@ -220,8 +220,8 @@
 
           (simple-service 'cmake-presets
                           home-xdg-configuration-files-service-type
-                          (list `("CMakeUserPresetsGlobal.json"
-                                  ,(local-file "CMakeUserPresetsGlobal.json"))))
+                          (list `("sonar-presets.json"
+                                  ,(local-file "sonar-presets.json"))))
 
           (simple-service 'cursor-config
                           home-xdg-configuration-files-service-type
