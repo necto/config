@@ -6,7 +6,8 @@
       "inherits": "linux-asserted-release-from-sources",
       "binaryDir": "build/asserts",
       "cacheVariables": {
-        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
+        "VERBOSE_MAKEFILE": false
       },
       "environment": {
         "CCACHE_BASEDIR": "${sourceDir}/build/asserts"
@@ -17,7 +18,8 @@
       "inherits": "linux-debug-from-sources",
       "binaryDir": "build/debug",
       "cacheVariables": {
-        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
+        "VERBOSE_MAKEFILE": false
       },
       "environment": {
         "CCACHE_BASEDIR": "${sourceDir}/build/debug"
