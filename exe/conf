@@ -1,0 +1,4 @@
+#!/bin/bash
+# A shortcut to mirror the build one
+
+cmake --preset "$@"

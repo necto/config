@@ -1,2 +1,3 @@
 #!/bin/bash
+# TODO: if an argument is given, load that file in ipython instead
 guix shell python python-pandas python-colorama python-ipython -- ipython -i -c "import pandas as pd"

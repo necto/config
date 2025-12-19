@@ -111,7 +111,9 @@
     `(#:install-plan
       '(("stdin-to-emacsclient.sh" "bin/stdin-to-emacsclient.sh")
         ("pd" "bin/pd")
-        ("slice-n-dice" "bin/slice-n-dice"))))
+        ("slice-n-dice" "bin/slice-n-dice")
+        ("conf" "bin/conf")
+        ("build" "bin/build"))))
    (home-page "https://github.com/necto/config")
    (synopsis "My personal scripts.")
    (description "My personal scripts.")

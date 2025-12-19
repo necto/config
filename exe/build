@@ -1,0 +1,4 @@
+#!/bin/bash
+# prefer this to direct invocation of ninja to set the environment, in particular CCACHE_BASEDIR
+
+cmake --build --preset "$@"
