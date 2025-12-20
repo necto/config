@@ -320,6 +320,7 @@
                                      %emacs-config "/bin/doom env\n"
                                      %emacs-config "/bin/doom install\n"
                                      %emacs-config "/bin/doom sync\n"
+                                     "emacsclient -a '' --eval '(copilot-install-server)'\n"
                                      %emacs-config "/bin/doom doctor\n")))))
 
           (simple-service 'doom-config
