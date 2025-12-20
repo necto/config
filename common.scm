@@ -25,6 +25,7 @@
              (gnu packages version-control)
              (gnu packages rust-apps) ; For ripgrep, bat, git-delta
              (gnu packages fontutils) ; For fontconfig
+             (gnu packages fonts) ; For font-ubuntu
 
              (gnu packages guile)
              (gnu packages guile-xyz)
@@ -162,6 +163,7 @@
                            foot ;; sway default terminal emulator
                            fzf ;; command-line fuzzy finder
                            fuzzel ;; keyboard-centered app launcher
+                           font-ubuntu ;; used in my doom-emacs config. not preinstalled on non-ubuntu systems
                            xwayland-satellite ;; needed for X11 apps to run in niri/wayland
                            pulseaudio ;; for pactl
                            pavucontrol
