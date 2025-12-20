@@ -11,7 +11,8 @@
    '("/home/necto/proj/nutri-journal/journals/" "/home/necto/.config/doom/"
      "/home/necto/.config/emacs/"))
  '(safe-local-variable-values
-   '((lisp-fill-paragraphs-as-doc-string nil) (geiser-insert-actual-lambda)
+   '((geiser-guile-binary "guix" "repl") (lisp-fill-paragraphs-as-doc-string nil)
+     (geiser-insert-actual-lambda)
      (eval when
            (string-equal (file-name-nondirectory buffer-file-name) "clean.csv")
            (nutri-journal-mode))
