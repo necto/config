@@ -25,7 +25,6 @@
              (gnu packages version-control)
              (gnu packages rust-apps) ; For ripgrep, bat, git-delta
              (gnu packages fontutils) ; For fontconfig
-             (gnu packages fonts) ; For font-ubuntu
 
              (gnu packages guile)
              (gnu packages guile-xyz)
@@ -45,6 +44,9 @@
              (gnu packages syncthing)
 
              (gnu packages emacs-xyz) ; for emacs-telega-server
+
+             (nongnu packages fonts) ; For font-ubuntu
+
              (azaostro home services)
              )
 
