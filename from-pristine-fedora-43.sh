@@ -1,3 +1,9 @@
+#!/bin/bash
+# This is the entry point of the bootstrapping process.
+# It installs the necessary software and workarounds and passes over to guix home.
+# To lunch it, it is enough to fetch just the script file and run it:
+#   wget https://raw.githubusercontent.com/necto/config/master/from-pristine-fedora-43.sh
+# I have not tried to run it in batch mode, so perhaps just copy each command into shell, one by one, or by blocks.
 sudo dnf update
 
 # mount the storage with backed-up home dir, then
