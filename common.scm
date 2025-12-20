@@ -238,12 +238,10 @@
                                 `("x11/xresources" ,(plain-file "Xresources" (string-append "Xcursor.size:" %cursor-size "\nXcursor.theme: " %cursor-theme "\n")))
                                 `("glib-2.0/settings/keyfile" ,(glib2-settings-keyfile %cursor-size %cursor-theme))
                                 `("sway/cursor.theme" ,(plain-file "sway-cursor-theme" (string-append "set $cursor_size " %cursor-size "\nset $cursor_theme " %cursor-theme "\n")))
-                                ;; TODO: when niri 25.09 is available, include cursor config from a generated file:
-                                ;; `("niri/cursor.theme" ,(plain-file "niri-cursor-theme" (string-append "cursor {"
-                                ;;                                                                       "\n    xcursor-size " %cursor-size
-                                ;;                                                                       "\n    xcursor-theme \"" %cursor-theme "\""
-                                ;;                                                                       "\n}\n")))
-                                ))
+                                `("niri/cursor.theme" ,(plain-file "niri-cursor-theme" (string-append "cursor {"
+                                                                                                      "\n    xcursor-size " %cursor-size
+                                                                                                      "\n    xcursor-theme \"" %cursor-theme "\""
+                                                                                                      "\n}\n")))))
 
           (simple-service 'git-config
                           home-xdg-configuration-files-service-type

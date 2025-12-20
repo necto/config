@@ -203,12 +203,7 @@ layout {
 // Idle configuration (using swayidle)
 spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -fkFl -s stretch -i ~/.config/sway/resources/wallpaper-webb-universe.jpg" "timeout" "600" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors" "before-sleep" "swaylock -fkFl -s stretch -i ~/.config/sway/resources/wallpaper-webb-universe.jpg"
 
-// TODO: when niri 25.09 is available,
-// include it from a generated file
-cursor {
-    xcursor-theme "Bibata-Modern-Ice"
-    xcursor-size 24
-}
+include "cursor.theme"
 
 workspace "chat" {
     open-on-output "eDP-1"
