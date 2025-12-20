@@ -40,7 +40,10 @@ syncthing
 rm -rf .ssh/
 mv ~/frame-home-backup-2025.12.20/.ssh/ ~/
 
-# TODO: recover firefox sessions
+# Recover firefox sessions
+pkill -9 firefox
+rm -rf ~/.mozilla/
+firefox
 
 echo "[ ] Go to the Bitwarden page to install it interactively"
 $HOME/.guix-profile/bin/firefox https://addons.mozilla.org/en-US/firefox/addon/bitwarden-password-manager/
