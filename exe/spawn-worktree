@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+
+import argparse
+import subprocess
+import sys
+import re
+from pathlib import Path
+
+def check_branch_exists(branch_name):
+    """
+    Checks if a branch exists locally or on remote 'origin'.
+    Returns True if found, False otherwise.
+    """
+    # 1. Check Local
+    local_check = subprocess.run(
+        ["git", "show-ref", "--verify", "--quiet", f"refs/heads/{branch_name}"]
+    )
+    if local_check.returncode == 0:
+        return True
+
+    # 2. Check Remote (assumes 'origin')
+    remote_check = subprocess.run(
+        ["git", "show-ref", "--verify", "--quiet", f"refs/remotes/origin/{branch_name}"]
+    )
+    if remote_check.returncode == 0:
+        return True
+
+    return False
+
+def get_user_confirmation(branch_name):
+    """
+    Prompts the user to create a new branch.
+    """
+    while True:
+        try:
+            response = input(f"[?] Branch '{branch_name}' not found. Create it? [y/N]: ").strip().lower()
+            if response in ('y', 'yes'):
+                return True
+            if response in ('n', 'no', ''):
+                return False
+        except KeyboardInterrupt:
+            print("\nAborted.")
+            sys.exit(1)
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Create a new git worktree for sonar-cpp and link configuration presets."
+    )
+    parser.add_argument("branch_name", type=str, help="The name of the git branch.")
+    parser.add_argument(
+        "--path", "-p",
+        type=str,
+        default=None,
+        help="Custom path for the worktree. Defaults to ~/proj/sonar-cpp-<SAFE_BRANCH_NAME>"
+    )
+
+    args = parser.parse_args()
+
+    # Raw branch name for Git commands (must keep special chars like '/')
+    git_branch_name = args.branch_name.strip()
+
+    # Sanitized name for Filesystem (replace / : \ etc with -)
+    # Regex explanation: Match anything that is NOT alphanumeric, underscore, dot, or hyphen
+    # and replace it with a hyphen.
+    fs_safe_name = re.sub(r'[^\w.-]', '-', git_branch_name)
+
+    # Logic to determine Worktree Path
+    if args.path:
+        # User provided specific path -> just expand/sanitize the path itself
+        raw_path = Path(args.path)
+    else:
+        # Default -> use the sanitized filesystem-safe name
+        # e.g., "feature/login" becomes "~/proj/sonar-cpp-feature-login"
+        raw_path = Path(f"~/proj/wt/{fs_safe_name}")
+
+    # Sanitize: expand ~ and resolve absolute path
+    worktree_path = raw_path.expanduser().resolve()
+
+    print(f"[*] Git Branch: {git_branch_name}")
+    print(f"[*] Worktree Dir: {worktree_path}")
+
+    # Check Branch & Prepare Command
+    if check_branch_exists(git_branch_name):
+        print(f"[*] Branch '{git_branch_name}' found.")
+        cmd = ["git", "worktree", "add", str(worktree_path), git_branch_name]
+    else:
+        if get_user_confirmation(git_branch_name):
+            print(f"[*] Creating new branch '{git_branch_name}'...")
+            cmd = ["git", "worktree", "add", "-b", git_branch_name, str(worktree_path)]
+        else:
+            print("[!] Operation cancelled by user.")
+            sys.exit(0)
+
+    # Execute Git Worktree Add
+    try:
+        subprocess.run(cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error: Git command failed with exit code {e.returncode}", file=sys.stderr)
+        sys.exit(e.returncode)
+
+    # Create Symlink
+    source_config = Path("~/.config/sonar-presets.json").expanduser()
+    target_link = worktree_path / "CMakeUserPresets.json"
+
+    if not source_config.exists():
+        print(f"[!] Warning: Source config {source_config} does not exist.")
+
+    try:
+        target_link.symlink_to(source_config)
+        print(f"[*] Symlink created: {target_link.name} -> {source_config}")
+    except FileExistsError:
+        print(f"[!] Warning: Symlink at {target_link} already exists. Skipping.")
+    except Exception as e:
+        print(f"Error creating symlink: {e}", file=sys.stderr)
+
+if __name__ == "__main__":
+    main()
