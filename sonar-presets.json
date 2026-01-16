@@ -33,7 +33,7 @@
         "VERBOSE_MAKEFILE": false
       },
       "environment": {
-        "CCACHE_BASEDIR": "${sourceDir}/build/plugin-asserts"
+        "CCACHE_BASEDIR": "${sourceDir}"
       }
     },
     {
@@ -44,7 +44,7 @@
         "VERBOSE_MAKEFILE": false
       },
       "environment": {
-        "CCACHE_BASEDIR": "${sourceDir}/build/release"
+        "CCACHE_BASEDIR": "${sourceDir}"
       }
     }
   ],
