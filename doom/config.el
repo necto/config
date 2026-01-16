@@ -243,3 +243,7 @@
 
 ;; Start calendar on Monday
 (setq calendar-week-start-day 1)
+
+(after! mermaid-mode
+  (setq mermaid-mmdc-location "docker")
+  (setq mermaid-flags "run -u 1000 --rm -v /tmp:/tmp ghcr.io/mermaid-js/mermaid-cli/mermaid-cli"))
