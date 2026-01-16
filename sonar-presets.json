@@ -24,6 +24,28 @@
       "environment": {
         "CCACHE_BASEDIR": "${sourceDir}/build/debug"
       }
+    },
+    {
+      "name": "pluginAsserts",
+      "inherits": "linux-asserted-release-from-sources",
+      "binaryDir": "build/plugin-asserts",
+      "cacheVariables": {
+        "VERBOSE_MAKEFILE": false
+      },
+      "environment": {
+        "CCACHE_BASEDIR": "${sourceDir}/build/plugin-asserts"
+      }
+    },
+    {
+      "name": "release",
+      "inherits": "linux-release-from-sources",
+      "binaryDir": "build/release",
+      "cacheVariables": {
+        "VERBOSE_MAKEFILE": false
+      },
+      "environment": {
+        "CCACHE_BASEDIR": "${sourceDir}/build/release"
+      }
     }
   ],
   "buildPresets": [
@@ -35,6 +57,16 @@
     {
       "name": "debug",
       "configurePreset": "debug",
+      "inheritConfigureEnvironment": true
+    },
+    {
+      "name": "pluginAsserts",
+      "configurePreset": "pluginAsserts",
+      "inheritConfigureEnvironment": true
+    },
+    {
+      "name": "release",
+      "configurePreset": "release",
       "inheritConfigureEnvironment": true
     }
   ]

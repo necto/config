@@ -256,6 +256,12 @@
                           ;; Guile seems to not support XDG_CONFIG stuff
                           (list `(".guile" ,(local-file "guile.scm"))))
 
+          (simple-service 'gradle-config
+                          home-xdg-configuration-files-service-type
+                          ;; gradle looks up for gradle.properties in $GRADLE_USER_HOME
+                          ;; which is set in the and of this file.
+                          (list `("gradle/gradle.properties" ,(local-file "gradle.properties"))))
+
           (simple-service 'ssh-config
                           home-files-service-type
                           ;; open_ssh does not support XDG_CONFIG directory
@@ -337,4 +343,7 @@
              ;; For some reason these variables need to be exported explicitly and
              ;; it is not done automatically upon installing nss-scripts
              ("SSL_CERT_DIR" . ,(string-append %home "/.guix-home/profile/etc/ssl/certs"))
-             ("SSL_CERT_FILE" . ,(string-append %home "/.guix-home/profile/etc/ssl/certs/ca-certificates.crt"))))))))
+             ("SSL_CERT_FILE" . ,(string-append %home "/.guix-home/profile/etc/ssl/certs/ca-certificates.crt"))
+             ;; Useful for custom defaults of gradle properties, such as cmakePreset
+             ;; Properties in $GRADLE_USER_HOME/gradle.properties override those in project gradle.properties
+             ("GRADLE_USER_HOME" . ,(string-append %home "/.config/gradle"))))))))
