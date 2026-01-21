@@ -228,7 +228,9 @@
           (simple-service 'cmake-presets
                           home-xdg-configuration-files-service-type
                           (list `("sonar-presets.json"
-                                  ,(local-file "sonar-presets.json"))))
+                                  ,(local-file "sonar-presets.json"))
+                                `("llvm-presets.json"
+                                  ,(local-file "llvm-presets.json"))))
 
           (simple-service 'cursor-config
                           home-xdg-configuration-files-service-type

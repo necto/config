@@ -1,0 +1,65 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "asserts",
+      "generator": "Ninja",
+      "binaryDir": "${sourceParentDir}/build/asserts",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER_LAUNCHER": "ccache",
+        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+        "LLVM_Z3_INSTALL_DIR": "${sourceParentDir}/llvm-install",
+        "LLVM_ENABLE_Z3_SOLVER": true,
+        "LLVM_ENABLE_ZSTD": true,
+        "LLVM_ENABLE_ZLIB": false,
+        "LLVM_USE_STATIC_ZSTD": true,
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "LLVM_ENABLE_ASSERTIONS": true,
+        "LLVM_ENABLE_DUMP": true,
+        "LLVM_TARGETS_TO_BUILD": "X86",
+        "CMAKE_INSTALL_PREFIX": "${sourceParentDir}/llvm-install",
+        "LLVM_ENABLE_PROJECTS": "clang",
+        "CMAKE_CXX_STANDARD": "17",
+        "LLVM_USE_LINKER": "lld",
+        "CLANG_DEFAULT_LINKER": "lld",
+        "LLVM_APPEND_VC_REV": false
+      },
+      "environment": {
+        "CCACHE_BASEDIR": "${sourceParentDir}"
+      }
+    },
+    {
+      "name": "debug",
+      "inherits": "asserts",
+      "binaryDir": "${sourceParentDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "LLVM_ENABLE_ZLIB": false,
+        "LLVM_ENABLE_ASSERTIONS": true
+      }
+    },
+    {
+      "name": "clang-tidy",
+      "inherits": "asserts",
+      "binaryDir": "${sourceParentDir}/build/clang-tidy",
+      "cacheVariables": {
+        "LLVM_ENABLE_PROJECTS": "clang;clang-tools-extra"
+      },
+      "environment": {
+        "CCACHE_BASEDIR": "${sourceParentDir}"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "asserts",
+      "configurePreset": "asserts",
+      "inheritConfigureEnvironment": true
+    },
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "inheritConfigureEnvironment": true
+    }
+  ]
+}
