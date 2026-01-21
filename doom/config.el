@@ -247,3 +247,39 @@
 (after! mermaid-mode
   (setq mermaid-mmdc-location "docker")
   (setq mermaid-flags "run -u 1000 --rm -v /tmp:/tmp ghcr.io/mermaid-js/mermaid-cli/mermaid-cli"))
+
+;; Simple presentation mode for org-mode:
+;; present one heading at a time, with big fond
+(defun org-advance ()
+  (interactive)
+  (when (buffer-narrowed-p)
+  (beginning-of-buffer)
+  (widen)
+  (org-forward-heading-same-level 1))
+    (org-narrow-to-subtree))
+
+(defun org-retreat ()
+  (interactive)
+  (when (buffer-narrowed-p)
+    (beginning-of-buffer)
+    (widen)
+   (org-backward-heading-same-level 1))
+   (org-narrow-to-subtree))
+
+(defun org-start-present ()
+  (interactive)
+  (org-narrow-to-subtree)
+  (doom-big-font-mode 1))
+
+(defun org-end-present ()
+  (interactive)
+  (widen)
+  (doom-big-font-mode -1))
+
+(map! :after org
+       :mode org-mode
+       :localleader
+       :desc "Start presentation" "p s" #'org-start-present
+       :desc "End presentation" "p e" #'org-end-present
+       :desc "Narrow to next heading" "p n" #'org-advance
+       :desc "Narrow to previous heading" "p p" #'org-retreat)
