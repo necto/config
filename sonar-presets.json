@@ -6,8 +6,7 @@
       "inherits": "linux-asserted-release-from-sources",
       "binaryDir": "build/asserts",
       "cacheVariables": {
-        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
-        "VERBOSE_MAKEFILE": false
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
       },
       "environment": {
         "CCACHE_BASEDIR": "${sourceDir}/build/asserts"
@@ -18,8 +17,7 @@
       "inherits": "linux-debug-from-sources",
       "binaryDir": "build/debug",
       "cacheVariables": {
-        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
-        "VERBOSE_MAKEFILE": false
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
       },
       "environment": {
         "CCACHE_BASEDIR": "${sourceDir}/build/debug"
@@ -29,9 +27,6 @@
       "name": "pluginAsserts",
       "inherits": "linux-asserted-release-from-sources",
       "binaryDir": "build/plugin-asserts",
-      "cacheVariables": {
-        "VERBOSE_MAKEFILE": false
-      },
       "environment": {
         "CCACHE_BASEDIR": "${sourceDir}"
       }
@@ -40,9 +35,6 @@
       "name": "release",
       "inherits": "linux-release-from-sources",
       "binaryDir": "build/release",
-      "cacheVariables": {
-        "VERBOSE_MAKEFILE": false
-      },
       "environment": {
         "CCACHE_BASEDIR": "${sourceDir}"
       }
