@@ -20,7 +20,7 @@ sudo usermod -a -G video $USER
 
 # swaylock and brightnessctl must be installed with the host package manager
 # because they need integration with the system
-sudo dnf install -y swaylock brightnessctl
+sudo dnf install -y swaylock brightnessctl network-manager-applet
 
 # Now install guix using their official install script
 cd /tmp
