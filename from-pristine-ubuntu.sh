@@ -77,11 +77,11 @@ GUIX_PROFILE="$HOME/.config/guix/current"
 . "$GUIX_PROFILE/etc/profile"
 # make sure the new guix is used
 hash -r
-guix describe --format=channels > ~/.config/guix/channels.scm
-guix pull --fallback
 
 # takes a long time and can take advantage of many cores
 guix home reconfigure "$CONFIG_DIR/$PROFILE.scm"
+
+guix pull --fallback
 
 echo "Now you can reboot and log into sway."
 echo "Then run $CONFIG_DIR/after-reboot.sh"

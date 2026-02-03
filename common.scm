@@ -332,6 +332,10 @@
                                      "emacsclient -a '' --eval '(copilot-install-server)'\n"
                                      %emacs-config "/bin/doom doctor\n")))))
 
+          (simple-service 'guix-config
+                          home-xdg-configuration-files-service-type
+                          (list `("guix/channels.scm" ,(local-file "guix/channels.scm"))))
+
           (simple-service 'doom-config
                           home-direct-symlink-service-type
                           (path-to-local "doom"))

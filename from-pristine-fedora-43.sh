@@ -86,13 +86,11 @@ GUIX_PROFILE="$HOME/.config/guix/current"
 . "$GUIX_PROFILE/etc/profile"
 # make sure the new guix is used
 hash -r
-guix describe --format=channels > ~/.config/guix/channels.scm
-
-guix pull --fallback
 
 PROFILE=personal # professional is not relevant as I do not use Fedora at work
 # takes a long time and can take advantage of many cores
 guix home reconfigure "$CONFIG_DIR/$PROFILE.scm"
+guix pull --fallback
 
 echo "Now you can reboot and log into niri."
 echo "Then run $CONFIG_DIR/after-reboot-fedora-43.sh"
