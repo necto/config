@@ -80,6 +80,10 @@ ls -Zd /gnu /gnu/store # verify it is "unconfined_u"
 sudo systemctl start guix-daemon
 ps -eZ | grep guix-daemon # verify it is "unconfined_service_t"
 
+# Add substitute servers and authorize their keys
+# helps skipping building firefox
+sudo bash "$CONFIG_DIR/add-nonguix-substitutes.sh"
+
 guix pull --fallback --channels="$CONFIG_DIR/guix/channels.scm"
 
 GUIX_PROFILE="$HOME/.config/guix/current"

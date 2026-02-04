@@ -65,6 +65,10 @@ if [ ! -f /etc/apparmor.d/abstractions/base.d/guix.store.ro ]; then
     sudo service apparmor reload
 fi
 
+# Add substitute servers and authorize their keys
+# helps skipping building firefox
+sudo bash "$CONFIG_DIR/add-nonguix-substitutes.sh"
+
 # workaround for https://gitlab.gnome.org/GNOME/xdg-desktop-portal-gnome/-/issues/74
 # see also https://bbs.archlinux.org/viewtopic.php?id=285590
 systemctl --user mask xdg-desktop-portal-gtk
