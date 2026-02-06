@@ -51,11 +51,17 @@ binds {
     Mod+Ctrl+Up { move-window-up-or-to-workspace-up; }
     Mod+Ctrl+Right { move-column-right-or-to-monitor-right; }
 
-    // Move workspace to monitor
+    // Move workspace to monitor (vim keys)
     Mod+Ctrl+Shift+H { move-workspace-to-monitor-left; }
     Mod+Ctrl+Shift+L { move-workspace-to-monitor-right; }
     Mod+Ctrl+Shift+J { move-window-to-workspace-down; }
     Mod+Ctrl+Shift+K { move-window-to-workspace-up; }
+
+    // Move workspace to monitor (arrow keys)
+    Mod+Ctrl+Shift+Left { move-workspace-to-monitor-left; }
+    Mod+Ctrl+Shift+Right { move-workspace-to-monitor-right; }
+    Mod+Ctrl+Shift+Down { move-window-to-workspace-down; }
+    Mod+Ctrl+Shift+Up { move-window-to-workspace-up; }
 
     // Fullscreen
     Mod+Shift+F { fullscreen-window; }
