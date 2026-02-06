@@ -103,3 +103,5 @@
 (package! cov) ; display test code coverage in emacs
 
 (package! mermaid-mode)
+
+(package! auto-dark)
