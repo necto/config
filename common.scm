@@ -353,7 +353,9 @@
                           (list `("darkman/desktop-interface.sh"
                                   ,(make-executable-file "darkman-desktop-interface.sh" (local-file "darkman/desktop-interface.sh")))
                                 `("darkman/foot.sh"
-                                  ,(make-executable-file "darkman-foot.sh" (local-file "darkman/foot.sh")))))
+                                  ,(make-executable-file "darkman-foot.sh" (local-file "darkman/foot.sh")))
+                                `("darkman/fuzzel.sh"
+                                  ,(make-executable-file "darkman-fuzzel.sh" (local-file "darkman/fuzzel.sh")))))
 
 
           (simple-service 'doom-config
