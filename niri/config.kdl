@@ -143,8 +143,11 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // xdg-desktop-portal-wlr starts only if WAYLAND_DISPLAY is set
 spawn-sh-at-startup "export XDG_CURRENT_DESKTOP=niri && systemctl --user set-environment XDG_CURRENT_DESKTOP=niri && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 
+// Automatically adjust color temperature based on time of day
 spawn-at-startup "gammastep-indicator"
 spawn-at-startup "nm-applet"
+// Automatically switch light/dark themes based on time of day
+spawn-at-startup "darkman" "run"
 spawn-at-startup "syncthing" "--no-browser"
 spawn-at-startup "dunst"
 spawn-at-startup "waybar"

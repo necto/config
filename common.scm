@@ -31,7 +31,7 @@
              (gnu packages package-management)
 
              (gnu packages wm) ; for waybar, kanshi, niri
-             (gnu packages xdisorg) ; for gammastep, fuzzel
+             (gnu packages xdisorg) ; for gammastep, fuzzel, darkman
              (gnu packages xorg) ; for xwayland-satellite
              (gnu packages image) ; for slurp
              (gnu packages terminals) ; for foot, fzf
@@ -133,6 +133,12 @@
     "\n" ;; ssh agent daemon
     "eval \"$(ssh-agent -s)\"\n")))
 
+(define (make-executable-file name file)
+  (computed-file name
+                 #~(begin
+                     (copy-file #$file #$output)
+                     (chmod #$output #o555))))
+
 (define (home-env %custom-dir %extra-path)
   (home-environment
    ;; Below is the list of packages that will show up in your
@@ -161,6 +167,7 @@
                            kanshi ;; dynamic display configuration
                            ;; swaylock -- can't install as a user, it doesn't collaborate with pam_authenticate
                            gammastep ;; control screen color temperature according to time of the day
+                           darkman ;; automatic dark/light mode switcher for wayland
                            grimshot ;; take screenshots
                            slurp ;; select area for a screenshot
                            foot ;; sway default terminal emulator
@@ -335,6 +342,19 @@
           (simple-service 'guix-config
                           home-xdg-configuration-files-service-type
                           (list `("guix/channels.scm" ,(local-file "guix/channels.scm"))))
+
+          (simple-service 'darkman-config
+                          home-xdg-configuration-files-service-type
+                          (list `("darkman/config.yaml" ,(local-file "darkman/config.yaml"))
+                                ))
+
+          (simple-service 'darkman-togglers
+                          home-xdg-data-files-service-type
+                          (list `("darkman/desktop-interface.sh"
+                                  ,(make-executable-file "darkman-desktop-interface.sh" (local-file "darkman/desktop-interface.sh")))
+                                `("darkman/foot.sh"
+                                  ,(make-executable-file "darkman-foot.sh" (local-file "darkman/foot.sh")))))
+
 
           (simple-service 'doom-config
                           home-direct-symlink-service-type
