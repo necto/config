@@ -21,7 +21,6 @@ binds {
     Mod+Shift+Q { close-window; }
 
     // Application launcher
-    Mod+D { spawn "sh" "-c" "fuzzel -T footclient | xargs niri msg action spawn --"; }
     Mod+P { spawn "sh" "-c" "fuzzel -T footclient | xargs niri msg action spawn --"; }
 
     // Exit (use a confirmation dialog)
@@ -80,6 +79,9 @@ binds {
     // Lock screen
     Mod+Z { spawn "swaylock" "-fkFl" "-s" "stretch" "-i" "~/.config/sway/resources/wallpaper-webb-universe.jpg"; }
     Mod+Shift+Z { spawn "swaylock" "-fkFl" "-s" "stretch" "-i" "~/.config/sway/resources/wallpaper-webb-universe.jpg"; }
+
+    // Toggle light/dark mode
+    Mod+D { spawn "darkman" "toggle"; }
 
     // Brightness control
     XF86MonBrightnessUp { spawn "brightnessctl" "s" "7%+"; }
