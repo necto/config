@@ -6,7 +6,7 @@ binds {
     // Mod key is Super (Mod4/Logo key)
 
     // Terminal
-    Mod+Return { spawn "footclient"; }
+    Mod+Return { spawn "sh" "footclient-with-autostart.sh"; }
 
     // Emacs
     Mod+Backslash { spawn "emacsclient" "-c" "-n" "-a" "emacs" "--eval" "(switch-to-buffer nil)"; }
@@ -21,7 +21,7 @@ binds {
     Mod+Shift+Q { close-window; }
 
     // Application launcher
-    Mod+P { spawn "sh" "-c" "fuzzel -T footclient | xargs niri msg action spawn --"; }
+    Mod+P { spawn "sh" "-c" "fuzzel -T footclient-with-autostart.sh | xargs niri msg action spawn --"; }
 
     // Exit (use a confirmation dialog)
     Mod+Shift+E { quit; }
@@ -155,8 +155,6 @@ spawn-at-startup "dunst"
 spawn-at-startup "waybar"
 // Start foot server to keep the color scheme state (it is controlled by the USR signals dynamically)
 spawn-at-startup "foot" "--server"
-// When started, foot server does not know the current color scheme, so send it the corresponding signal
-spawn-sh-at-startup "~/.guix-home/profile/bin/apply-darkman-theme-to-foot-when-ready.sh"
 // spawn-sh-at-startup is passed verbatim to shell and can expand "~" and variables
 spawn-sh-at-startup "swaybg -i ~/.config/sway/resources/wallpaper-tree-horizon.jpg -m fill"
 // kanshi config is broken somewhat: it applies wrong position to the displays

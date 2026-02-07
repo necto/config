@@ -115,7 +115,7 @@
       '(("stdin-to-emacsclient.sh" "bin/stdin-to-emacsclient.sh")
         ("pd" "bin/pd")
         ("slice-n-dice" "bin/slice-n-dice")
-        ("apply-darkman-theme-to-foot-when-ready.sh" "bin/apply-darkman-theme-to-foot-when-ready.sh")
+        ("footclient-with-autostart.sh" "bin/footclient-with-autostart.sh")
         ("conf" "bin/conf")
         ("build" "bin/build")
         ("spawn-worktree" "bin/spawn-worktree"))))
