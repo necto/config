@@ -253,6 +253,18 @@
                                                                                                       "\n    xcursor-size " %cursor-size
                                                                                                       "\n    xcursor-theme \"" %cursor-theme "\""
                                                                                                       "\n}\n")))))
+          ; This setting can only be written through a gsettings/dconf invocation, but it is persisted in a binary DB,
+          ; so do it upon home reconfigure
+          (simple-service
+           'gtk-cursor-gsettings
+           home-activation-service-type
+           #~(begin
+               (system* "gsettings" "set"
+                        "org.gnome.desktop.interface"
+                        "cursor-theme" #$%cursor-theme)
+               (system* "gsettings" "set"
+                        "org.gnome.desktop.interface"
+                        "cursor-size" #$%cursor-size)))
 
           (simple-service 'git-config
                           home-xdg-configuration-files-service-type
