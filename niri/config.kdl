@@ -153,8 +153,6 @@ spawn-at-startup "darkman" "run"
 spawn-at-startup "syncthing" "--no-browser"
 spawn-at-startup "dunst"
 spawn-at-startup "waybar"
-// Start foot server to keep the color scheme state (it is controlled by the USR signals dynamically)
-spawn-at-startup "foot" "--server"
 // spawn-sh-at-startup is passed verbatim to shell and can expand "~" and variables
 spawn-sh-at-startup "swaybg -i ~/.config/sway/resources/wallpaper-tree-horizon.jpg -m fill"
 // kanshi config is broken somewhat: it applies wrong position to the displays
