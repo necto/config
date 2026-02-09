@@ -69,11 +69,6 @@ fi
 # helps skipping building firefox
 sudo bash "$CONFIG_DIR/add-nonguix-substitutes.sh"
 
-# workaround for https://gitlab.gnome.org/GNOME/xdg-desktop-portal-gnome/-/issues/74
-# see also https://bbs.archlinux.org/viewtopic.php?id=285590
-systemctl --user mask xdg-desktop-portal-gtk
-systemctl --user mask xdg-desktop-portal-gnome
-
 # takes a long time and can take advantage of many cores
 # --fallback will make guix build the missing package from source if substitute fails
 guix pull --fallback --channels="$CONFIG_DIR/guix/channels.scm"
