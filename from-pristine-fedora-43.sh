@@ -41,9 +41,15 @@ git clone https://github.com/necto/config
 CONFIG_DIR="$HOME/config"
 cd config && git remote set-url origin 'git@github.com:necto/config'
 
-# skip sway desktop file, I don't use sway anylonger
-
 # Make sure GDM sources the guix paths before starting sway
+GDM_SWAY_SESSION_FILE="/usr/share/wayland-sessions/sway.desktop"
+sudo cp "$CONFIG_DIR/sway.desktop" "$GDM_SWAY_SESSION_FILE"
+# Make the shell substitution in the .desktop file
+# because GDM might not perform shell substitutions
+sudo sed -i "s@\$HOME@$HOME@" "$GDM_SWAY_SESSION_FILE"
+
+
+# Make sure GDM sources the guix paths before starting niri
 GDM_NIRI_SESSION_FILE="/usr/share/wayland-sessions/niri.desktop"
 sudo cp "$CONFIG_DIR/niri.desktop" "$GDM_NIRI_SESSION_FILE"
 # Make the shell substitution in the .desktop file
