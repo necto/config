@@ -51,7 +51,7 @@ def main():
         "--path", "-p",
         type=str,
         default=None,
-        help="Custom path for the worktree. Defaults to ~/proj/sonar-cpp-<SAFE_BRANCH_NAME>"
+        help="Custom path for the worktree. Defaults to ~/proj/wt/<SAFE_BRANCH_NAME>"
     )
     parser.add_argument(
         "--build",
@@ -69,11 +69,8 @@ def main():
 
     # Logic to determine Worktree Path
     if args.path:
-        # User provided specific path -> just expand/sanitize the path itself
         raw_path = Path(args.path)
     else:
-        # Default -> use the sanitized filesystem-safe name
-        # e.g., "feature/login" becomes "~/proj/sonar-cpp-feature-login"
         raw_path = Path(f"~/proj/wt/{fs_safe_name}")
 
     # Sanitize: expand ~ and resolve absolute path
@@ -101,7 +98,7 @@ def main():
         print(f"Error: Git command failed with exit code {e.returncode}", file=sys.stderr)
         sys.exit(e.returncode)
 
-    # Create Symlink
+    # Create Symlink for Presets
     source_config = Path("~/.config/sonar-presets.json").expanduser()
     target_link = worktree_path / "CMakeUserPresets.json"
 
@@ -120,25 +117,29 @@ def main():
         print(f"[*] Starting build procedure: {args.build}")
         try:
             if args.build == "gradle":
-                # Runs: ./gradlew txz
-                subprocess.run(
-                    ["./gradlew", "txz"],
-                    cwd=worktree_path,
-                    check=True
-                )
+                subprocess.run(["./gradlew", "txz"], cwd=worktree_path, check=True)
+
             elif args.build == "cmake":
-                # Runs: cmake --preset asserts && cmake --build --preset asserts
-                # We split this into two calls to handle errors gracefully
-                subprocess.run(
-                    ["cmake", "--preset", "asserts"],
-                    cwd=worktree_path,
-                    check=True
-                )
-                subprocess.run(
-                    ["cmake", "--build", "--preset", "asserts"],
-                    cwd=worktree_path,
-                    check=True
-                )
+                # 1. Run Config Preset
+                subprocess.run(["cmake", "--preset", "asserts"], cwd=worktree_path, check=True)
+
+                # 2. Link compile_commands.json to worktree root
+                cc_source = worktree_path / "build" / "asserts" / "compile_commands.json"
+                cc_target = worktree_path / "compile_commands.json"
+
+                if cc_source.exists():
+                    try:
+                        # Use relative_to to make the symlink robust if moved
+                        cc_target.symlink_to(cc_source)
+                        print(f"[*] Symlink created: {cc_target.name} -> {cc_source}")
+                    except FileExistsError:
+                        pass
+                else:
+                    print(f"[!] Warning: {cc_source} not found; skipping compile_commands symlink.")
+
+                # 3. Run Build Preset
+                subprocess.run(["cmake", "--build", "--preset", "asserts"], cwd=worktree_path, check=True)
+
             print("[*] Build finished successfully.")
 
         except subprocess.CalledProcessError as e:
