@@ -10,7 +10,7 @@
         "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
       },
       "environment": {
-        "CCACHE_BASEDIR": "${sourceDir}/build/asserts"
+        "CCACHE_BASEDIR": "${sourceDir}"
       }
     },
     {
@@ -22,7 +22,7 @@
         "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
       },
       "environment": {
-        "CCACHE_BASEDIR": "${sourceDir}/build/debug"
+        "CCACHE_BASEDIR": "${sourceDir}"
       }
     },
     {
