@@ -8,6 +8,7 @@
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF",
         "USE_PCH": "OFF",
+        "FETCHCONTENT_BASE_DIR": "$penv{HOME}/.cache/cmake-fetchcontent/",
         "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
       },
       "environment": {
@@ -21,6 +22,7 @@
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF",
         "USE_PCH": "OFF",
+        "FETCHCONTENT_BASE_DIR": "$penv{HOME}/.cache/cmake-fetchcontent/",
         "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
       },
       "environment": {
@@ -33,6 +35,7 @@
       "binaryDir": "build/plugin-asserts",
       "cacheVariables": {
         "USE_PCH": "OFF",
+        "FETCHCONTENT_BASE_DIR": "$penv{HOME}/.cache/cmake-fetchcontent/",
         "CMAKE_VERBOSE_MAKEFILE": "OFF"
       },
       "environment": {
@@ -45,6 +48,7 @@
       "binaryDir": "build/release",
       "cacheVariables": {
         "USE_PCH": "OFF",
+        "FETCHCONTENT_BASE_DIR": "$penv{HOME}/.cache/cmake-fetchcontent/",
         "CMAKE_VERBOSE_MAKEFILE": "OFF"
       },
       "environment": {
