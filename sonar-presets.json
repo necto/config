@@ -7,6 +7,7 @@
       "binaryDir": "build/asserts",
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF",
+        "USE_PCH": "OFF",
         "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
       },
       "environment": {
@@ -19,6 +20,7 @@
       "binaryDir": "build/debug",
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF",
+        "USE_PCH": "OFF",
         "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
       },
       "environment": {
@@ -30,6 +32,7 @@
       "inherits": "linux-asserted-release-from-sources",
       "binaryDir": "build/plugin-asserts",
       "cacheVariables": {
+        "USE_PCH": "OFF",
         "CMAKE_VERBOSE_MAKEFILE": "OFF"
       },
       "environment": {
@@ -41,6 +44,7 @@
       "inherits": "linux-release-from-sources",
       "binaryDir": "build/release",
       "cacheVariables": {
+        "USE_PCH": "OFF",
         "CMAKE_VERBOSE_MAKEFILE": "OFF"
       },
       "environment": {
