@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import shutil
 import subprocess
 import sys
 import re
@@ -111,6 +112,12 @@ def main():
     except subprocess.CalledProcessError as e:
         print(f"Error: Git command failed with exit code {e.returncode}", file=sys.stderr)
         sys.exit(e.returncode)
+
+    # Copy CLAUDE.md from current directory if present
+    claude_md = Path("CLAUDE.md")
+    if claude_md.exists():
+        shutil.copy2(claude_md, worktree_path / "CLAUDE.md")
+        print(f"[*] Copied CLAUDE.md to {worktree_path}")
 
     # Create Symlink for Presets
     source_config = Path("~/.config/sonar-presets.json").expanduser()
