@@ -118,6 +118,8 @@
         ("footclient-with-autostart.sh" "bin/footclient-with-autostart.sh")
         ("conf" "bin/conf")
         ("build" "bin/build")
+        ("test" "bin/test")
+        ("utest" "bin/utest")
         ("spawn-worktree" "bin/spawn-worktree"))))
    (home-page "https://github.com/necto/config")
    (synopsis "My personal scripts.")

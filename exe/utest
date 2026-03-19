@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    ./build/asserts/lit -sv ./test/unittests
+else
+    ./build/asserts/test/unittests/core/core_unittests --gtest_filter="$1"
+fi

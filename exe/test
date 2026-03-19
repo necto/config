@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./build/"${1:-asserts}"/lit -sv "${2:-./test/}" "${@:3}"
