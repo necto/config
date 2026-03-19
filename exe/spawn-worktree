@@ -66,6 +66,7 @@ def main():
 
     # Sanitized name for Filesystem (replace / : \ etc with -)
     fs_safe_name = re.sub(r'[^\w.-]', '-', git_branch_name)
+    fs_safe_name = re.sub(r'^(az-|cpp-)+', '', fs_safe_name)
 
     # Logic to determine Worktree Path
     if args.path:
