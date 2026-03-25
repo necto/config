@@ -7,7 +7,6 @@
       "binaryDir": "build/asserts",
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF",
-        "FETCHCONTENT_BASE_DIR": "$penv{HOME}/.cache/cmake-fetchcontent/",
         "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
       },
       "environment": {
@@ -20,7 +19,6 @@
       "binaryDir": "build/debug",
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF",
-        "FETCHCONTENT_BASE_DIR": "$penv{HOME}/.cache/cmake-fetchcontent/",
         "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
       },
       "environment": {
@@ -32,7 +30,6 @@
       "inherits": "linux-asserted-release-from-sources",
       "binaryDir": "build/plugin-asserts",
       "cacheVariables": {
-        "FETCHCONTENT_BASE_DIR": "$penv{HOME}/.cache/cmake-fetchcontent/",
         "CMAKE_VERBOSE_MAKEFILE": "OFF"
       },
       "environment": {
@@ -44,7 +41,6 @@
       "inherits": "linux-release-from-sources",
       "binaryDir": "build/release",
       "cacheVariables": {
-        "FETCHCONTENT_BASE_DIR": "$penv{HOME}/.cache/cmake-fetchcontent/",
         "CMAKE_VERBOSE_MAKEFILE": "OFF"
       },
       "environment": {
