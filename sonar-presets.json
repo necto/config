@@ -3,7 +3,7 @@
   "configurePresets": [
     {
       "name": "asserts",
-      "inherits": "linux-asserted-release-from-sources",
+      "inherits": "linux-asserted-release",
       "binaryDir": "build/asserts",
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF",
@@ -15,7 +15,7 @@
     },
     {
       "name": "debug",
-      "inherits": "linux-debug-from-sources",
+      "inherits": "linux-debug",
       "binaryDir": "build/debug",
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF",
@@ -27,7 +27,7 @@
     },
     {
       "name": "pluginAsserts",
-      "inherits": "linux-asserted-release-from-sources",
+      "inherits": "linux-asserted-release",
       "binaryDir": "build/plugin-asserts",
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF"
@@ -38,7 +38,7 @@
     },
     {
       "name": "release",
-      "inherits": "linux-release-from-sources",
+      "inherits": "linux-release",
       "binaryDir": "build/release",
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF"
