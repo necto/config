@@ -117,7 +117,9 @@ binds {
 
     // Monitor focus
     Mod+Shift+H { focus-monitor-left; }
+    Mod+Shift+Left { focus-monitor-left; }
     Mod+Shift+L { focus-monitor-right; }
+    Mod+Shift+Right { focus-monitor-right; }
 
     Mod+O { toggle-overview; }
 
