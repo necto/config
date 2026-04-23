@@ -40,6 +40,36 @@ def get_user_confirmation(prompt):
             print("\nAborted.")
             sys.exit(1)
 
+def get_user_choice(prompt, options):
+    """Present numbered choices; return 0-based index of selection."""
+    print(f"[?] {prompt}")
+    for i, opt in enumerate(options, 1):
+        print(f"    {i}. {opt}")
+    while True:
+        try:
+            raw = input(f"    Choice [1-{len(options)}]: ").strip()
+            if raw.isdigit():
+                idx = int(raw) - 1
+                if 0 <= idx < len(options):
+                    return idx
+        except KeyboardInterrupt:
+            print("\nAborted.")
+            sys.exit(1)
+
+def check_local_branch_exists(branch_name):
+    result = subprocess.run(
+        ["git", "show-ref", "--verify", "--quiet", f"refs/heads/{branch_name}"]
+    )
+    return result.returncode == 0
+
+def dir_has_significant_files(path):
+    """Return True if path contains files other than hidden entries and CLAUDE.md."""
+    for entry in path.iterdir():
+        if entry.name.startswith('.') or entry.name == 'CLAUDE.md':
+            continue
+        return True
+    return False
+
 def main():
     parser = argparse.ArgumentParser(
         description="Create a new git worktree for sonar-cpp and link configuration presets."
@@ -87,10 +117,25 @@ def main():
     branch_exists = check_branch_exists(git_branch_name)
     if args.create:
         if branch_exists:
-            if not get_user_confirmation(f"Branch '{git_branch_name}' already exists. Check it out instead?"):
+            choice = get_user_choice(
+                f"Branch '{git_branch_name}' already exists. What do you want to do?",
+                [
+                    "Check out the existing branch",
+                    "Recreate it from HEAD (delete local + create fresh)",
+                    "Cancel",
+                ]
+            )
+            if choice == 0:
+                cmd = ["git", "worktree", "add", str(worktree_path), git_branch_name]
+            elif choice == 1:
+                if check_local_branch_exists(git_branch_name):
+                    subprocess.run(["git", "branch", "-D", git_branch_name], check=True)
+                branch_exists = False
+                print(f"[*] Creating new branch '{git_branch_name}'...")
+                cmd = ["git", "worktree", "add", "-b", git_branch_name, str(worktree_path)]
+            else:
                 print("[!] Operation cancelled by user.")
                 sys.exit(0)
-            cmd = ["git", "worktree", "add", str(worktree_path), git_branch_name]
         else:
             print(f"[*] Creating new branch '{git_branch_name}'...")
             cmd = ["git", "worktree", "add", "-b", git_branch_name, str(worktree_path)]
@@ -106,11 +151,34 @@ def main():
                 print("[!] Operation cancelled by user.")
                 sys.exit(0)
 
+    # Pre-flight directory check
+    if worktree_path.exists():
+        if dir_has_significant_files(worktree_path):
+            print(f"[!] Error: '{worktree_path}' already exists and contains files.", file=sys.stderr)
+            sys.exit(1)
+        if not get_user_confirmation(f"'{worktree_path}' already exists but appears empty. Remove it and continue?"):
+            print("[!] Operation cancelled by user.")
+            sys.exit(0)
+        shutil.rmtree(worktree_path)
+
     # Execute Git Worktree Add
+    branch_existed_before = branch_exists
+    dir_existed_before = worktree_path.exists()
     try:
         subprocess.run(cmd, check=True)
     except subprocess.CalledProcessError as e:
         print(f"Error: Git command failed with exit code {e.returncode}", file=sys.stderr)
+        try:
+            if not branch_existed_before and check_local_branch_exists(git_branch_name):
+                subprocess.run(["git", "branch", "-D", git_branch_name])
+        except Exception:
+            pass
+        try:
+            if not dir_existed_before and worktree_path.exists():
+                shutil.rmtree(worktree_path)
+                subprocess.run(["git", "worktree", "prune"])
+        except Exception:
+            pass
         sys.exit(e.returncode)
 
     # Copy CLAUDE.md from current directory if present
