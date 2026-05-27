@@ -7,7 +7,9 @@
       "binaryDir": "build/asserts",
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF",
-        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
+        "CMAKE_C_COMPILER_CLANG_SCAN_DEPS": "$penv{HOME}/.guix-profile/bin/clang-scan-deps",
+        "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS": "$penv{HOME}/.guix-profile/bin/clang-scan-deps"
       },
       "environment": {
         "CCACHE_BASEDIR": "${sourceDir}"
@@ -19,7 +21,9 @@
       "binaryDir": "build/debug",
       "cacheVariables": {
         "CMAKE_VERBOSE_MAKEFILE": "OFF",
-        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/"
+        "USE_LLVM_SOURCE": "$penv{HOME}/proj/llvm-project/",
+        "CMAKE_C_COMPILER_CLANG_SCAN_DEPS": "$penv{HOME}/.guix-profile/bin/clang-scan-deps",
+        "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS": "$penv{HOME}/.guix-profile/bin/clang-scan-deps"
       },
       "environment": {
         "CCACHE_BASEDIR": "${sourceDir}"
@@ -30,7 +34,9 @@
       "inherits": "linux-asserted-release",
       "binaryDir": "build/plugin-asserts",
       "cacheVariables": {
-        "CMAKE_VERBOSE_MAKEFILE": "OFF"
+        "CMAKE_VERBOSE_MAKEFILE": "OFF",
+        "CMAKE_C_COMPILER_CLANG_SCAN_DEPS": "$penv{HOME}/.guix-profile/bin/clang-scan-deps",
+        "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS": "$penv{HOME}/.guix-profile/bin/clang-scan-deps"
       },
       "environment": {
         "CCACHE_BASEDIR": "${sourceDir}"
@@ -41,7 +47,9 @@
       "inherits": "linux-release",
       "binaryDir": "build/release",
       "cacheVariables": {
-        "CMAKE_VERBOSE_MAKEFILE": "OFF"
+        "CMAKE_VERBOSE_MAKEFILE": "OFF",
+        "CMAKE_C_COMPILER_CLANG_SCAN_DEPS": "$penv{HOME}/.guix-profile/bin/clang-scan-deps",
+        "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS": "$penv{HOME}/.guix-profile/bin/clang-scan-deps"
       },
       "environment": {
         "CCACHE_BASEDIR": "${sourceDir}"
