@@ -187,6 +187,15 @@ def main():
         shutil.copy2(claude_md, worktree_path / "CLAUDE.md")
         print(f"[*] Copied CLAUDE.md to {worktree_path}")
 
+    # Create .clangd for compilation database discovery
+    clangd_config = worktree_path / ".clangd"
+    if not clangd_config.exists():
+        clangd_config.write_text(
+            "CompileFlags:\n"
+            "  CompilationDatabase: build/asserts/\n"
+        )
+        print(f"[*] Created .clangd in {worktree_path}")
+
     # Create Symlink for Presets
     source_config = Path("~/.config/sonar-presets.json").expanduser()
     target_link = worktree_path / "CMakeUserPresets.json"
