@@ -118,6 +118,7 @@
         ("footclient-with-autostart.sh" "bin/footclient-with-autostart.sh")
         ("conf" "bin/conf")
         ("build" "bin/build")
+        ("run-workflow" "bin/run-workflow")
         ("ltest" "bin/ltest")
         ("utest" "bin/utest")
         ("spawn-worktree" "bin/spawn-worktree"))))

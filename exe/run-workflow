@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""Start a GitHub Actions workflow and print the new run's ID and URL."""
+
+import subprocess, sys, json, time, webbrowser
+
+def parse_args(args):
+    """Extract workflow name, --repo value, and --web flag from args.
+    Returns (workflow, repo, open_web, gh_args) where gh_args has --web removed."""
+    workflow = None
+    repo = None
+    open_web = False
+    gh_args = []
+    i = 0
+    while i < len(args):
+        if args[i] == "--web":
+            open_web = True
+            i += 1
+        elif args[i] == "--repo" and i + 1 < len(args):
+            repo = args[i + 1]
+            gh_args += [args[i], args[i + 1]]
+            i += 2
+        elif args[i].startswith("--repo="):
+            repo = args[i].split("=", 1)[1]
+            gh_args.append(args[i])
+            i += 1
+        elif args[i] == "-R" and i + 1 < len(args):
+            repo = args[i + 1]
+            gh_args += [args[i], args[i + 1]]
+            i += 2
+        elif not args[i].startswith("-") and workflow is None:
+            workflow = args[i]
+            gh_args.append(args[i])
+            i += 1
+        else:
+            gh_args.append(args[i])
+            i += 1
+    return workflow, repo, open_web, gh_args
+
+def get_latest_run_id(workflow, repo):
+    """Get the databaseId of the most recent run for the workflow."""
+    cmd = ["gh", "run", "list", "--workflow", workflow, "--limit", "1",
+           "--json", "databaseId,url,createdAt"]
+    if repo:
+        cmd += ["--repo", repo]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        return None
+    runs = json.loads(result.stdout)
+    if not runs:
+        return None
+    return runs[0]
+
+def main():
+    args = sys.argv[1:]
+    workflow, repo, open_web, gh_args = parse_args(args)
+    if not workflow:
+        sys.exit("Error: could not determine workflow name from arguments")
+
+    # Snapshot the current latest run ID before triggering
+    before = get_latest_run_id(workflow, repo)
+    before_id = before["databaseId"] if before else None
+
+    # Trigger the workflow, forwarding all original args (minus --web)
+    result = subprocess.run(["gh", "workflow", "run"] + gh_args)
+    if result.returncode != 0:
+        sys.exit(result.returncode)
+
+    # Poll until a new run appears (different ID from before)
+    timeout = 30  # seconds
+    interval = 0.25
+    elapsed = 0
+    while elapsed < timeout:
+        time.sleep(interval)
+        elapsed += interval
+        latest = get_latest_run_id(workflow, repo)
+        if latest and latest["databaseId"] != before_id:
+            print(f"Run ID: {latest['databaseId']}")
+            print(f"URL:    {latest['url']}")
+            if open_web:
+                webbrowser.open(latest["url"])
+            return
+    sys.exit(f"Timed out after {timeout}s waiting for new run to appear")
+
+if __name__ == "__main__":
+    main()
