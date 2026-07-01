@@ -22,7 +22,8 @@
         "CMAKE_CXX_STANDARD": "17",
         "LLVM_USE_LINKER": "lld",
         "CLANG_DEFAULT_LINKER": "lld",
-        "LLVM_APPEND_VC_REV": false
+        "LLVM_APPEND_VC_REV": false,
+        "CMAKE_PREFIX_PATH": "${sourceParentDir}/llvm-install"
       },
       "environment": {
         "CCACHE_BASEDIR": "${sourceParentDir}"
