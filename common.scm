@@ -143,7 +143,14 @@
                      (copy-file #$file #$output)
                      (chmod #$output #o555))))
 
-(define (home-env %custom-dir %extra-path)
+;; %custom-dir selects the profile ("personal" / "professional"); profile-specific
+;; overrides are passed in by the corresponding personal.scm / professional.scm.
+;; ssl-cert-file defaults to the plain nss-certs bundle; a profile that sits behind
+;; a TLS-inspection proxy overrides it with a bundle that adds the corporate CA.
+(define* (home-env %custom-dir %extra-path
+                   #:key (ssl-cert-file
+                          (string-append
+                           %home "/.guix-home/profile/etc/ssl/certs/ca-certificates.crt")))
   (home-environment
    ;; Below is the list of packages that will show up in your
    ;; Home profile, under ~/.guix-home/profile.
@@ -388,7 +395,7 @@
              ;; For some reason these variables need to be exported explicitly and
              ;; it is not done automatically upon installing nss-scripts
              ("SSL_CERT_DIR" . ,(string-append %home "/.guix-home/profile/etc/ssl/certs"))
-             ("SSL_CERT_FILE" . ,(string-append %home "/.guix-home/profile/etc/ssl/certs/ca-certificates.crt"))
+             ("SSL_CERT_FILE" . ,ssl-cert-file)
              ;; Useful for custom defaults of gradle properties, such as cmakePreset
              ;; Properties in $GRADLE_USER_HOME/gradle.properties override those in project gradle.properties
              ("GRADLE_USER_HOME" . ,(string-append %home "/.config/gradle"))))))))
