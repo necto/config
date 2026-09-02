@@ -147,10 +147,21 @@
 ;; overrides are passed in by the corresponding personal.scm / professional.scm.
 ;; ssl-cert-file defaults to the plain nss-certs bundle; a profile that sits behind
 ;; a TLS-inspection proxy overrides it with a bundle that adds the corporate CA.
+;; gradle-config-service defaults to a plain symlink of the tracked gradle.properties;
+;; a profile that needs untracked credentials folded in overrides it with a service
+;; that generates the file instead.
 (define* (home-env %custom-dir %extra-path
                    #:key (ssl-cert-file
                           (string-append
-                           %home "/.guix-home/profile/etc/ssl/certs/ca-certificates.crt")))
+                           %home "/.guix-home/profile/etc/ssl/certs/ca-certificates.crt"))
+                        (gradle-config-service
+                         (simple-service 'gradle-config
+                                         home-xdg-configuration-files-service-type
+                                         ;; gradle looks up for gradle.properties in
+                                         ;; $GRADLE_USER_HOME which is set in the and of
+                                         ;; this file.
+                                         (list `("gradle/gradle.properties"
+                                                 ,(local-file "gradle.properties"))))))
   (home-environment
    ;; Below is the list of packages that will show up in your
    ;; Home profile, under ~/.guix-home/profile.
@@ -289,11 +300,7 @@
                           ;; Guile seems to not support XDG_CONFIG stuff
                           (list `(".guile" ,(local-file "guile.scm"))))
 
-          (simple-service 'gradle-config
-                          home-xdg-configuration-files-service-type
-                          ;; gradle looks up for gradle.properties in $GRADLE_USER_HOME
-                          ;; which is set in the and of this file.
-                          (list `("gradle/gradle.properties" ,(local-file "gradle.properties"))))
+          gradle-config-service
 
           (simple-service 'ssh-config
                           home-files-service-type
