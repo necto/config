@@ -1,0 +1,31 @@
+#!/bin/bash
+# Jump to a named niri workspace, or name the focused one.
+#
+# fuzzel --dmenu prints the typed text verbatim when it matches none of the
+# entries it was given, which makes one prompt enough for both jobs: pick (or
+# fuzzy-match) an existing name to focus that workspace, type a new name to
+# give it to the focused workspace, pick the "no name" entry to clear the name,
+# or press Escape to cancel.
+
+set -euo pipefail
+
+unset_entry='󰬟 no name'
+
+names="$(niri msg -j workspaces | jq -r '.[].name | select(. != null)' | sort)"
+
+choice="$(
+    printf '%s\n%s\n' "$unset_entry" "$names" |
+        fuzzel --dmenu --lines 5 --prompt 'workspace: '
+)"
+
+case "$choice" in
+    '') ;; # cancelled, or an empty name: leave everything alone
+    "$unset_entry") niri msg action unset-workspace-name ;;
+    *)
+        if grep -qxF -- "$choice" <<<"$names"; then
+            niri msg action focus-workspace -- "$choice"
+        else
+            niri msg action set-workspace-name -- "$choice"
+        fi
+        ;;
+esac
