@@ -305,3 +305,10 @@
     ;; Depth -95 puts this before doom-init-theme-h, which sounds like a good
     ;; idea, if only for performance reasons.
     (add-hook hook #'my-auto-dark-init-h -95)))
+
+(defun disable-company-mode-in-buffer ()
+  (company-mode -1))
+
+(after! org
+  ;; Company mode pop-up slows Emacs down in org mode, also it is almost never useful
+  (add-hook 'org-mode-hook #'disable-company-mode-in-buffer))
