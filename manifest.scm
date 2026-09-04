@@ -24,6 +24,7 @@
         (specification->package "firefox")
         (specification->package "findutils")
         (specification->package "jq")
+        (specfiication->package "jless")
         (specification->package "gimp")
         (specification->package "graphviz")
         (specification->package "gnuplot")
