@@ -132,7 +132,7 @@ binds {
     Mod+E { focus-workspace "emacs"; }
     Mod+1 { focus-workspace "emacs"; }
     // Name (or un-name) the focused workspace
-    Mod+Shift+N { spawn "niri-workspace-name"; }
+    Mod+Shift+W { spawn "niri-workspace-name"; }
 
     Mod+Shift+C { focus-workspace "chat"; }
     Mod+6 { focus-workspace "chat"; }
