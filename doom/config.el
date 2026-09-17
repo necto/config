@@ -210,7 +210,18 @@
                           "-XX:AdaptiveSizePolicyWeight=90"
                           "-Dsun.zip.disableMemoryMapping=true"
                           "-Xmx4G" "-Xms512m")
-        lsp-java-autobuild-enabled nil))
+        lsp-java-autobuild-enabled nil)
+  ;; lsp-java hardcodes jdtls 1.23.0 (April 2023), which bundles Buildship 3.1.7
+  ;; and Gradle tooling API 7.4.2.  That tooling API has no `JavaVersion.VERSION_21',
+  ;; so a project with `sourceCompatibility = 21' makes the Gradle sync die with
+  ;; "Cannot convert string value 'VERSION_21'"; the Buildship classpath container
+  ;; then never resolves and JDT drops the *whole* raw classpath, JRE container
+  ;; included -- which is why even `java.io' comes out unresolved.  Run
+  ;; `M-x lsp-java-update-server' after changing this.
+  (setq lsp-java-jdt-download-url
+        (concat "https://www.eclipse.org/downloads/download.php"
+                "?file=/jdtls/milestones/1.61.0/"
+                "jdt-language-server-1.61.0-202609031315.tar.gz")))
 
 (defun my/lsp-prune-stale-session-folders ()
   "Drop workspace folders and blocklist entries that no longer exist on disk.
