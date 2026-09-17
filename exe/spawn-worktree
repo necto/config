@@ -181,11 +181,14 @@ def main():
             pass
         sys.exit(e.returncode)
 
-    # Copy CLAUDE.md from current directory if present
-    claude_md = Path("CLAUDE.md")
-    if claude_md.exists():
-        shutil.copy2(claude_md, worktree_path / "CLAUDE.md")
-        print(f"[*] Copied CLAUDE.md to {worktree_path}")
+    # Copy untracked per-repo files from current directory if present.
+    # .dir-locals.el carries the Emacs lsp settings (no file watchers, jdtls
+    # import exclusions); it is gitignored globally, so it never gets committed.
+    for name in ("CLAUDE.md", ".dir-locals.el"):
+        source = Path(name)
+        if source.exists():
+            shutil.copy2(source, worktree_path / name)
+            print(f"[*] Copied {name} to {worktree_path}")
 
     # Create .clangd for compilation database discovery
     clangd_config = worktree_path / ".clangd"

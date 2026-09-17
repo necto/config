@@ -185,7 +185,92 @@
 (after! lsp-mode
   (setq lsp-headerline-breadcrumb-enable t)
   (setq lsp-headerline-breadcrumb-segments '(symbols))
-  (setq lsp-log-io nil))
+  (setq lsp-log-io nil)
+  ;; Build output is never worth a file watcher.
+  (dolist (re '("[/\\\\]build\\'" "[/\\\\]llvm-project\\'"
+                "[/\\\\]toolchain\\'" "[/\\\\]its\\'"))
+    (add-to-list 'lsp-file-watch-ignored-directories re)))
+
+;; The per-repo lsp settings (disabled file watchers in the huge trees, jdtls
+;; import tuning for sonar-cpp) live in untracked `.dir-locals.el' files in the
+;; repos themselves; `.dir-locals.el' is in ~/.config/git/ignore and
+;; ~/config/exe/spawn-worktree copies it into new worktrees.  Only the safety
+;; marks have to be here: `hack-local-variables-filter' would otherwise prompt
+;; on every visit.  lsp-mode marks `lsp-enable-file-watchers' itself; lsp-java
+;; marks nothing.  `lsp-java-vmargs' is `:risky t' and can never be set from a
+;; dir-local, hence the global `setq' below.
+(put 'lsp-java-import-gradle-enabled 'safe-local-variable #'booleanp)
+(put 'lsp-java-import-exclusions 'safe-local-variable #'vectorp)
+(put 'lsp-java-project-resource-filters 'safe-local-variable #'vectorp)
+
+(after! lsp-java
+  ;; The 1G default heap is not enough for any non-toy workspace, and autobuild
+  ;; rebuilds the whole project on every save.
+  (setq lsp-java-vmargs '("-XX:+UseParallelGC" "-XX:GCTimeRatio=4"
+                          "-XX:AdaptiveSizePolicyWeight=90"
+                          "-Dsun.zip.disableMemoryMapping=true"
+                          "-Xmx4G" "-Xms512m")
+        lsp-java-autobuild-enabled nil))
+
+(defun my/lsp-prune-stale-session-folders ()
+  "Drop workspace folders and blocklist entries that no longer exist on disk.
+Stale roots make `lsp--server-register-capability' fail with `file-missing'
+while registering the file watchers, which aborts processing of that message."
+  (interactive)
+  (require 'lsp-mode)
+  (let* ((session (lsp-session))
+         (folders (-filter #'file-directory-p (lsp-session-folders session)))
+         (blocklist (-uniq (-filter #'file-directory-p
+                                    (lsp-session-folders-blocklist session)))))
+    ;; `lsp-session' is a cl-defstruct, so `setf' on its accessors is a
+    ;; macro expansion, not a function call -- and lsp-mode is not loaded when
+    ;; this file is read, so a literal `setf' here expands into a call to the
+    ;; non-existent function `(setf lsp-session-folders)'.  Expand at run time.
+    (eval `(setf (lsp-session-folders ',session) ',folders
+                 (lsp-session-folders-blocklist ',session) ',blocklist)
+          t)
+    ;; The `folders' list is not where the dead roots hurt: a workspace's roots
+    ;; come from `folder->servers' (`lsp-find-roots-for-workspace'), which is
+    ;; rebuilt on every start from the persisted `server-id->folders'.  Clean
+    ;; both, or ~/proj/sonar-cpp-master keeps coming back.
+    (let ((id->folders (lsp-session-server-id->folders session)))
+      (ht-aeach (puthash key (-filter #'file-directory-p value) id->folders)
+                id->folders))
+    (let ((folder->servers (lsp-session-folder->servers session)))
+      (dolist (folder (ht-keys folder->servers))
+        (unless (file-directory-p folder)
+          (remhash folder folder->servers))))
+    (lsp--persist-session session)
+    (when (called-interactively-p 'interactive)
+      (message "lsp session: %d folders, %d blocklisted"
+               (length folders) (length blocklist)))))
+
+(defun my/lsp-root-watchable-p (dir)
+  "Return non-nil if DIR should get lsp-mode file watchers.
+`lsp--server-register-capability' tests the *global* value of
+`lsp-enable-file-watchers': it runs while handling a server message, not in a
+project buffer, so the nil in a repo's .dir-locals.el never reaches it.  Read
+it at DIR the way lsp-mode reads its own ignore lists, and treat a root that
+no longer exists as unwatchable -- `directory-files' on it would otherwise
+escape and abort processing of the whole LSP message."
+  (and (file-directory-p dir)
+       (with-temp-buffer
+         (setq-local buffer-file-name (expand-file-name "lsp-mode-temp" dir))
+         (hack-local-variables)
+         lsp-enable-file-watchers)))
+
+(define-advice lsp-watch-root-folder
+    (:around (fn dir &rest args) my/honour-dir-locals)
+  "Skip watching roots that are gone or that opted out via .dir-locals.el."
+  (if (my/lsp-root-watchable-p dir)
+      (apply fn dir args)
+    (lsp-log "Not watching %s: missing, or disabled by dir-locals" dir)
+    (or (nth 3 args) (make-lsp-watch :root-directory dir))))
+
+;; Can be kept clean like this:
+;; Probably not worth risking having another hook, it grows slowly and the
+;; dangling sessions aren't too expensive.
+;; (add-hook 'lsp-before-initialize-hook #'my/lsp-prune-stale-session-folders)
 
 (after! lsp-sonarlint
   (setq lsp-sonarlint-auto-download t
