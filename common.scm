@@ -131,12 +131,23 @@
 (define %guix-config-dir
   (dirname (current-filename)))
 
+;; A single ssh-agent shared by every login shell, bound to a fixed socket path.
+;; Spawning a fresh `ssh-agent -s` here instead would leak one daemon per login
+;; shell (they reparent to PID 1 and are never reaped), and each new shell would
+;; also shadow the agent that actually holds the keys.
 (define bash-profile-file
   (plain-file
    "bash-profile"
    (string-append
-    "\n" ;; ssh agent daemon
-    "eval \"$(ssh-agent -s)\"\n")))
+    "\n"
+    "export SSH_AUTH_SOCK=\"${XDG_RUNTIME_DIR:-/tmp}/ssh-agent.socket\"\n"
+    ;; ssh-add -l: 0 = agent with keys, 1 = agent without keys, 2 = no agent.
+    ;; Only 2 warrants a spawn, so test $? rather than negating the command.
+    "ssh-add -l >/dev/null 2>&1\n"
+    "if [ $? -eq 2 ]; then\n"
+    "    rm -f \"$SSH_AUTH_SOCK\"\n"
+    "    ssh-agent -a \"$SSH_AUTH_SOCK\" >/dev/null 2>&1\n"
+    "fi\n")))
 
 (define (make-executable-file name file)
   (computed-file name
