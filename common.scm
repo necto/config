@@ -30,7 +30,7 @@
              (gnu packages guile-xyz)
              (gnu packages package-management)
 
-             (gnu packages wm) ; for waybar, kanshi, niri
+             (gnu packages window-management) ; for waybar, kanshi, niri, sway, dunst, grimshot
              (gnu packages xdisorg) ; for gammastep, fuzzel, darkman
              (gnu packages xorg) ; for xwayland-satellite
              (gnu packages image) ; for slurp
@@ -54,18 +54,18 @@
 ;; ;; sway: render/pass.c:23: wlr_render_pass_add_texture: Assertion `box->x >= 0 && box->y >= 0 && box->x + box->width <= options->texture->width && box->y + box->height <= options->texture->height' failed.
 ;; (define wlroots-patched
 ;;   (package
-;;    (inherit (@@ (gnu packages wm) wlroots))
+;;    (inherit (@@ (gnu packages window-management) wlroots))
 ;;    (source
 ;;     (origin
-;;      (inherit (package-source (@@ (gnu packages wm) wlroots)))
+;;      (inherit (package-source (@@ (gnu packages window-management) wlroots)))
 ;;      (patches
 ;;       (list (search-patch "/home/arseniy/tmp/wlroots.patch")))))))
 
 ;; (define sway-patched
 ;;   (package
-;;    (inherit (@@ (gnu packages wm) sway))
+;;    (inherit (@@ (gnu packages window-management) sway))
 ;;    (inputs
-;;     (modify-inputs (package-inputs (@@ (gnu packages wm) sway))
+;;     (modify-inputs (package-inputs (@@ (gnu packages window-management) sway))
 ;;                    (replace "wlroots" wlroots-patched)))))
 
 
