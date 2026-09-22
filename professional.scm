@@ -1,5 +1,27 @@
 (load "common.scm")
 
+;; Optional private layer: a checkout of the private configuration repository at
+;; ~/private-config, so that work-specific configuration never lands in this public one.
+;; The layer is a Scheme file whose last expression is an alist, read below through
+;; private-ref -- it is evaluated in this same module, so everything common.scm imported
+;; is in scope there. A missing layer is not an error: this profile still reconfigures,
+;; minus the private parts, after saying so. Only the 'services key is read; private-ref
+;; is the place to grow that if the layer ever needs another axis.
+(define %private-dir (string-append %home "/private-config"))
+
+(define %private-extras
+  (let ((entry (string-append %private-dir "/professional-extras.scm")))
+    (if (file-exists? entry)
+        (load entry)
+        (begin
+          (format (current-error-port)
+                  "professional.scm: no private layer at ~a -- \
+configuring the public parts only.~%" entry)
+          '()))))
+
+(define (private-ref key default)
+  (or (assq-ref %private-extras key) default))
+
 ;; The corporate CloudFlare TLS-inspection proxy re-signs some hosts (e.g. the
 ;; Azure blob storage that GitHub artifact downloads redirect to) with a private
 ;; CA. gh (Go) and other tools obey SSL_CERT_FILE and ignore the system
@@ -69,4 +91,5 @@
 
 (home-env "professional" '("/home/arseniy/.sonar/bin/")
           #:ssl-cert-file %ca-certificates-with-corp
-          #:gradle-config-service %gradle-config-service)
+          #:gradle-config-service %gradle-config-service
+          #:extra-services (private-ref 'services '()))

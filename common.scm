@@ -162,6 +162,11 @@
 ;; gradle-config-service defaults to a plain symlink of the tracked gradle.properties;
 ;; a profile that needs untracked credentials folded in overrides it with a service
 ;; that generates the file instead.
+;; extra-services is appended after every service defined here, so a profile can add
+;; services this file knows nothing about -- in particular ones coming from an optional
+;; private repository, which is how work-specific configuration stays out of this public
+;; one. Several services may extend the same service type freely; what they must not do
+;; is declare the same target path twice, which is a collision rather than an override.
 (define* (home-env %custom-dir %extra-path
                    #:key (ssl-cert-file
                           (string-append
@@ -173,7 +178,8 @@
                                          ;; $GRADLE_USER_HOME which is set in the and of
                                          ;; this file.
                                          (list `("gradle/gradle.properties"
-                                                 ,(local-file "gradle.properties"))))))
+                                                 ,(local-file "gradle.properties")))))
+                        (extra-services '()))
   (home-environment
    ;; Below is the list of packages that will show up in your
    ;; Home profile, under ~/.guix-home/profile.
@@ -233,7 +239,8 @@
    ;; Below is the list of Home services.  To search for available
    ;; services, run 'guix home search KEYWORD' in a terminal.
    (services
-    (list (service home-bash-service-type
+    (append
+     (list (service home-bash-service-type
                    (home-bash-configuration
                     (aliases '(("ls" . "eza")
                                ("rehash" . "hash -r")
@@ -266,11 +273,11 @@
                           (list `("bash-command-timer.sh"
                                   ,(local-file "bash-command-timer.sh"))))
 
+          ;; Work-specific presets are not here: they live in the private layer and
+          ;; arrive through extra-services.
           (simple-service 'cmake-presets
                           home-xdg-configuration-files-service-type
-                          (list `("sonar-presets.json"
-                                  ,(local-file "sonar-presets.json"))
-                                `("llvm-presets.json"
+                          (list `("llvm-presets.json"
                                   ,(local-file "llvm-presets.json"))))
 
           (simple-service 'cursor-config
@@ -417,4 +424,5 @@
              ("SSL_CERT_FILE" . ,ssl-cert-file)
              ;; Useful for custom defaults of gradle properties, such as cmakePreset
              ;; Properties in $GRADLE_USER_HOME/gradle.properties override those in project gradle.properties
-             ("GRADLE_USER_HOME" . ,(string-append %home "/.config/gradle"))))))))
+             ("GRADLE_USER_HOME" . ,(string-append %home "/.config/gradle")))))
+     extra-services))))

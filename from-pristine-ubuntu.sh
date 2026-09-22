@@ -77,6 +77,15 @@ GUIX_PROFILE="$HOME/.config/guix/current"
 # make sure the new guix is used
 hash -r
 
+# The professional profile picks up an optional private layer from a separate checkout
+# (see the "Private layer" section of README.md). Reconfiguring without it succeeds and
+# leaves out the private parts, which is easy to miss on a fresh machine -- so say so.
+if [ "$PROFILE" = "professional" ] && \
+       [ ! -e "$HOME/private-config/professional-extras.scm" ]; then
+    echo "Note: no private layer in $HOME/private-config -- configuring the public"
+    echo "parts only. Clone it and re-run 'guix home reconfigure' to get the rest."
+fi
+
 # takes a long time and can take advantage of many cores
 guix home reconfigure "$CONFIG_DIR/$PROFILE.scm"
 
