@@ -117,3 +117,25 @@ export "HISTSIZE=1000"
 export "HISTFILESIZE=1000000"
 # one dot-file less in the home directory
 export "HISTFILE=$HOME/.cache/bash_history"
+
+## Optimized clang toolchain (optional)
+
+# optimized-clang-with-lld-toolchain lives in its own profile, outside
+# ~/config/manifest.scm, so that `guix pull && guix upgrade' never triggers a
+# multi-hour PGO+ThinLTO+BOLT rebuild.  Install it with
+# `install-optimized-clang'; remove it with
+# `rm -rf ~/.guix-extra-profiles/optimized-clang'.
+#
+# Sourced last on purpose: etc/profile *prepends*, so this profile's bin/ and
+# its C_INCLUDE_PATH / CPLUS_INCLUDE_PATH / LIBRARY_PATH entries end up ahead
+# of the clang-with-lld-toolchain from the manifest, superseding it entirely
+# rather than merely shadowing the clang binary.
+#
+# etc/profile prepends unconditionally, so the ${PATH#...} guard keeps nested
+# interactive shells from stacking duplicate entries.
+_optimized_clang_profile="$HOME/.guix-extra-profiles/optimized-clang/optimized-clang"
+if [ -L "$_optimized_clang_profile" ] &&
+       [ "${PATH#*"$_optimized_clang_profile/bin"}" = "$PATH" ]; then
+    GUIX_PROFILE="$_optimized_clang_profile" . "$_optimized_clang_profile/etc/profile"
+fi
+unset _optimized_clang_profile

@@ -122,6 +122,7 @@
         ("ltest" "bin/ltest")
         ("utest" "bin/utest")
         ("spawn-worktree" "bin/spawn-worktree")
+        ("install-optimized-clang" "bin/install-optimized-clang")
         ("niri-workspace-name" "bin/niri-workspace-name"))))
    (home-page "https://github.com/necto/config")
    (synopsis "My personal scripts.")

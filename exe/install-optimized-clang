@@ -1,0 +1,39 @@
+#!/bin/sh
+# Install (or reinstall) optimized-clang-with-lld-toolchain into a dedicated
+# profile that `guix pull && guix upgrade' never touches.
+#
+# Rationale: the package is a PGO + ThinLTO build with -march=native.
+# It takes hours and can never be substituted.  Keeping it out of
+# ~/config/manifest.scm means the default `guix upgrade' leaves it alone;
+# pinning the channels means a reinstall reuses the derivation already in the
+# store rather than rebuilding.
+#
+# Once installed, ~/config/.bashrc sources this profile *after* the main one,
+# so its bin/ and its C_INCLUDE_PATH / CPLUS_INCLUDE_PATH / LIBRARY_PATH
+# entries precede those of the clang-with-lld-toolchain from the manifest,
+# and it supersedes it wholesale.
+#
+#   install-optimized-clang            install / reinstall
+#   install-optimized-clang --dry-run  show what would be built
+#
+# To remove it:  rm -rf ~/.guix-extra-profiles/optimized-clang
+# To rebuild it against newer channels: refresh channels-optimized-clang.scm
+# (see the header of that file) and rerun this script.
+
+set -eu
+
+channels="$HOME/config/guix/channels-optimized-clang.scm"
+profile="$HOME/.guix-extra-profiles/optimized-clang/optimized-clang"
+
+[ -f "$channels" ] || { echo "install-optimized-clang: missing $channels" >&2; exit 1; }
+
+mkdir -p "$(dirname "$profile")"
+
+# `guix package -p' registers an indirect GC root under /var/guix/gcroots/auto,
+# so the result survives `guix gc' for as long as the profile exists.
+#
+# Keep this profile single-package: adding anything else re-resolves the whole
+# profile manifest against the *current* guix rather than the pinned one, which
+# would re-derive clang.
+exec guix time-machine -C "$channels" -- \
+     package -p "$profile" -i optimized-clang-with-lld-toolchain "$@"
