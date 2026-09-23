@@ -122,7 +122,7 @@ export "HISTFILE=$HOME/.cache/bash_history"
 
 # optimized-clang-with-lld-toolchain lives in its own profile, outside
 # ~/config/manifest.scm, so that `guix pull && guix upgrade' never triggers a
-# multi-hour PGO+ThinLTO+BOLT rebuild.  Install it with
+# multi-hour PGO+ThinLTO rebuild.  Install it with
 # `install-optimized-clang'; remove it with
 # `rm -rf ~/.guix-extra-profiles/optimized-clang'.
 #
@@ -131,11 +131,15 @@ export "HISTFILE=$HOME/.cache/bash_history"
 # of the clang-with-lld-toolchain from the manifest, superseding it entirely
 # rather than merely shadowing the clang binary.
 #
-# etc/profile prepends unconditionally, so the ${PATH#...} guard keeps nested
-# interactive shells from stacking duplicate entries.
+# etc/profile prepends unconditionally, and so do /etc/profile.d/guix.sh and
+# ~/.guix-home/profile/etc/profile on every *login* shell.  A nested login shell
+# therefore inherits this profile somewhere in PATH while the two stock profiles
+# get re-prepended in front of it.  So test what we actually care about -- where
+# `clang' resolves -- instead of pattern-matching PATH: that stays correct no
+# matter how the entries got reordered, and still no-ops in the common case.
 _optimized_clang_profile="$HOME/.guix-extra-profiles/optimized-clang/optimized-clang"
 if [ -L "$_optimized_clang_profile" ] &&
-       [ "${PATH#*"$_optimized_clang_profile/bin"}" = "$PATH" ]; then
+       [ "$(command -v clang)" != "$_optimized_clang_profile/bin/clang" ]; then
     GUIX_PROFILE="$_optimized_clang_profile" . "$_optimized_clang_profile/etc/profile"
 fi
 unset _optimized_clang_profile
