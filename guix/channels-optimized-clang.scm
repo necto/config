@@ -21,7 +21,7 @@
        (name 'guix-azaostro)
        (url "https://github.com/necto/guix-azaostro")
        (branch "main")
-       (commit "491ba3aa4949d1471d8d4875827f42f53a86104c"))
+       (commit "1b14b4f128870a467f8a7614752d531d9d57936b"))
       (channel
        (name 'nonguix)
        (url "https://gitlab.com/nonguix/nonguix")
